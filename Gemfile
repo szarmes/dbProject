@@ -21,6 +21,7 @@ group :test do
 
   # Uncomment this line on OS X.
   gem 'growl', '1.0.3'
+  gem 'factory_girl_rails', '4.2.1'
 
   # Uncomment these lines on Linux.
   # gem 'libnotify', '0.8.0'
