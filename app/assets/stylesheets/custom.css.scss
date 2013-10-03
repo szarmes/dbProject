@@ -119,6 +119,10 @@ div.port1{
   
   padding-bottom:100px;
 }
+div.social-icons{
+  
+  padding-bottom:100px;
+}
 /* colors */
 
 body.portfolio{
@@ -132,7 +136,7 @@ body.portfolio{
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: white;
+  color: #B8FEFF;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
@@ -142,6 +146,19 @@ body.portfolio{
     color: white;
     text-decoration: none;
   }
+}
+#brand {
+  color: #B8FEFF;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+#sidebar{
+  float: left;
+  position: fixed;
+  overflow-y: auto;
+
 }
 
 /* footer */
