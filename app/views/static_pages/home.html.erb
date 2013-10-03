@@ -1,34 +1,19 @@
-<% if signed_in? %>
-  <div class="row">
-    <aside class="span4">
-      <section>
-        <%= render 'shared/user_info' %>
-      </section>
-      <section>
-        <%= render 'shared/stats' %>
-      </section>
-      <section>
-        <%= render 'shared/micropost_form' %>
-      </section>
-    </aside>
-  <div class="span8">
-      <h3>Micropost Feed</h3>
-      <%= render 'shared/feed' %>
-    </div>
+<% provide(:title, 'Home') %>
+<!DOCTYPE html>
+<html>
+<body class = "portfolio">
+  <div class="main">
+  	<img src="/assets/main.jpg" height = 200 width=200 align ="left"/>
+  	<p class="ex1"> Hi, my name is Duncan Szarmes. I am a third year student at UBCO
+  		majoring in Computer Science, hailing from Hawaii. I am a TA for COSC 111 as well.
+   </p>
+
+  	<p class = "ex2">	Interests/Hobbies:
+  		surfing, biking, gaming, guitar, being creative, and much more..
+  	</p>
   </div>
-<% else %>
-  <div class="center hero-unit">
-    <h1>Welcome to the Sample App</h1>
+</body>
+</html>
 
-    <h2>
-      This is the home page for the
-      <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
-      sample application.
-    </h2>
 
-    <%= link_to "Sign up now!", signup_path,
-                                class: "btn btn-large btn-primary" %>
-  </div>
 
-  <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
-<% end %>

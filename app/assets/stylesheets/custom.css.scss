@@ -38,7 +38,7 @@ textarea {
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
+  line-height: 2;
 }
 
 h1 {
@@ -54,12 +54,75 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $grayLight;
+  color: black;
 }
+h2.refer {
+  font-size: 1.6em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: left;
+  font-weight: normal;
+  color: black;
+  align:left;
+}
+
 
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+  font: Helvatica, serif;
+}
+
+p.ex1 {
+  font-size: 1.1em;
+  line-height: 1.7em;
+  font: Helvatica, serif;
+  text-align: left;
+  padding-left:300px;
+  padding-top: 130px;
+}
+
+p.ex2 {
+  font-size: 1.1em;
+  line-height: 1.7em;
+  font: Helvatica, serif;
+  text-align: left;
+  padding-left:300px;
+}
+
+p.ex3 {
+  font-size: 1.1em;
+  line-height: 1.7em;
+  font: Helvatica, serif;
+  text-align: left;
+
+}
+
+div.ex1{
+  
+padding-top:25px;
+padding-bottom:25px;
+float:right
+
+
+}
+div.ex2{
+  
+align:center
+
+}
+div.port{
+padding-bottom:50px;
+
+}
+div.port1{
+  
+  padding-bottom:100px;
+}
+/* colors */
+
+body.portfolio{
+  
 }
 
 
