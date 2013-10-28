@@ -14,17 +14,18 @@
 ActiveRecord::Schema.define(version: 20131008164900) do
 
   create_table "users", force: true do |t|
-    t.string   "name"
+    t.string   "username"
+    t.integer   "user_id",                   null: false
     t.string   "email",                  default: "",    null: false
+    t.integer   "decksMade",              null:false
+    t.boolean   "paid",                  default:false, null: false
+    t.boolean  "admin",                  default: false
+
+
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin",                  default: false
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -39,5 +40,80 @@ ActiveRecord::Schema.define(version: 20131008164900) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+
+
+
+
+
+
+
+    create_table "decks", force: true do |t|
+        t.integer   "deck_id",  null: false
+        t.string    "deckTitle",    null: false
+        t.integer   "uses",     null: false
+        t.integer   "user_id",                   null: false
+        t.string       "courseName", null: false
+        t.integer     "course_id", null: false
+
+       
+    end
+
+    create_table "cards", force: true do |t|
+        t.integer   "card_id",  null: false
+        t.integer   "deck_id",  null: false
+        t.string    "qtext",    null: false
+        t.string    "atext",    null: false
+        t.boolean   "isUsed",   default: false
+        t.datetime  "lastUsed"
+    end
+
+    create_table "ratings", force: true do |t|
+        t.integer   "rating_id",  null: false
+        t.integer   "deck_id",  null: false
+        t.integer   "card_id",  null: false
+        t.integer   "user_id",  null: false
+        t.string    "comment",    null: false
+        t.string    "atext",    null: false
+        t.boolean   "liked",   default: false
+        t.datetime  "created_at"
+
+    end
+    create_table "recent_decks", force: true do |t|
+        t.integer   "user_id",  null: false
+        t.integer   "deck_id",  null: false
+        t.integer   "card_id",  null: false
+        t.datetime  "lastUsed"
+
+    end
+
+    create_table "subjects", force: true do |t|
+        t.integer   "subject_id",  null: false
+        t.string    "name",     null: false
+
+    end
+    create_table "courses", force: true do |t|
+        t.integer   "subject_id",  null: false
+        t.integer   "course_id",  null: false
+        t.integer   "courseNum",  null: false
+        t.string    "name",     null: false
+
+    end
+
+    create_table "favorite_decks", force: true do |t|
+        t.integer   "user_id",  null: false
+        t.integer   "deck_id",  null: false
+        t.integer   "card_id",  null: false
+
+    end
+
+    create_table "favorite_cards", force: true do |t|
+        t.integer   "user_id",  null: false
+        t.integer   "card_id",  null: false
+
+    end
+
+
+
 
 end
