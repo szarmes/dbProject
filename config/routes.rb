@@ -1,20 +1,26 @@
-SampleApp::Application.routes.draw do
-  resources :users do
-    member do
-      get :following, :followers
-    end
+First_Website::Application.routes.draw do
+devise_for :users, :skip => [:sessions]
+ 
+  devise_scope :user do 
+    root to: 'static_pages#home'
+    get 'signin' => 'devise/sessions#new', :as => :new_user_session
+  post 'signin' => 'devise/sessions#create', :as => :user_session
+  delete 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
+    match '/sessions/user', to: 'devise/sessions#create', via: :post
   end
- resources :sessions,      only: [:new, :create, :destroy]
-  resources :microposts,    only: [:create, :destroy]
-  resources :relationships, only: [:create, :destroy]
-  root  'static_pages#home'
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
-  match '/help',    to: 'static_pages#help',    via: 'get'
-  match '/about',   to: 'static_pages#about',   via: 'get'
-  match '/contact', to: 'static_pages#contact', via: 'get'
-  match '/work', to: 'static_pages#work', via: 'get'
+   # member do
+    #  get :following, :followers
+    #end
+  #end
+ # resources :microposts,    only: [:create, :destroy]
+ # resources :relationships, only: [:create, :destroy]
+  #root  'static_pages#home'
+  #match '/help',    to: 'static_pages#help',    via: 'get'
+  #match '/about',   to: 'static_pages#about',   via: 'get'
+  match '/contacts', to: 'contacts#thank_you', via: 'get'
+  match '/contact/new', to: 'contact#new', via: 'get'
+  match '/files/new', to: 'file#new', via: 'get'
+  match '/resume', to: 'static_pages#resume', via: 'get'
   match '/references', to: 'static_pages#references', via: 'get'
   match '/portfolio', to: 'static_pages#portfolio', via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
@@ -56,7 +62,7 @@ SampleApp::Application.routes.draw do
   #     resources :sales do
   #       get 'recent', on: :collection
   #     end
-  #   end
+  #   end 
   
   # Example resource route with concerns:
   #   concern :toggleable do

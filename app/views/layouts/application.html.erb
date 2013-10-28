@@ -10,9 +10,7 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <%= render 'layouts/sidebar' %>
-    <%= render 'layouts/shh' %>
-
+    
     <div class="container">
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>

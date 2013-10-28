@@ -4,6 +4,15 @@ div.konami{
   
  padding-left:400px;
 }
+ul.hmenu {
+  list-style: none; 
+  margin: 0 0 2em;
+  padding: 0;
+}
+
+ul.hmenu li {
+  display: inline;  
+}
 
 /* mixins, variables, etc. */
 
@@ -37,6 +46,7 @@ textarea {
   text-align: center;
   h1 {
     margin-bottom: 10px;
+    font-weight:bold;
   }
 }
 
@@ -70,6 +80,15 @@ h2.refer {
   color: black;
   align:left;
 }
+h3 {
+  font-size: 2.0em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: left;
+  font-weight: bold;
+  color: black;
+  align:left;
+}
 
 
 p {
@@ -98,6 +117,22 @@ p.ex2 {
 p.ex3 {
   font-size: 1.1em;
   line-height: 1.7em;
+  font: Helvatica, serif;
+  text-align: left;
+
+}
+p.ex4 {
+  padding-left:200px;
+  font-size: 1.1em;
+  line-height: 1.3em;
+  font: Helvatica, serif;
+  text-align: left;
+
+}
+p.konami {
+  float:right;
+  font-size: 0.6em;
+  line-height: 1.3em;
   font: Helvatica, serif;
   text-align: left;
 
@@ -160,9 +195,12 @@ body.portfolio{
   }
 }
 #sidebar{
+  padding-top:20px;
+  padding-left:3px;
   float: left;
   position: fixed;
   overflow-y: auto;
+  
 
 }
 
