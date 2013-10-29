@@ -1,9 +1,6 @@
 @import "bootstrap";
 
-div.konami{
-  
- padding-left:400px;
-}
+
 ul.hmenu {
   list-style: none; 
   margin: 0 0 2em;
@@ -176,7 +173,7 @@ body.portfolio{
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #B8FEFF;
+  color: #FE2EC8;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
@@ -188,7 +185,7 @@ body.portfolio{
   }
 }
 #brand {
-  color: #B8FEFF;
+  color: #FFFFFF;
   &:hover {
     color: white;
     text-decoration: none;

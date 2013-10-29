@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(version: 20131008164900) do
 
   create_table "users", force: true do |t|
     t.string   "username"
-    t.integer   "user_id",                   null: false
+    t.integer   "user_id",                  default: :id, null: false
     t.string   "email",                  default: "",    null: false
-    t.integer   "decksMade",              null:false
-    t.boolean   "paid",                  default:false, null: false
+    t.integer   "decksMade",              default: 0, null:false
+    t.boolean   "paid",                  default:false
     t.boolean  "admin",                  default: false
 
 
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
         t.string    "deckTitle",    null: false
         t.integer   "uses",     null: false
         t.integer   "user_id",                   null: false
-        t.string       "courseName", null: false
+        t.string     "courseName", null: false
         t.integer     "course_id", null: false
 
        

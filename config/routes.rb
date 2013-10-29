@@ -1,13 +1,9 @@
 First_Website::Application.routes.draw do
-devise_for :users, :skip => [:sessions]
+devise_for :users
  
-  devise_scope :user do 
-    root to: 'static_pages#home'
-    get 'signin' => 'devise/sessions#new', :as => :new_user_session
-  post 'signin' => 'devise/sessions#create', :as => :user_session
-  delete 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
-    match '/sessions/user', to: 'devise/sessions#create', via: :post
-  end
+ 
+root to: 'static_pages#home'
+    
    # member do
     #  get :following, :followers
     #end
@@ -15,14 +11,13 @@ devise_for :users, :skip => [:sessions]
  # resources :microposts,    only: [:create, :destroy]
  # resources :relationships, only: [:create, :destroy]
   #root  'static_pages#home'
-  #match '/help',    to: 'static_pages#help',    via: 'get'
-  #match '/about',   to: 'static_pages#about',   via: 'get'
-  match '/contacts', to: 'contacts#thank_you', via: 'get'
-  match '/contact/new', to: 'contact#new', via: 'get'
-  match '/files/new', to: 'file#new', via: 'get'
-  match '/resume', to: 'static_pages#resume', via: 'get'
-  match '/references', to: 'static_pages#references', via: 'get'
-  match '/portfolio', to: 'static_pages#portfolio', via: 'get'
+  match '/browse', to: 'browse#index', via: 'get'
+  match '/your_decks', to: 'decks#index', via: 'get'
+  match '/recent_decks', to: 'decks#recent', via: 'get'
+  match '/favorite_decks', to: 'decks#favorite', via: 'get'
+  match '/favorite_cards', to: 'cards#favorite', via: 'get'
+ 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

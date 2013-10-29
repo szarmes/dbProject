@@ -5,8 +5,15 @@ class Card < ActiveRecord::Base
 		belongs_to :favorite_deck
 
 
-		 has_one  :deck, dependent: :destroy
+		has_one  :deck, dependent: :destroy
  
         
- 
+ 	after_create :do_setID
+
+  private
+    def do_setID
+      
+      newID = self.id
+      self.update_attributes(:card_id => newID)
+	end
 end
