@@ -1,6 +1,7 @@
 First_Website::Application.routes.draw do
 devise_for :users
  
+resources :decks
  
 root to: 'static_pages#home'
     
@@ -12,8 +13,9 @@ root to: 'static_pages#home'
  # resources :relationships, only: [:create, :destroy]
   #root  'static_pages#home'
   match '/browse', to: 'browse#index', via: 'get'
-  match '/your_decks', to: 'decks#index', via: 'get'
-  match '/recent_decks', to: 'decks#recent', via: 'get'
+  match '/your_decks', to: 'decks#your_decks', via: 'get'
+  #match '/new_deck', to: 'decks#create', via: 'post'
+  #match '/recent_decks', to: 'decks#recent', via: 'get'
   match '/favorite_decks', to: 'decks#favorite', via: 'get'
   match '/favorite_cards', to: 'cards#favorite', via: 'get'
  

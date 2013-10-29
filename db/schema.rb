@@ -49,12 +49,14 @@ ActiveRecord::Schema.define(version: 20131008164900) do
 
 
     create_table "decks", force: true do |t|
-        t.integer   "deck_id",  null: false
+        t.integer   "deck_id",   default: 0,null: false
         t.string    "deckTitle",    null: false
-        t.integer   "uses",     null: false
-        t.integer   "user_id",                   null: false
+        t.integer   "uses",     default: 0,null: false
+        t.integer   "user_id",            default: 0,       null: false
         t.string     "courseName", null: false
-        t.integer     "course_id", null: false
+        t.integer     "course_id", default: 0, null: false
+        t.string     "subjectName",  null: false
+        t.integer     "subject_id", default: 0, null: false
 
        
     end

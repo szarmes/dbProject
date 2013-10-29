@@ -1,1 +1,20 @@
-<h1>your Decks</h1>
+<h1> Create a deck</h1>
+
+<%= form_for @deck, :url => { :action => "create" } do |f| %>
+
+  <p> Fields marked with * are required </p>
+  
+  <div><%= f.label "Title *" %><br />
+  <%= f.text_field :deckTitle, :autofocus => true %></div>
+
+  <div><%= f.label "Subject *" %><br />
+  <%= f.text_field :subjectName, :autofocus => true %></div>
+
+  <div><%= f.label "Course *" %><br />
+  <%= f.text_field :courseName, :autofocus => true %></div>
+ 
+ <!-- ADD EMPLOYER OPTION HERE and extra fields that come with it-->
+
+ <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+
+<% end %>
