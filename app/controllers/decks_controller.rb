@@ -3,6 +3,14 @@ class DecksController < ApplicationController
   def index
 
     @deck = Deck.new
+    @decks = Deck.where(user_id: current_user.user_id).paginate(page: params[:page])
+           
+
+  end
+  def your_decks
+
+    @deck = Deck.new
+    @decks = Deck.where(user_id: current_user.user_id).paginate(page: params[:page])
            
 
   end
@@ -13,26 +21,61 @@ class DecksController < ApplicationController
 
   end
 
+
   def create
 
   	if user_signed_in?
-            @deck = Deck.new(deck_params)
-            if @deck.save
+      @deck = Deck.new(deck_params)
+      if @deck.save
 
-        		@deck.user_id = current_user.user_id
-                @deck.course_id = Course.find_by(name: @deck.courseName).course_id 
-            	@deck.subject_id = Subject.find_by(name: @deck.subjectName).subject_id
-            	@deck.save
+          @deck.user_id = current_user.user_id
+        
+          if !Course.find_by(name: @deck.courseName).nil?
+            cid = Course.find_by(name: @deck.courseName).course_id 
+          end
 
-                flash[:success] = "Deck created!"
-                redirect_to '/your_decks'
-                else
-                flash[:error] = "Try again :("
-                redirect_to root_path
-            end
-        end
+          if !Subject.find_by(name: @deck.subjectName).nil?
+            sid = Subject.find_by(name: @deck.subjectName).subject_id
+          end
+          
+          if sid.nil?
+            @newSubject = Subject.create(subject_id: 0, name: @deck.subjectName)
+            @newSubject.save
+            
+            @newCourse = Course.create(subject_id: @newSubject.subject_id, 
+                        course_id:0, courseNum: 100, name: @deck.courseName)
+            @newCourse.save
 
+            @deck.subject_id = @newSubject.subject_id
+            @deck.course_id = @newCourse.course_id
 
+          elsif cid.nil?
+
+            @newCourse = Course.create(subject_id: sid, 
+                          course_id:0, courseNum: 100, name: @deck.courseName)
+            @newCourse.save
+
+            @deck.subject_id = sid
+            @deck.course_id = @newCourse.course_id
+          end
+          @deck.save
+
+          flash[:success] = "Deck created!"
+          redirect_to '/your_decks'
+      else
+          flash[:error] = "Please fill in all required fields."
+          redirect_to '/decks'
+      end
+    
+    end
+  end
+
+  def destroy
+    
+    @deck = Deck.find_by(params[:id])
+    @deck.destroy
+    flash[:success] = "Deck deleted."
+    redirect_to '/your_decks'
   end
 
 

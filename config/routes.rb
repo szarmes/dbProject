@@ -4,6 +4,8 @@ devise_for :users
 resources :decks
  
 root to: 'static_pages#home'
+
+delete 'decks' => 'decks#destroy', :as => :destroy_decks
     
    # member do
     #  get :following, :followers
@@ -15,7 +17,7 @@ root to: 'static_pages#home'
   match '/browse', to: 'browse#index', via: 'get'
   match '/your_decks', to: 'decks#your_decks', via: 'get'
   #match '/new_deck', to: 'decks#create', via: 'post'
-  #match '/recent_decks', to: 'decks#recent', via: 'get'
+  match '/recent_decks', to: 'decks#recent', via: 'get'
   match '/favorite_decks', to: 'decks#favorite', via: 'get'
   match '/favorite_cards', to: 'cards#favorite', via: 'get'
  

@@ -4,6 +4,9 @@ class Deck < ActiveRecord::Base
         has_many  :cards, dependent: :destroy
         has_one  :course 
         has_one  :subject 
+ 	
+    validates :deckTitle, :courseName, :subjectName, presence: true
+
  	after_create :do_setID
 
   private

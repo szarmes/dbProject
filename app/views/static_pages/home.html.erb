@@ -4,7 +4,7 @@
 <body class = "portfolio">
 
 	<% if user_signed_in? %>
-           <div class ="center">
+      <div class ="center">
             <div class="row">
   			<%= link_to'Create a Deck', '/decks', class: "btn btn-large btn-primary"  %>        
    			<br/></div></div>
@@ -17,7 +17,7 @@
 	</div><br/><br/>
 	
       <%= render 'devise/menu/registration_items' %>
-  </br>
+      </br>
       <%= render 'devise/menu/login_items' %>
   	</div>
             
