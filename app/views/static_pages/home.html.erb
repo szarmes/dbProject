@@ -1,0 +1,32 @@
+<% provide(:title, 'Home') %>
+<!DOCTYPE html>
+<html>
+<body class = "portfolio">
+
+	<% if user_signed_in? %>
+      <div class ="center">
+            <div class="row">
+  			<%= link_to'Create a Deck', '/decks', class: "btn btn-large btn-primary"  %>        
+   			<br/></div></div>
+            
+    <% else %>
+
+    <div class ="center">
+	<div class ="welcome">
+		Welcome to Socially Constructed Flashcards!!
+	</div><br/><br/>
+	
+      <%= render 'devise/menu/registration_items' %>
+      </br>
+      <%= render 'devise/menu/login_items' %>
+  	</div>
+            
+    <% end %>
+
+
+  
+</body>
+</html>
+
+
+

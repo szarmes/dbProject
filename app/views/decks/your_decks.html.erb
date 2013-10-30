@@ -1,0 +1,15 @@
+<h1>Your Decks</h1>
+
+<% if user_signed_in? %>
+    	<div class="row">
+  			<%= link_to'New Deck', '/decks', class: "btn btn-large btn-primary"  %>  
+  			<br/>
+   		</div>
+	
+	<% if @decks.any? %>
+		  <div>
+		    <%= render partial: 'shared/decks', collection: @decks %>
+		  </div>
+		  <%= will_paginate @decks %>
+	<% end %>
+<% end %>
