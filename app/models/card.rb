@@ -6,6 +6,8 @@ class Card < ActiveRecord::Base
 
 
 		has_one  :deck, dependent: :destroy
+
+		validates :atext, :qtext, presence: true
  
         
  	after_create :do_setID

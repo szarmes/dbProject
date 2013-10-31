@@ -14,6 +14,11 @@
   <%= f.hidden_field :deck_id, :value => @card.deck_id %>
  
 
- <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+ <%= f.submit "Create a Card", class: "btn btn-large btn-primary" %>
+
+ <h2> Cards in this Deck </h2>
+
+
+  <div><%= render partial: 'shared/cards', collection: @cards %></div>
 
 <% end %>
