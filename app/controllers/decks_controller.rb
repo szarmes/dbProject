@@ -28,34 +28,24 @@ class DecksController < ApplicationController
       @deck = Deck.new(deck_params)
       if @deck.save
 
-          @deck.user_id = current_user.user_id
+        @deck.user_id = current_user.user_id
+
+        sid = Subject.find_by(name: @deck.subjectName).subject_id 
+        @deck.subject_id = sid
+
+
+        if !Course.find_by(courseNum: @deck.courseNum, subject_id: sid).nil?
+            cid = Course.find_by(courseNum: @deck.courseNum, 
+            subject_id: sid).course_id 
+            @deck.course_id = cid
+        end
         
-          if !Course.find_by(name: @deck.courseName).nil?
-            cid = Course.find_by(name: @deck.courseName).course_id 
-          end
-
-          if !Subject.find_by(name: @deck.subjectName).nil?
-            sid = Subject.find_by(name: @deck.subjectName).subject_id
-          end
-          
-          if sid.nil?
-            @newSubject = Subject.create(subject_id: 0, name: @deck.subjectName)
-            @newSubject.save
-            
-            @newCourse = Course.create(subject_id: @newSubject.subject_id, 
-                        course_id:0, courseNum: 100, name: @deck.courseName)
-            @newCourse.save
-
-            @deck.subject_id = @newSubject.subject_id
-            @deck.course_id = @newCourse.course_id
-
-          elsif cid.nil?
+         if cid.nil?
 
             @newCourse = Course.create(subject_id: sid, 
-                          course_id:0, courseNum: 100, name: @deck.courseName)
+                        course_id:0, courseNum: @deck.courseNum, name: @deck.courseName)
             @newCourse.save
 
-            @deck.subject_id = sid
             @deck.course_id = @newCourse.course_id
           end
           @deck.save
@@ -83,7 +73,7 @@ class DecksController < ApplicationController
    private
     
     def deck_params
-        params.require(:deck).permit(:deckTitle, :courseName, :subjectName)
+        params.require(:deck).permit(:deckTitle, :courseNum, :courseName, :subjectName)
     end
 
   

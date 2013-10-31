@@ -2,13 +2,17 @@
     <h2> <%= decks.deckTitle %> </h2>
     </div>
    
-    <div>
-    <p class="ex4">Subject: <%= decks.subjectName %> </p>
-    </div>
+    <% if !decks.courseName.nil? %>
+        <div>
+        <p class="ex4"><%= decks.subjectName %> - <%= decks.courseNum %> - <%= decks.courseName %> </p>
+        </div>
+    <% else %> 
+        <div>
+        <p class="ex4"><%= decks.subjectName %> - <%= decks.courseNum %> </p>
+        </div>
+    <% end %>
 
-    <div >
-    <p class="ex4">Course: <%= decks.courseName %> </p>
-    </div>
+   
     
     <%= link_to "Delete this Deck", @deck, method: :delete, data: { confirm: "You sure?" } %>
 

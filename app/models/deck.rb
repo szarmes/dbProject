@@ -5,7 +5,7 @@ class Deck < ActiveRecord::Base
         has_one  :course 
         has_one  :subject 
  	
-    validates :deckTitle, :courseName, :subjectName, presence: true
+    validates :deckTitle, :courseNum, :subjectName, presence: true
 
  	after_create :do_setID
 

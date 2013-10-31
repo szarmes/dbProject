@@ -53,8 +53,9 @@ ActiveRecord::Schema.define(version: 20131008164900) do
         t.string    "deckTitle",    null: false
         t.integer   "uses",     default: 0,null: false
         t.integer   "user_id",            default: 0,       null: false
-        t.string     "courseName", null: false
-        t.integer     "course_id", default: 0, null: false
+        t.string     "courseName"
+        t.integer     "course_id", null: false
+        t.string     "courseNum", null: false
         t.string     "subjectName",  null: false
         t.integer     "subject_id", default: 0, null: false
 
@@ -97,8 +98,8 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     create_table "courses", force: true do |t|
         t.integer   "subject_id",  null: false
         t.integer   "course_id",  null: false
-        t.integer   "courseNum",  null: false
-        t.string    "name",     null: false
+        t.string   "courseNum",  null: false
+        t.string    "name"
 
     end
 
