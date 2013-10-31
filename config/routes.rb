@@ -7,6 +7,8 @@ resources :cards
 root to: 'static_pages#home'
 
 delete 'decks' => 'decks#destroy', :as => :destroy_decks
+delete 'cards' => 'cards#destroy', :as => :destroy_cards
+patch  'cards' => 'cards#edit', :as => :edit_cards
     
    # member do
     #  get :following, :followers

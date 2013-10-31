@@ -11,8 +11,7 @@
             <li><%= link_to "Recent Decks", '/recent_decks', id: "brand" %></li>   
             <li><%= link_to "Favorite Decks", '/favorite_decks', id: "brand" %></li> 
             <li><%= link_to "Favorite Cards", '/favorite_cards', id: "brand" %></li>  
-            <li><%= link_to'Sign Out', destroy_user_session_path, :method => :delete, id:"brand" %>  </li>      
-            
+            <li><%= link_to'Sign Out', destroy_user_session_path, :method => :delete, id:"brand" %>  </li>     
           <% else %>
             
             <li><%= link_to "Sign In", new_user_session_path, id: "brand" %></li> 

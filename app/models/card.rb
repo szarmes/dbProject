@@ -5,8 +5,7 @@ class Card < ActiveRecord::Base
 		belongs_to :favorite_deck
 
 
-		has_one  :deck, dependent: :destroy
-
+		has_one  :deck
 		validates :atext, :qtext, presence: true
  
         

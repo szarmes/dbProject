@@ -3,6 +3,13 @@ class CardsController < ApplicationController
   def favorite
 
   end
+
+  def edit
+    @card = Card.find_by(params[:id])
+    @deckID = @card.deck_id
+    
+    
+  end
   
   def new
 
@@ -44,9 +51,11 @@ class CardsController < ApplicationController
 def destroy
     
     @card = Card.find_by(params[:id])
+    @deckID = @card.deck_id
     @card.destroy
     flash[:success] = "Card deleted."
-  end
+    redirect_to new_card_path(:deck =>@deckID)
+end
 
 
 
