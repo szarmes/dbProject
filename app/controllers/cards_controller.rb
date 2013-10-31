@@ -11,6 +11,14 @@ class CardsController < ApplicationController
   	@card.deck_id=@deck.deck_id
 
   end
+  def index
+
+    @card = Card.new
+    @deck =  Deck.find(params[:deck])
+    @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
+    
+
+  end
 
   def create
 	if user_signed_in?

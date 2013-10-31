@@ -1,0 +1,13 @@
+<h1> <%= @deck.deckTitle %> </h1>
+ <% if !@deck.courseName.nil? %>
+       
+        <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
+        
+    <% else %> 
+        
+        <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> </h2>
+        
+    <% end %>
+
+
+    <div><%= render partial: 'shared/cards', collection: @cards %></div>
