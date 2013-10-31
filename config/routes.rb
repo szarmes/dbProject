@@ -2,6 +2,7 @@ First_Website::Application.routes.draw do
 devise_for :users
  
 resources :decks
+resources :cards
  
 root to: 'static_pages#home'
 

@@ -21,6 +21,10 @@ class DecksController < ApplicationController
 
   end
 
+  def edit
+    redirect_to '/edit_decks'
+  end
+
 
   def create
 
@@ -34,10 +38,22 @@ class DecksController < ApplicationController
         @deck.subject_id = sid
 
 
-        if !Course.find_by(courseNum: @deck.courseNum, subject_id: sid).nil?
-            cid = Course.find_by(courseNum: @deck.courseNum, 
+        if @deck.courseName.nil?
+
+          if !Course.find_by(courseNum: @deck.courseNum, subject_id: sid).nil?
+            cid = Course.find_by(courseNum: @deck.courseNum,
             subject_id: sid).course_id 
             @deck.course_id = cid
+          end
+        else
+          if !Course.find_by(courseNum: @deck.courseNum, subject_id: sid, 
+            name: @deck.courseName).nil?
+            cid = Course.find_by(courseNum: @deck.courseNum,
+            subject_id: sid, name: @deck.courseName).course_id 
+            @deck.course_id = cid
+          end
+
+
         end
         
          if cid.nil?

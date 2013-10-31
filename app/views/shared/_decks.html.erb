@@ -15,5 +15,7 @@
    
     
     <%= link_to "Delete this Deck", @deck, method: :delete, data: { confirm: "You sure?" } %>
+    <br/>
+    <%= link_to "Add card to this Deck", new_card_path(:deck => decks.deck_id) %>
 
    

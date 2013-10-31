@@ -1,0 +1,19 @@
+<h1> New Card </h1>
+
+
+<%= simple_form_for @card, :url => { :action => "create" } do |f| %>
+
+  <p> Fields marked with * are required </p>
+  
+  <div><%= f.label "Question *" %> <br />
+  <%= f.text_area :qtext, :autofocus => true %></div>
+
+  <div><%= f.label "Answer *" %> <br />
+  <%= f.text_area :atext, :autofocus => true %></div>
+
+  <%= f.hidden_field :deck_id, :value => @card.deck_id %>
+ 
+
+ <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+
+<% end %>

@@ -54,17 +54,18 @@ ActiveRecord::Schema.define(version: 20131008164900) do
         t.integer   "uses",     default: 0,null: false
         t.integer   "user_id",            default: 0,       null: false
         t.string     "courseName"
-        t.integer     "course_id", null: false
+        t.integer     "course_id"
         t.string     "courseNum", null: false
         t.string     "subjectName",  null: false
         t.integer     "subject_id", default: 0, null: false
+        t.string   "remember_token"
 
        
     end
 
     create_table "cards", force: true do |t|
-        t.integer   "card_id",  null: false
-        t.integer   "deck_id",  null: false
+        t.integer   "card_id",  default:0,null: false
+        t.integer   "deck_id",  default:0,null: false
         t.string    "qtext",    null: false
         t.string    "atext",    null: false
         t.boolean   "isUsed",   default: false
