@@ -4,12 +4,30 @@ class CardsController < ApplicationController
 
   end
 
-  def edit
-    @card = Card.find_by(params[:id])
-    @deckID = @card.deck_id
-    
-    
+
+  def show
+    @card = Card.find(params[:id]) 
+     @userID = current_user.user_id
   end
+
+  def edit
+    @card = Card.find(params[:id])  
+  end
+
+  def update
+  @card = Card.find(params[:id])
+  if @card.update_attributes(card_params)
+
+    flash[:success] = "Changes saved"
+
+    redirect_to new_card_path(:deck =>@card.deck_id)         
+  
+  else
+    flash[:error] = "Changes not saved. Try again."
+    redirect_to new_card_path(:deck =>@card.deck_id)                       
+  end
+  
+end
   
   def new
 
@@ -57,6 +75,7 @@ def destroy
     redirect_to new_card_path(:deck =>@deckID)
 end
 
+  
 
 
    private

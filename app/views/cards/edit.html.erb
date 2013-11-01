@@ -1,6 +1,6 @@
 <h1> Matt was here </h1>
 
-<%= simple_form_for @card, :url => { :action => "edit" } do |f| %>
+<%= simple_form_for @card, :html => { :method => :put} do |f| %>
 
   <p> Fields marked with * are required </p>
   

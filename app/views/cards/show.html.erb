@@ -1,0 +1,20 @@
+<h1> Question </h1>
+
+<h2><%= @card.qtext %></h2>
+
+<h1> Answer </h1>
+
+<h2><%= @card.atext %></h2>
+
+
+<% if !@card.nil? %>
+<% if Deck.find_by(deck_id: @card.deck_id).user_id == @userID %>
+
+
+    <%= link_to "Edit this Card", edit_card_path(@card.card_id)%>
+     <br/>
+     <%= link_to "Delete this Card", @card, method: :delete, data: { confirm: "You sure?" } %>
+    <br/> 
+
+<% end %>
+<% end %>

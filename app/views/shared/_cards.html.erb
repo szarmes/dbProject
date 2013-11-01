@@ -11,9 +11,11 @@
     <% if !@card.nil? %>
     <% if Deck.find_by(deck_id: @card.deck_id).user_id == @userID %>
 
-    <%= link_to "Delete this Card", @card, method: :delete, data: { confirm: "You sure?" } %> 
+
     <%= link_to "Edit this Card", edit_card_path(cards.card_id)%>
      <br/>
+     <%= link_to "Delete this Card", @card, method: :delete, data: { confirm: "You sure?" } %>
+    <br/> 
 
     <% end %>
      <% end %>

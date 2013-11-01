@@ -4,7 +4,6 @@ class Card < ActiveRecord::Base
 		belongs_to :recent_deck
 		belongs_to :favorite_deck
 
-
 		has_one  :deck
 		validates :atext, :qtext, presence: true
  
