@@ -18,6 +18,7 @@ class CardsController < ApplicationController
   @card = Card.find(params[:id])
   if @card.update_attributes(card_params)
 
+
     flash[:success] = "Changes saved"
 
     redirect_to new_card_path(:deck =>@card.deck_id)         

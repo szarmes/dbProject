@@ -59,7 +59,37 @@ class DecksController < ApplicationController
   end
 
   def edit
-    redirect_to '/edit_decks'
+    @deck = Deck.find(params[:id])  
+  end
+
+  def update
+    @deck = Deck.find(params[:id])
+    if @deck.update_attributes(deck_params)
+
+      @course = Course.find_by(course_id: @deck.course_id)
+      if @course.name != @deck.courseName
+        if !Course.find_by(name: @deck.courseName, subject_id: @deck.subject_id, course_id: @deck.course_id).nil?
+          @newCourse = Course.find_by(name: @deck.courseName, subject_id: @deck.subject_id, course_id: @deck.course_id)
+          @deck.course_id = @newCourse.course_id
+          @deck.save
+        else 
+          @newCourse = Course.create(subject_id: @deck.subject_id, 
+                        course_id:0, courseNum: @deck.courseNum, name: @deck.courseName)
+          @deck.course_id = @newCourse.course_id
+          @deck.save
+          @newCourse.save
+        end
+
+          
+      end
+      flash[:success] = "Changes saved"
+
+      redirect_to '/your_decks'         
+    
+    else
+      flash[:error] = "Changes not saved. Try again."
+      redirect_to new_card_path(:deck =>@card.deck_id)                       
+    end
   end
 
 

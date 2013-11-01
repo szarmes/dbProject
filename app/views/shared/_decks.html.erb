@@ -14,10 +14,14 @@
 
    
     
+
+    <%= link_to "View this Deck ", deck_path(decks.deck_id) %>
+    <br/>
+    <%= link_to "Edit this Deck", edit_deck_path(decks.deck_id)%>
+     <br/>
+    <%= link_to "Add/edit cards in this Deck", new_card_path(:deck => decks.deck_id) %>
+     <br/>
     <%= link_to "Delete this Deck", @deck, method: :delete, data: { confirm: "You sure?" } %>
     <br/>
-    <%= link_to "Edit this Deck", new_card_path(:deck => decks.deck_id) %>
-     <br/>
-    <%= link_to "View this Deck ", deck_path(decks.deck_id) %>
-
+   
    

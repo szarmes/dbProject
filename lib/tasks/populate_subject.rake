@@ -66,5 +66,8 @@ namespace :db do
    	Subject.create!(subject_id: 0, name: 'Visiting Graduate Students')
    	Subject.create!(subject_id: 0, name: 'Visual Arts')
    	Subject.create!(subject_id: 0, name: 'Visiting Undergraduate Research Students')
+
+
+    User.create!(email: 'test@test.com', username: 'test', password: 'testtest', password_confirmation: 'testtest')
   end
 end

@@ -1,13 +1,14 @@
-<h1> Create a Deck</h1>
+<h1> Edit this Deck</h1>
 
-<%= simple_form_for @deck, :url => { :action => "create" } do |f| %>
+
+<%= simple_form_for @deck, :html => { :method => :put} do |f| %>
 
   <p> Fields marked with * are required </p>
   
   <div><%= f.label "Title *" %> 
   E.g. "Bio Midterm 1" <br />
 
-  <%= f.text_field :deckTitle, :autofocus => true %></div>
+  <%= f.text_field :deckTitle, :autofocus => true, :default => @deck.deckTitle%></div>
 
   
   <div>
@@ -29,16 +30,16 @@
     	'Political Science','Psychology','Science Co-Op','Sociology','Social Work','Spanish',
     	'Statistics','Sustainability','Theatre','Visiting Graduate Students','Visual Arts',
     	'Visiting Undergraduate Research Students'],
-    	:default => 1, label:'' %>
+    	:default => @deck.subjectName , label:'' %>
   </div>
 
   <div><%= f.label "Course Number *" %><br />
-  <%= f.text_field :courseNum, :autofocus => true %></div>
+  <%= f.text_field :courseNum, :autofocus => true, :default => @deck.courseNum %></div>
 
   <div><%= f.label "Course Name" %><br />
-  <%= f.text_field :courseName, :autofocus => true %></div>
+  <%= f.text_field :courseName, :autofocus => true, :default => @deck.courseName %></div>
  
 
- <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+ <%= f.submit "Save Changes", class: "btn btn-large btn-primary" %>
 
-<% end %>
+ <% end %>
