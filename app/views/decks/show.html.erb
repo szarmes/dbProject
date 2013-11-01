@@ -9,5 +9,7 @@
         
     <% end %>
 
-
+    <%= link_to "Favorite this Deck", {:controller => "decks", :action => 'addfavorite', 
+    :userID => @userID,:favid => @deck.deck_id} %>
+     <br/>
     <div><%= render partial: 'shared/cards', collection: @cards %></div>

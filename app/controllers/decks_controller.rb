@@ -13,7 +13,7 @@ class DecksController < ApplicationController
 
     @deck =  Deck.find(params[:id])
     @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
-           
+    @userID = current_user.user_id
 
   end
   def your_decks
@@ -29,6 +29,33 @@ class DecksController < ApplicationController
   end
   def favorite
 
+  @favorite = FavoriteDeck.new
+  @favorites = FavoriteDeck.where(user_id: current_user.user_id).paginate(page: params[:page])
+
+  end
+  def addfavorite
+
+    @deck = Deck.find(params[:favid])
+    @user = User.find(params[:userID])
+    if !FavoriteDeck.find_by(user_id: @user.user_id, deck_id: @deck.deck_id).nil?
+      flash[:error] = "Deck already in favorites."
+      redirect_to deck_path(@deck.deck_id)
+
+    else
+  
+      @favorite = FavoriteDeck.create(user_id: @user.user_id,deck_id: @deck.deck_id,card_id:0)
+      @favorite.save
+      flash[:success] = "Deck added to favorites."
+      redirect_to '/favorite_decks'
+    end
+  end
+
+  def destroyfavorite
+
+    @deck = FavoriteDeck.find_by(params[:id])
+    @deck.destroy
+    flash[:success] = "Deck removed from favorites."
+    redirect_to '/favorite_decks'
   end
 
   def edit

@@ -21,6 +21,7 @@ namespace :db do
     Subject.create!(subject_id: 0, name: 'Curriculum Studies')
     Subject.create!(subject_id: 0, name: 'Digital Humanities')
     Subject.create!(subject_id: 0, name: 'Educational Administration')
+     Subject.create!(subject_id: 0, name: 'Educational Studies')
     Subject.create!(subject_id: 0, name: 'English for Academic Purposes')
     Subject.create!(subject_id: 0, name: 'Early Childhood Education')
     Subject.create!(subject_id: 0, name: 'Economics')
