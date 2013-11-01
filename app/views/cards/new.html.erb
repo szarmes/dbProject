@@ -1,4 +1,14 @@
-<h1> Edit this Deck </h1>
+<h1> Add/Edit Cards </h1>
+<h1> <%= @deck.deckTitle %> </h1>
+ <% if !@deck.courseName.nil? %>
+       
+        <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
+        
+    <% else %> 
+        
+        <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> </h2>
+        
+    <% end %>
 
 
 <%= simple_form_for @card, :url => { :action => "create" } do |f| %>
