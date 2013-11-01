@@ -2,7 +2,7 @@ class CreateSchema < ActiveRecord::Migration
   def change
    create_table :users do |t|
     t.string   :username
-    t.integer   :user_id,  default: :id, null: false
+    t.integer   :user_id,  default: 0, null: false
     t.string   :email, default: "",    null: false               
     t.integer   :decksMade, default: 0, null:false             
     t.boolean   :paid , default:false               
