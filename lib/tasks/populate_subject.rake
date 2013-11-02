@@ -70,17 +70,17 @@ namespace :db do
 
     User.create!(email: 'test@test.com', username: 'test', password: 'testtest', password_confirmation: 'testtest')
 
-    Deck.create(deck_id: 1, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 2, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 3, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 4, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 5, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 6, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 7, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 8, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 9, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 10, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 11, deckTitle: "test", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )  
+    Deck.create(deck_id: 1, deckTitle: "test1", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    Deck.create(deck_id: 2, deckTitle: "test2", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    Deck.create(deck_id: 3, deckTitle: "test3", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    Deck.create(deck_id: 4, deckTitle: "test4", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    Deck.create(deck_id: 5, deckTitle: "test5", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    Deck.create(deck_id: 6, deckTitle: "test6", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    Deck.create(deck_id: 7, deckTitle: "test7", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    Deck.create(deck_id: 8, deckTitle: "test8", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    Deck.create(deck_id: 9, deckTitle: "test9", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    Deck.create(deck_id: 10, deckTitle: "test10", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    Deck.create(deck_id: 11, deckTitle: "test11", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )  
 
   end
 end

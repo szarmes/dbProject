@@ -20,13 +20,13 @@ class DecksController < ApplicationController
           deck_id: @deck.deck_id)
 
     if  @check.nil?
-      if  RecentDeck.count('deck_id', :distinct => true)              #<---broken here!!!!!
-                                                                      #matt fix it
+      if  RecentDeck.count('deck_id', :distinct => true) <= 4            
         @recent = RecentDeck.create(user_id: current_user.user_id, 
         deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
         @recent.save
       else
-        @earliest = RecentDeck.order(lastUsed: :desc).first
+        @earliest = RecentDeck.order(lastUsed: :asc).first
+        @earliest.destroy
         @recent = RecentDeck.create(user_id: current_user.user_id, 
           deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
         @recent.save

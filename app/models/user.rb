@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
         has_many  :decks, dependent: :destroy
         has_many  :ratings, dependent: :destroy
         has_many  :cards, dependent: :destroy
-        has_many  :recent_decks, dependent: :destroy
+        has_many  :recent_decks, dependent: :destroy, :limit => 2
         has_many  :favorite_cards, dependent: :destroy
         has_many  :favorite_decks, dependent: :destroy
 
@@ -24,8 +24,9 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: true }
 
   after_create :do_setID
-
+  
   private
+
     def do_setID
       
       newID = self.id
