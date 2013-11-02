@@ -8,7 +8,7 @@ root to: 'static_pages#home'
 
 delete 'decks' => 'decks#destroy', :as => :destroy_decks
 delete 'cards' => 'cards#destroy', :as => :destroy_cards
-delete 'favorite_decks' => 'decks#destroyfavorite', :as => :destroy_favorite
+get   'removefavorite', to: 'decks#removefavorite'
 get   'addfavorite', to: 'decks#addfavorite'
     
    # member do

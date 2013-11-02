@@ -9,7 +9,15 @@
         
     <% end %>
 
+    <% if FavoriteDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
+
     <%= link_to "Favorite this Deck", {:controller => "decks", :action => 'addfavorite', 
     :userID => @userID,:favid => @deck.deck_id} %>
      <br/>
+     <% else %>
+     
+       <%= link_to "DeFavorite this Deck", {:controller => "decks", :action => 'removefavorite', 
+    :userID => @userID,:favid => @deck.deck_id} %>
+    <br/>
+     <% end %>
     <div><%= render partial: 'shared/cards', collection: @cards %></div>

@@ -1,7 +1,8 @@
 
 <% @deck=Deck.find_by(deck_id: favorite.deck_id) %>
 
-
+<% if @deck.nil? %>
+<% else %>
 <div>
     <h2> <%= @deck.deckTitle %> </h2>
     </div>
@@ -18,11 +19,11 @@
     <% end %>
 
    
-    
-    <%= link_to "Remove from Favorites", @favorite, method: :delete, 
-    data: { confirm: "You sure?" } %>
+     <%= link_to "DeFavorite this Deck", {:controller => "decks", :action => 'removefavorite', 
+    :userID => @userID,:favid => @deck.deck_id} %>
     <br/>
     <%= link_to "View this Deck ", deck_path(favorite.deck_id) %>
+<% end %>
 
         
    

@@ -72,18 +72,24 @@ class DecksController < ApplicationController
 
     else
   
-      @favorite = FavoriteDeck.create(user_id: @user.user_id,deck_id: @deck.deck_id,card_id:0)
+      @favorite = FavoriteDeck.create(user_id: @user.user_id, deck_id: @deck.deck_id, 
+                                      card_id:0, fav_id:0)
       @favorite.save
       flash[:success] = "Deck added to favorites."
       redirect_to '/favorite_decks'
     end
   end
 
-  def destroyfavorite
-
-    @deck = FavoriteDeck.find_by(params[:id])
-    @deck.destroy
-    flash[:success] = "Deck removed from favorites."
+  def removefavorite
+    @deck = Deck.find(params[:favid])
+    @userID = current_user.user_id
+    @favorite = FavoriteDeck.find_by(user_id: @userID, deck_id: @deck.deck_id)
+    if @favorite.nil?
+      flash[:error] = "uh-Oh3"
+    else
+      @favorite.delete
+      flash[:success] = "Deck removed from Favorites."
+    end
     redirect_to '/favorite_decks'
   end
 
@@ -173,7 +179,6 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    
     @deck = Deck.find_by(params[:id])
     @deck.destroy
     flash[:success] = "Deck deleted."

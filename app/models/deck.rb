@@ -1,9 +1,10 @@
 class Deck < ActiveRecord::Base
 
 		belongs_to :user
+    belongs_to :favorite_deck
         has_many  :cards, dependent: :destroy
         has_one  :course 
-        has_one  :subject 
+        has_one  :subject
  	
     validates :deckTitle, :courseNum, :subjectName, presence: true
 
