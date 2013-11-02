@@ -16,7 +16,7 @@
      <br/>
      <% else %>
      
-       <%= link_to "DeFavorite this Deck", {:controller => "decks", :action => 'removefavorite', 
+       <%= link_to "Un-Favorite this Deck", {:controller => "decks", :action => 'removefavorite', 
     :userID => @userID,:favid => @deck.deck_id} %>
     <br/>
      <% end %>

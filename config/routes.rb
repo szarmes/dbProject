@@ -3,6 +3,7 @@ devise_for :users
  
 resources :decks
 resources :cards
+resources :browse
  
 root to: 'static_pages#home'
 
@@ -10,6 +11,12 @@ delete 'decks' => 'decks#destroy', :as => :destroy_decks
 delete 'cards' => 'cards#destroy', :as => :destroy_cards
 get   'removefavorite', to: 'decks#removefavorite'
 get   'addfavorite', to: 'decks#addfavorite'
+get   'searchsubject', to: 'browse#searchsubject'
+get   'searchcoursename', to: 'browse#searchcoursename'
+get   'searchcoursenum', to: 'browse#searchcoursenum'
+post 'search', to: 'browse#search'
+get 'search', to: 'browse#search'
+
     
    # member do
     #  get :following, :followers
@@ -18,7 +25,7 @@ get   'addfavorite', to: 'decks#addfavorite'
  # resources :microposts,    only: [:create, :destroy]
  # resources :relationships, only: [:create, :destroy]
   #root  'static_pages#home'
-  match '/browse', to: 'browse#index', via: 'get'
+  
   match '/your_decks', to: 'decks#your_decks', via: 'get'
   #match '/new_deck', to: 'decks#create', via: 'post'
   match '/recent_decks', to: 'decks#recent', via: 'get'
