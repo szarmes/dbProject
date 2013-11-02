@@ -14,6 +14,29 @@ class DecksController < ApplicationController
     @deck =  Deck.find(params[:id])
     @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
     @userID = current_user.user_id
+    @recents = RecentDeck.where(user_id: current_user.user_id)
+    #code to add deck to recent deck
+    @check = RecentDeck.find_by(user_id: current_user.user_id,
+          deck_id: @deck.deck_id)
+
+    if  @check.nil?
+      if  RecentDeck.count('deck_id', :distinct => true)              #<---broken here!!!!!
+                                                                      #matt fix it
+        @recent = RecentDeck.create(user_id: current_user.user_id, 
+        deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
+        @recent.save
+      else
+        @earliest = RecentDeck.order(lastUsed: :desc).first
+        @recent = RecentDeck.create(user_id: current_user.user_id, 
+          deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
+        @recent.save
+      end
+    end
+
+    #increment uses
+    @deck.uses=@deck.uses+1
+    @deck.save
+
 
   end
   def your_decks
@@ -26,7 +49,13 @@ class DecksController < ApplicationController
   end
   def recent
 
+  @recent = RecentDeck.new
+  @recents = RecentDeck.where(user_id: current_user.user_id).order(lastUsed: :desc).paginate(page: params[:page])
+
   end
+
+
+
   def favorite
 
   @favorite = FavoriteDeck.new
