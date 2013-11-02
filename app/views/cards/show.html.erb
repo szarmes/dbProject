@@ -7,6 +7,21 @@
 <h2><%= @card.atext %></h2>
 
 
+<% if FavoriteCard.find_by(:user_id => @userID, :card_id => @card.card_id).nil? %>
+
+    <%= link_to "Favorite this Card", {:controller => "cards", :action => 'addfavorite', 
+    :userID => @userID,:favid => @card.card_id} %>
+     <br/>
+     <% else %>
+     
+    <%= link_to "Un-Favorite this Card", {:controller => "cards", :action => 'removefavorite', 
+    :userID => @userID,:favid => @card.card_id} %>
+    <br/>
+     <% end %>
+<%= link_to "Back to Deck", deck_path(@card.deck_id) %>
+     <br/>
+
+
 <% if !@card.nil? %>
 <% if Deck.find_by(deck_id: @card.deck_id).user_id == @userID %>
 

@@ -80,7 +80,13 @@ namespace :db do
     Deck.create(deck_id: 8, deckTitle: "test8", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
     Deck.create(deck_id: 9, deckTitle: "test9", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
     Deck.create(deck_id: 10, deckTitle: "test10", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    Deck.create(deck_id: 11, deckTitle: "test11", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )  
+    Deck.create(deck_id: 11, deckTitle: "test11", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+
+    Card.create(card_id: 1, deck_id: 1, qtext: "test1", atext: "test1")
+    Card.create(card_id: 2, deck_id: 1, qtext: "test2", atext: "test2") 
+    Card.create(card_id: 3, deck_id: 1, qtext: "test3", atext: "test3") 
+    Card.create(card_id: 4, deck_id: 1, qtext: "test4", atext: "test4") 
+    Card.create(card_id: 5, deck_id: 1, qtext: "test5", atext: "test5")   
 
   end
 end

@@ -11,6 +11,10 @@ delete 'decks' => 'decks#destroy', :as => :destroy_decks
 delete 'cards' => 'cards#destroy', :as => :destroy_cards
 get   'removefavorite', to: 'decks#removefavorite'
 get   'addfavorite', to: 'decks#addfavorite'
+
+get   'removefavoritec', to: 'cards#removefavorite'
+get   'addfavoritec', to: 'cards#addfavorite'
+
 get   'searchsubject', to: 'browse#searchsubject'
 get   'searchcoursename', to: 'browse#searchcoursename'
 get   'searchcoursenum', to: 'browse#searchcoursenum'

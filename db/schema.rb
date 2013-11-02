@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
   create_table "favorite_cards", force: true do |t|
     t.integer "user_id", null: false
     t.integer "card_id", null: false
+    t.integer "fav_id",  null: false
   end
 
   create_table "favorite_decks", force: true do |t|

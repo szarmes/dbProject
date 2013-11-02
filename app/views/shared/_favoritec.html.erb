@@ -1,10 +1,8 @@
-<h1>Favorite Cards</h1>
 
+<% @card=Card.find_by(card_id: favorite.fav_id) %>
 
-<% @favorites.each do |favorite| %>
-
-<% @card = Card.find_by(card_id: favorite.card_id) %>
-
+<% if @card.nil? %>
+<% else %>
 <h1> Question </h1>
 
 <h2><%= @card.qtext %></h2>
@@ -13,11 +11,17 @@
 
 <h2><%= @card.atext %></h2>
 
+<% end %>
 
    
      <%= link_to "Un-Favorite this Card", {:controller => "cards", :action => 'removefavorite', 
     :userID => @userID,:favid => @card.card_id} %>
     <br/>
-    <%= link_to "View this Card ", card_path(@card.card_id) %>
+    <%= link_to "View this Card ", card_path(favorite.card_id) %>
 
-<% end %>
+
+        
+   
+    
+   
+   

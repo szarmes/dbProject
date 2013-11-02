@@ -1,8 +1,5 @@
 class CardsController < ApplicationController
 
-  def favorite
-
-  end
 
 
   def show
@@ -75,6 +72,43 @@ def destroy
     flash[:success] = "Card deleted."
     redirect_to new_card_path(:deck =>@deckID)
 end
+
+def favorite
+
+  @favorite = FavoriteCard.new
+  @favorites = FavoriteCard.where(user_id: current_user.user_id).paginate(page: params[:page])
+
+  end
+  def addfavorite
+
+    @card = Card.find(params[:favid])
+    @user = User.find(params[:userID])
+    if !FavoriteCard.find_by(user_id: @user.user_id, card_id: @card.card_id).nil?
+      flash[:error] = "Card already in favorites."
+      redirect_to card_path(@card.card_id)
+
+    else
+  
+      @favorite = FavoriteCard.create(user_id: @user.user_id, card_id: @card.card_id, 
+                                     fav_id:0)
+      @favorite.save
+      flash[:success] = "Card added to favorites."
+      redirect_to '/favorite_cards'
+    end
+  end
+
+  def removefavorite
+    @card = Card.find(params[:favid])
+    @userID = current_user.user_id
+    @favorite = FavoriteCard.find_by(user_id: @userID, card_id: @card.card_id)
+    if @favorite.nil?
+      flash[:error] = "uh-Oh3"
+    else
+      @favorite.delete
+      flash[:success] = "Card removed from Favorites."
+    end
+    redirect_to '/favorite_cards'
+  end
 
   
 
