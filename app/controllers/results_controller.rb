@@ -17,7 +17,6 @@ class ResultsController < ApplicationController
   def create
     @subSearch = Deck.new
     Result.delete_all
-  	@results = Deck.search(subject_name, course_name, course_num)
     @subject = subject_name
     subjectlength = @subject.to_s.length
     length = subjectlength-19
@@ -29,12 +28,9 @@ class ResultsController < ApplicationController
     length -= 17
     @nameString = course_num.to_s[15,length]
     @results = Deck.search(@subjectString, @courseString, @nameString)
-    @num = @results.size
-    @i = 1
-    while @i <= @num do
-      @result = Result.create(:deck_id => (@results.find(@i).deck_id))
+    @results.each do |r|
+      @result = Result.create(:deck_id => (r.deck_id))
       @result.save
-      @i += 1
     end
     @results = Result.all.paginate(page: params[:page])
     redirect_to '/index'
