@@ -10,6 +10,16 @@ class Deck < ActiveRecord::Base
 
  	after_create :do_setID
 
+
+  def self.search(subject, name, number)
+    query_obj = Deck.all
+    query_obj = query_obj.where('subjectName like ?', "%#{subject}%") unless subject.blank?
+    query_obj = query_obj.where('courseName like ?', "%#{name}%") unless name.blank?
+    query_obj = query_obj.where('courseNum like ?', "%#{number}%") unless number.blank?
+
+    query_obj
+  end
+
   private
     def do_setID
       

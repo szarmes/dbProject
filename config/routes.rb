@@ -3,7 +3,7 @@ devise_for :users
  
 resources :decks
 resources :cards
-resources :browse
+resources :results
  
 root to: 'static_pages#home'
 
@@ -15,27 +15,15 @@ get   'addfavorite', to: 'decks#addfavorite'
 get   'removefavoritec', to: 'cards#removefavorite'
 get   'addfavoritec', to: 'cards#addfavorite'
 
-get   'searchsubject', to: 'browse#searchsubject'
-get   'searchcoursename', to: 'browse#searchcoursename'
-get   'searchcoursenum', to: 'browse#searchcoursenum'
-post 'search', to: 'browse#search'
-get 'search', to: 'browse#search'
+#post  'search', to: 'results#search'
+#get   'search', to: 'results#search'
 
-    
-   # member do
-    #  get :following, :followers
-    #end
-  #end
- # resources :microposts,    only: [:create, :destroy]
- # resources :relationships, only: [:create, :destroy]
-  #root  'static_pages#home'
   
   match '/your_decks', to: 'decks#your_decks', via: 'get'
-  #match '/new_deck', to: 'decks#create', via: 'post'
   match '/recent_decks', to: 'decks#recent', via: 'get'
   match '/favorite_decks', to: 'decks#favorite', via: 'get'
   match '/favorite_cards', to: 'cards#favorite', via: 'get'
- 
+  match '/index', to: 'results#search', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

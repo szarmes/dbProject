@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer "user_id",        default: 0, null: false
     t.string  "courseName"
     t.integer "course_id"
-    t.string  "courseNum",                  null: false
+    t.string  "courseNum"
     t.string  "subjectName",                null: false
     t.integer "subject_id",     default: 0, null: false
     t.string  "remember_token"
@@ -71,6 +71,10 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer  "deck_id",  null: false
     t.integer  "card_id",  null: false
     t.datetime "lastUsed"
+  end
+
+  create_table "results", force: true do |t|
+    t.integer "deck_id", null: false
   end
 
   create_table "subjects", force: true do |t|

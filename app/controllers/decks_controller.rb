@@ -85,7 +85,7 @@ class DecksController < ApplicationController
     @userID = current_user.user_id
     @favorite = FavoriteDeck.find_by(user_id: @userID, deck_id: @deck.deck_id)
     if @favorite.nil?
-      flash[:error] = "uh-Oh3"
+      flash[:error] = "Cannot find deck in Favorites"
     else
       @favorite.delete
       flash[:success] = "Deck removed from Favorites."
