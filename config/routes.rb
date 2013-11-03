@@ -3,7 +3,7 @@ devise_for :users
  
 resources :decks
 resources :cards
-resources :results
+resource :search, :controller => :search
  
 root to: 'static_pages#home'
 
@@ -23,7 +23,7 @@ get   'addfavoritec', to: 'cards#addfavorite'
   match '/recent_decks', to: 'decks#recent', via: 'get'
   match '/favorite_decks', to: 'decks#favorite', via: 'get'
   match '/favorite_cards', to: 'cards#favorite', via: 'get'
-  match '/index', to: 'results#search', via: 'get'
+  match '/index', to: 'search#search', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

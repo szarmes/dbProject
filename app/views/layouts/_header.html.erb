@@ -6,7 +6,7 @@
         <ul class="nav pull-right">
           <% if user_signed_in? %>
             
-            <li><%= link_to "Browse", results_path, id: "brand" %></li>   
+            <li><%= link_to "Search", search_path, id: "brand" %></li>   
             <li><%= link_to "Your Decks", '/your_decks', id: "brand" %></li>   
             <li><%= link_to "Recent Decks", '/recent_decks', id: "brand" %></li>   
             <li><%= link_to "Favorite Decks", favorite_decks_path, id: "brand" %></li> 

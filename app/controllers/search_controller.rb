@@ -1,12 +1,18 @@
-class ResultsController < ApplicationController
+class SearchController < ApplicationController
 
   def search
-          @subSearch = Deck.new
+  	@subSearch = Deck.new
     @results = Result.all.paginate(page: params[:page])
     @result = Result.new
   end
 
   def index
+    @subSearch = Deck.new
+    @results = Result.all.paginate(page: params[:page])
+    @result = Result.new
+  end
+
+  def show
     @subSearch = Deck.new
     @results = Result.all.paginate(page: params[:page])
     @result = Result.new
