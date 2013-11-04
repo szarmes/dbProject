@@ -1,3 +1,19 @@
+<head>
+ <script type="text/javascript">
+        function showAns(){
+          $("#showAnswer").show();
+          $("#showAButton").hide();
+        }
+        function hideAns(){
+            $("#showAnswer").hide();
+            $("#showAButton").show();
+        }
+        </script>
+</head>
+<body>
+
+
+
 <h1> <%= @deck.deckTitle %> </h1>
  <% if !@deck.courseName.nil? %>
        
@@ -35,61 +51,97 @@
     
      <%  if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).nil? %>
          <p> <%= link_to "Like", {:controller => "decks", :action => 'rate', 
-        :userID => @userID,:liked => true, :deckID => @deck.deck_id} %> / 
+        :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count} %> / 
         <%= link_to "Dislike", {:controller => "decks", :action => 'rate', 
-        :userID => @userID,:liked => false, :deckID => @deck.deck_id} %> </p>
+        :userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count} %> </p>
 
     <% else %>
         <%  if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).liked == true %>
         <p> Deck liked. <%= link_to "Dislike", {:controller => "decks", :action => 'rate', 
-         :userID => @userID,:liked => false, :deckID => @deck.deck_id} %> 
+         :userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count} %> 
           </p> 
         <% else %>
         <p> Deck disliked. <%= link_to "Like", {:controller => "decks", :action => 'rate', 
-        :userID => @userID,:liked => true, :deckID => @deck.deck_id} %>  </p> 
+        :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count} %>  </p> 
         <% end %>
         <%= link_to "Unrate", {:controller => "decks", :action => 'unrate', 
-         :userID => @userID, :deckID => @deck.deck_id} %>
+         :userID => @userID, :deckID => @deck.deck_id, :count => @count} %>
     <% end %>
 
-
+    <% if !@cards.empty? %>
     <% @array = @cards.to_a %>
   <% 
       card = @array.at(@count)
   %>
 
-        <div>
-        <p class="ex4"> <b>Question:</b> <br/> <%= card.qtext %></p>
-        </div>
-        
-        <div>
-        <p class="ex4"> <b>Answer:</b> <br/><%= card.atext %></p>
-        </div> 
+  <div class = "row">
+       <aside class="span6">
+      <section>
+      <div>
+     
+    <h1><b>Question:</b> </h1><br/><h4> <%= card.qtext 
+    %></h4>
+        <br/>
+        <div id="showAButton" ><button type="button" onclick="showAns()", class= "btn btn-small btn-primary">Show Answer</button>
+               </div>
+  
+</div>
+         </section>
+    </aside>
+    <aside class="span6">
+      <section>
+<div id="showAnswer", style= "display: none">
+        <p class="ex4"> <h1><b>Answer:</b> </h1><br/><h4><%= card.atext %></h4></p>  
+         
+        <button type="button" onclick="hideAns()", class= "btn btn-small btn-primary">Hide Answer</button>
+              
+</div> 
+      </section>
+    </aside>
+    </div>
 
-    <%= link_to "View this Card", card_path(card.card_id) %>
-     <br/>
-
-    <% if !@card.nil? %>
-    <% if Deck.find_by(deck_id: @card.deck_id).user_id == @userID %>
 
 
-    <%= link_to "Edit this Card", edit_card_path(card.card_id)%>
-     <br/>
-     <%= link_to "Delete this Card", @card, method: :delete, data: { confirm: "You sure?" } %>
-    <br/> 
-
-
-    <% end %>
-     <% end %>
+    <div class="row">
+       <aside class="span6">
+      <section>
 
       <% if @count>0 %>
      <%= link_to "Previous Card", deck_path(card.deck_id, :count => @count-1), 
-     class: "btn btn-large btn-primary" %>
+     class: "btn btn-medium btn-primary" %>
      <% end %>
 
       <% if @count<(@array.size - 1) %>
      <%= link_to "Next Card", deck_path(card.deck_id, :count => @count+1), 
-      class: "btn btn-large btn-primary" %>
+      class: "btn btn-medium btn-primary" %>
      <% end %>
+     <br/><br/>
+ 
+     <%= link_to "Random Card!", deck_path(card.deck_id, :count => rand(@array.size)), 
+     class: "btn btn-medium btn-primary" %>
+
+   </section>
+    </aside>
+     </div>
+
+
+    <% if !card.nil? %>
+    <% if Deck.find_by(deck_id: card.deck_id).user_id == @userID %>
+
+
+    <%= link_to "Edit this Card", edit_card_path(card.card_id)%>
+     <br/>
+     <%= link_to "Delete this Card", card, method: :delete, data: { confirm: "You sure?" } %>
+    <br/> 
+
+
+    <% end %>
+    <% end %> 
+
+  <% end %>  
+
+
+</body>
+
 
 

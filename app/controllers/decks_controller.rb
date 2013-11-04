@@ -12,20 +12,15 @@ class DecksController < ApplicationController
   def show
     if params[:count].nil?
       @count = 0
-    else 
-
-     # @countString = params[:count].to_s
-      #length = @countString.length
-      #length=length-13
-      #@countString = @countString[11,length]
-      #puts @countString
+    else
       @count= params[:count].to_i
     end
     @rating = Deckrating.new
 
     @deck =  Deck.find(params[:id])
+    
     @cards = Card.where(deck_id: @deck.deck_id)
-    @shuffle = Card.where(deck_id: @deck.deck_id).order("RANDOM()")
+  
     @userID = current_user.user_id
     @recents = RecentDeck.where(user_id: current_user.user_id)
     #code to add deck to recent deck
@@ -72,7 +67,7 @@ class DecksController < ApplicationController
     @oldrating = Deckrating.find_by(deck_id: params[:deckID], user_id: params[:userID])
     @oldrating.destroy
     flash[:success] = "Rating removed"
-    redirect_to deck_path(params[:deckID])
+    redirect_to deck_path(params[:deckID], :count => params[:count])
 
   end
 
@@ -96,9 +91,9 @@ class DecksController < ApplicationController
       else
         flash[:error] = 'Deck disliked'
       end
-      redirect_to deck_path(@rating.deck_id)
+      redirect_to deck_path(@rating.deck_id, :count => params[:count])
     else
-      redirect_to deck_path(@rating.deck_id)
+      redirect_to deck_path(@rating.deck_id, :count => params[:count])
     end
 
   end
