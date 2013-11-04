@@ -87,6 +87,10 @@ class CreateSchema < ActiveRecord::Migration
         t.integer   :card_id
     end
 
+    create_table :results  do |t|
+        t.integer   :deck_id
+    end
+
     create_table :favorite_cards do |t|
         t.integer   :user_id
         t.integer   :card_id
