@@ -1,10 +1,29 @@
-<h1> Question </h1>
+<head>
+ <script type="text/javascript">
+        function showAns(){
+          $("#showAnswer").show();
+          $("#showAButton").hide();
+        }
+        function hideAns(){
+            $("#showAnswer").hide();
+            $("#showAButton").show();
+        }
+        </script>
+</head>
+<body>
+<div>
+    <p class="ex4"> <h1><b>Question:</b> </h1><br/><h2> <%= @card.qtext 
+    %></h2>
+        <br/>
+        <div id="showAButton" ><p class="ex4"><button type="button" onclick="showAns()", class= "btn btn-small btn-primary">Show Answer</button></p>
+        </p>            </div>
+</div>
+<div id="showAnswer", style= "display: none">
+         <p class="ex4">
+        <button type="button" onclick="hideAns()", class= "btn btn-small btn-primary">Hide Answer</button>
+        <p class="ex4"> <h1><b>Answer:</b> </h1><br/><h2><%= @card.atext %></h2></p>        
+</div> 
 
-<h2><%= @card.qtext %></h2>
-
-<h1> Answer </h1>
-
-<h2><%= @card.atext %></h2>
 
 
 <% if SavedCard.find_by(:user_id => @userID, :card_id => @card.card_id).nil? %>
