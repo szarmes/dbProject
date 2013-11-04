@@ -15,16 +15,16 @@
 </head>
 <body>
 <div>
-    <p class="ex4"> <h1><b>Question:</b> </h1><br/><h2> <%= @card.qtext 
-    %></h2>
+    <p class="cardTitle"> <h1><b>Question:</b> </h1><br/><h4> <%= @card.qtext 
+    %></h4>
         <br/>
         <div id="showAButton" ><p class="ex4"><button type="button" onclick="showAns()", class= "btn btn-small btn-primary">Show Answer</button></p>
         </p>            </div>
 </div>
 <div id="showAnswer", style= "display: none">
-         <p class="ex4">
+         <p class="cardTitle">
         <button type="button" onclick="hideAns()", class= "btn btn-small btn-primary">Hide Answer</button>
-        <p class="ex4"> <h1><b>Answer:</b> </h1><br/><h2><%= @card.atext %></h2></p>        
+        <p class="cardTitle"><b>Answer:</b></p><br/><h4><%= @card.atext %></h4>       
 </div> 
 
 
