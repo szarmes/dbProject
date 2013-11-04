@@ -11,9 +11,6 @@ delete 'decks' => 'decks#destroy', :as => :destroy_decks
 delete 'cards' => 'cards#destroy', :as => :destroy_cards
 get   'unsavedeck', to: 'decks#removefavorite'
 get   'savedeck', to: 'decks#addfavorite'
-
-get   'unsavecard', to: 'cards#removefavorite'
-get   'savecard', to: 'cards#addfavorite'
 get   'rate', to: 'decks#rate'
 post   'rate', to: 'decks#rate'
 get   'unrate', to: 'decks#unrate'
@@ -26,7 +23,6 @@ post   'unrate', to: 'decks#unrate'
   match '/your_decks', to: 'decks#your_decks', via: 'get'
   match '/recent_decks', to: 'decks#recent', via: 'get'
   match '/saved_decks', to: 'decks#favorite', via: 'get'
-  match '/saved_cards', to: 'cards#favorite', via: 'get'
   match '/index', to: 'search#search', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.

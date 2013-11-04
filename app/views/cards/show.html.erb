@@ -29,17 +29,6 @@
 
 
 
-<% if SavedCard.find_by(:user_id => @userID, :card_id => @card.card_id).nil? %>
-
-    <%= link_to "Save this Card", {:controller => "cards", :action => 'addfavorite', 
-    :userID => @userID,:favid => @card.card_id} %>
-     <br/>
-     <% else %>
-     
-    <%= link_to "Un-save this Card", {:controller => "cards", :action => 'removefavorite', 
-    :userID => @userID,:favid => @card.card_id} %>
-    <br/>
-     <% end %>
 <%= link_to "Back to Deck", deck_path(@card.deck_id) %>
      <br/>
 

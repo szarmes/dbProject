@@ -34,7 +34,7 @@
         <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
         <% @percent = (@liked * 100 / @total) %>
         <% if @percent > 49 %>
-          <div class = 'likedText', style = "color:#33CC33"><%= @percent %>% liked </div>
+          <div class = 'likedText', style = "color:#488F45"><%= @percent %>% liked </div>
         <% else %>
           <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
         <% end %>
@@ -108,6 +108,7 @@
      <%= link_to "Next Card", deck_path(card.deck_id, :count => @count+1), 
       class: "btn btn-medium btn-primary" %>
      <% end %>
+     <br/><br/>
  
      <%= link_to "Random Card", deck_path(card.deck_id, :count => rand(@array.size)), 
      class: "btn btn-medium btn-primary" %>
@@ -134,7 +135,6 @@
 
     <%= link_to "Edit this Card", edit_card_path(card.card_id), class: "btn btn-small btn-info"%>
      <%= link_to "Delete this Card", card, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
-    <br/> 
 
 
     <% end %>

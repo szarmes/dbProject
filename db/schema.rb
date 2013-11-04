@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer  "deck_id",  default: 0,     null: false
     t.string   "qtext",                    null: false
     t.string   "atext",                    null: false 
-    t.datetime "lastUsed"
   end
 
   create_table "courses", force: true do |t|
@@ -41,11 +40,6 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.string  "remember_token"
   end
 
-  create_table "saved_cards", force: true do |t|
-    t.integer "user_id", null: false
-    t.integer "card_id", null: false
-    t.integer "fav_id",  null: false
-  end
 
   create_table "saved_decks", force: true do |t|
     t.integer "user_id", null: false
@@ -58,9 +52,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer  "deckrating_id",                  null: false
     t.integer  "deck_id",                    null: false
     t.integer  "user_id",                    null: false
-    t.string   "comment"
     t.boolean  "liked",      default: false
-    t.datetime "created_at"
   end
 
  
