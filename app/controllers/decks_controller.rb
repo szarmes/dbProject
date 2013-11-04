@@ -11,6 +11,8 @@ class DecksController < ApplicationController
 
   def show
 
+    @rating = Deckrating.new
+
     @deck =  Deck.find(params[:id])
     @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
     @userID = current_user.user_id
@@ -54,43 +56,79 @@ class DecksController < ApplicationController
 
   end
 
+  def unrate
+
+    @oldrating = Deckrating.find_by(deck_id: params[:deckID], user_id: params[:userID])
+    @oldrating.destroy
+    flash[:success] = "Rating removed"
+    redirect_to deck_path(params[:deckID])
+
+  end
+
+  def rate
+    @rating = Deckrating.new
+
+    if !Deckrating.find_by(deck_id: params[:deckID], user_id: params[:userID]).nil?
+      @oldrating = Deckrating.find_by(deck_id: params[:deckID], user_id: params[:userID])
+      @oldrating.destroy
+    end
+
+    @rating.deck_id= params[:deckID]
+    @rating.user_id = params[:userID]
+    @rating.deckrating_id = 0
+    @rating.liked = params[:liked]
+    @rating.created_at = DateTime.now
+     
+    if @rating.save
+      if @rating.liked == true
+        flash[:success] = 'Deck liked'
+      else
+        flash[:error] = 'Deck disliked'
+      end
+      redirect_to deck_path(@rating.deck_id)
+    else
+      redirect_to deck_path(@rating.deck_id)
+    end
+
+  end
+
 
 
   def favorite
 
-  @favorite = FavoriteDeck.new
-  @favorites = FavoriteDeck.where(user_id: current_user.user_id).paginate(page: params[:page])
+  @favorite = SavedDeck.new
+  @favorites = SavedDeck.where(user_id: current_user.user_id).paginate(page: params[:page])
 
   end
   def addfavorite
 
     @deck = Deck.find(params[:favid])
     @user = User.find(params[:userID])
-    if !FavoriteDeck.find_by(user_id: @user.user_id, deck_id: @deck.deck_id).nil?
-      flash[:error] = "Deck already in favorites."
+    if !SavedDeck.find_by(user_id: @user.user_id, deck_id: @deck.deck_id).nil?
+      flash[:error] = "Deck already saved."
       redirect_to deck_path(@deck.deck_id)
 
     else
   
-      @favorite = FavoriteDeck.create(user_id: @user.user_id, deck_id: @deck.deck_id, 
+      @favorite = SavedDeck.create(user_id: @user.user_id, deck_id: @deck.deck_id, 
                                       card_id:0, fav_id:0)
       @favorite.save
-      flash[:success] = "Deck added to favorites."
-      redirect_to '/favorite_decks'
+      flash[:success] = "Deck saved."
+      redirect_to '/saved_decks'
     end
   end
 
   def removefavorite
     @deck = Deck.find(params[:favid])
     @userID = current_user.user_id
-    @favorite = FavoriteDeck.find_by(user_id: @userID, deck_id: @deck.deck_id)
+    @favorite = SavedDeck.find_by(user_id: @userID, deck_id: @deck.deck_id)
     if @favorite.nil?
-      flash[:error] = "Cannot find deck in Favorites"
+      flash[:error] = "Cannot find deck in saved decks"
     else
       @favorite.delete
-      flash[:success] = "Deck removed from Favorites."
+      flash[:success] = "Deck un-saved."
     end
-    redirect_to '/favorite_decks'
+    redirect_to '/saved_decks'
   end
 
   def edit

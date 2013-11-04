@@ -17,8 +17,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer  "card_id",  default: 0,     null: false
     t.integer  "deck_id",  default: 0,     null: false
     t.string   "qtext",                    null: false
-    t.string   "atext",                    null: false
-    t.boolean  "isUsed",   default: false
+    t.string   "atext",                    null: false 
     t.datetime "lastUsed"
   end
 
@@ -42,30 +41,29 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.string  "remember_token"
   end
 
-  create_table "favorite_cards", force: true do |t|
+  create_table "saved_cards", force: true do |t|
     t.integer "user_id", null: false
     t.integer "card_id", null: false
     t.integer "fav_id",  null: false
   end
 
-  create_table "favorite_decks", force: true do |t|
+  create_table "saved_decks", force: true do |t|
     t.integer "user_id", null: false
     t.integer "deck_id", null: false
     t.integer "card_id", null: false
     t.integer "fav_id",  null: false
   end
 
-  create_table "ratings", force: true do |t|
-    t.integer  "rating_id",                  null: false
+  create_table "deckratings", force: true do |t|
+    t.integer  "deckrating_id",                  null: false
     t.integer  "deck_id",                    null: false
-    t.integer  "card_id",                    null: false
     t.integer  "user_id",                    null: false
-    t.string   "comment",                    null: false
-    t.string   "atext",                      null: false
+    t.string   "comment"
     t.boolean  "liked",      default: false
     t.datetime "created_at"
   end
 
+ 
   create_table "recent_decks", force: true do |t|
     t.integer  "user_id",  null: false
     t.integer  "deck_id",  null: false

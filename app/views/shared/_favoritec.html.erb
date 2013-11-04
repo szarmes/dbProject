@@ -14,7 +14,7 @@
 <% end %>
 
    
-     <%= link_to "Un-Favorite this Card", {:controller => "cards", :action => 'removefavorite', 
+     <%= link_to "Un-save this Card", {:controller => "cards", :action => 'removefavorite', 
     :userID => @userID,:favid => @card.card_id} %>
     <br/>
     <%= link_to "View this Card ", card_path(favorite.card_id) %>
