@@ -53,5 +53,43 @@
     <% end %>
 
 
+    <% @array = @cards.to_a %>
+  <% 
+      card = @array.at(@count)
+  %>
 
-    <div><%= render partial: 'shared/cards', collection: @cards %></div>
+        <div>
+        <p class="ex4"> <b>Question:</b> <br/> <%= card.qtext %></p>
+        </div>
+        
+        <div>
+        <p class="ex4"> <b>Answer:</b> <br/><%= card.atext %></p>
+        </div> 
+
+    <%= link_to "View this Card", card_path(card.card_id) %>
+     <br/>
+
+    <% if !@card.nil? %>
+    <% if Deck.find_by(deck_id: @card.deck_id).user_id == @userID %>
+
+
+    <%= link_to "Edit this Card", edit_card_path(card.card_id)%>
+     <br/>
+     <%= link_to "Delete this Card", @card, method: :delete, data: { confirm: "You sure?" } %>
+    <br/> 
+
+
+    <% end %>
+     <% end %>
+
+      <% if @count>0 %>
+     <%= link_to "Previous Card", deck_path(card.deck_id, :count => @count-1), 
+     class: "btn btn-large btn-primary" %>
+     <% end %>
+
+      <% if @count<(@array.size - 1) %>
+     <%= link_to "Next Card", deck_path(card.deck_id, :count => @count+1), 
+      class: "btn btn-large btn-primary" %>
+     <% end %>
+
+

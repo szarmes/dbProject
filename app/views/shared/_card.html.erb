@@ -1,0 +1,30 @@
+        <div>
+        <p class="ex4"> <b>Question:</b> <br/> <%= card.qtext %></p>
+        </div>
+        
+        <div>
+        <p class="ex4"> <b>Answer:</b> <br/><%= card.atext %></p>
+        </div> 
+
+    <%= link_to "View this Card", card_path(card.card_id) %>
+     <br/>
+
+    <% if !@card.nil? %>
+    <% if Deck.find_by(deck_id: @card.deck_id).user_id == @userID %>
+
+
+    <%= link_to "Edit this Card", edit_card_path(card.card_id)%>
+     <br/>
+     <%= link_to "Delete this Card", @card, method: :delete, data: { confirm: "You sure?" } %>
+    <br/> 
+
+    <% end %>
+     <% end %>
+
+
+
+        
+   
+    
+   
+   

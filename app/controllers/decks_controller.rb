@@ -10,11 +10,22 @@ class DecksController < ApplicationController
   end
 
   def show
+    if params[:count].nil?
+      @count = 0
+    else 
 
+     # @countString = params[:count].to_s
+      #length = @countString.length
+      #length=length-13
+      #@countString = @countString[11,length]
+      #puts @countString
+      @count= params[:count].to_i
+    end
     @rating = Deckrating.new
 
     @deck =  Deck.find(params[:id])
-    @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
+    @cards = Card.where(deck_id: @deck.deck_id)
+    @shuffle = Card.where(deck_id: @deck.deck_id).order("RANDOM()")
     @userID = current_user.user_id
     @recents = RecentDeck.where(user_id: current_user.user_id)
     #code to add deck to recent deck
