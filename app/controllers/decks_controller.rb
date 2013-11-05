@@ -5,7 +5,7 @@ class DecksController < ApplicationController
     @deck = Deck.new
     @decks = Deck.where(user_id: current_user.user_id).paginate(page: params[:page])
     @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
-           
+    @userID = current_user.user_id
 
   end
 

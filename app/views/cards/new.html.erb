@@ -1,3 +1,4 @@
+<% if @deck.user_id == @userID %>
 <h1> Add/Edit Cards </h1>
 <h2> <%= @deck.deckTitle %> </h2>
  <% if !@deck.courseName.nil? %>
@@ -31,4 +32,5 @@
 
   <div><%= render partial: 'shared/cards', collection: @cards %></div>
 
+<% end %>
 <% end %>
