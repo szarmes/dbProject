@@ -215,20 +215,20 @@ table.presentDeck{
 
 table.questionCard{
   border: 1px solid black;
-  background-image:url('redcard.jpg');
+  background-image:url('simplecard.jpg');
   background-repeat:no-repeat;
-  width: 11.2em;
-  height: 228px;
+  width: 400px;
+  height: 300px;
   text-align: center;
   vertical-align: middle;
 }
 
 table.answerCard{
  border: 1px solid black;
-  background-image:url('greencard.jpg');
+  background-image:url('simplecard.jpg');
   background-repeat:no-repeat;
-  width: 11.2em;
-  height: 228px;
+  width: 400px;
+  height: 300px;
   text-align: center;
   vertical-align: middle;
 }
