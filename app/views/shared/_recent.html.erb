@@ -1,28 +1,50 @@
 
-<% @deck=Deck.find_by(deck_id: recent.deck_id) %>
+<% decks=Deck.find_by(deck_id: recent.deck_id) %>
 
-
-<div>
-    <h2> <%= @deck.deckTitle %> </h2>
-    </div>
-   
-    <% if !@deck.courseName.nil? %>
-        <div>
-        <p class="ex4"><%= @deck.subjectName %> - <%= @deck.courseNum %> - 
-            <%= @deck.courseName %> </p>
-        </div>
-    <% else %> 
-        <div>
-        <p class="ex4"><%= @deck.subjectName %> - <%= @deck.courseNum %> </p>
-        </div>
-    <% end %>
-
-   
-    
-    <%= link_to "View this Deck ", deck_path(recent.deck_id) %>
-
-        
-   
-    
-   
+<head>
+</head>
+<body>
+<div class="row", style = "border-bottom: 3px solid black">
+  <table> 
+    <tr>
+      <td style = "width:185px">
+        <table class = "deck">
+          <tr style = "text-align: center">
+            <td>
+                <p class ="cardTitle2"><%= decks.deckTitle %></p>
+            </td>
+          </tr>
+          <tr style = "text-align: center">
+            <td>
+              <% if !decks.courseName.nil? %>
+                <p class="cardBody2"><%= decks.subjectName %> - <%= decks.courseNum %> - <%= decks.courseName %> </p>
+              <% else %> 
+                <p class="cardBody2"><%= decks.subjectName %> - <%= decks.courseNum %> </p>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td style = "width:8em; text-align:center">
+        <% if Deckrating.where(deck_id: decks.deck_id).empty? %>
+          <div class = 'likedText'> No ratings </div>
+        <% else %>
+          <% @liked = Deckrating.where(deck_id: decks.deck_id, liked: true).count %>
+          <% @total = Deckrating.where(deck_id: decks.deck_id).count %>
+          <% @percent = (@liked * 100 / @total) %>
+          <% if @percent > 49 %>
+            <div class = 'likedText', style = "color:#488F45"><%= @percent %>% liked </div>
+          <% else %>
+            <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
+          <% end %>
+        <% end %>
+      </td>
+      <td style = "width:8em">
+        <%= link_to "View this Deck ", deck_path(decks.deck_id), class: "btn btn-small btn-success" %>
+      </td>
+     
+    </tr>
+  </table>
+</div>
+</body>
    
