@@ -71,8 +71,11 @@ def destroy
     @card = Card.find(params[:id])
     @deckID = @card.deck_id
     @card.destroy
+   
+
     flash[:success] = "Card deleted."
     redirect_to new_card_path(:deck =>@deckID)
+  
 end
 
 

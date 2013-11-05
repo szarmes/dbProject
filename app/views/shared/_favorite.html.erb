@@ -1,36 +1,38 @@
 
-<% decks=Deck.find_by(deck_id: favorite.deck_id) %>
-
+<% @deck=Deck.find_by(deck_id: favorite.deck_id) %>
 <head>
 </head>
 <body>
 <div class="row", style = "border-bottom: 3px solid black">
   <table> 
     <tr>
-      <td style = "width:185px">
+      <td style = "width:158px">
         <table class = "deck">
           <tr style = "text-align: center">
             <td>
-                <p class ="cardTitle2"><%= decks.deckTitle %></p>
+                <p class ="cardTitle2"><%= @deck.deckTitle %></p>
             </td>
           </tr>
           <tr style = "text-align: center">
             <td>
-              <% if !decks.courseName.nil? && !@deck.courseName == "" %>
-                <p class="cardBody2"><%= decks.subjectName %> - <%= decks.courseNum %> - <%= decks.courseName %> </p>
+              <% if !@deck.courseName.nil? && !@deck.courseName == "" %>
+                <p class="cardBody2"><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </p>
               <% else %> 
-                <p class="cardBody2"><%= decks.subjectName %> - <%= decks.courseNum %> </p>
+                <p class="cardBody2"><%= @deck.subjectName %> - <%= @deck.courseNum %> </p>
               <% end %>
             </td>
           </tr>
         </table>
       </td>
+       <td style = "width:8em">
+        <%= link_to "View this Deck ", deck_path(@deck.deck_id), class: "btn btn-small btn-success" %>
+      </td>
       <td style = "width:8em; text-align:center">
-        <% if Deckrating.where(deck_id: decks.deck_id).empty? %>
+        <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
           <div class = 'likedText'> No ratings </div>
         <% else %>
-          <% @liked = Deckrating.where(deck_id: decks.deck_id, liked: true).count %>
-          <% @total = Deckrating.where(deck_id: decks.deck_id).count %>
+          <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
+          <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
           <% @percent = (@liked * 100 / @total) %>
           <% if @percent > 49 %>
             <div class = 'likedText', style = "color:#488F45"><%= @percent %>% liked </div>
@@ -39,25 +41,22 @@
           <% end %>
         <% end %>
       </td>
-      <td style = "width:8em">
-        <%= link_to "View this Deck ", deck_path(decks.deck_id), class: "btn btn-small btn-success" %>
+      <td style="text-align:center">
+        <div class = 'likedText'> 
+          Created by: <br/> 
+          <% if !@deck.nil? %>
+          <%= User.find_by(user_id: @deck.user_id).username %> 
+          <% end %>
+        </div>
       </td>
-      <td style = "width:8em">
-         <%= link_to "Un-save", {:controller => "decks", :action => 'removefavorite', 
-           :userID => @userID,:favid => decks.deck_id}, class: "btn btn-small btn-danger" %>
+       <td style="text-align:center">
+        <div class = 'likedText'> 
+          Created on: <br/> 
+          <%= Deck.find_by(deck_id: @deck.deck_id).created_on.strftime("%b-%d-%Y") %> 
+        </div>
       </td>
      
     </tr>
   </table>
 </div>
 </body>
-   
-
-
-   
-
-        
-   
-    
-   
-   

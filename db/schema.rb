@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(version: 20131008164900) do
 
   create_table "cards", force: true do |t|
-    t.integer  "card_id",  default: 0,     null: false
-    t.integer  "deck_id",  default: 0,     null: false
-    t.string   "qtext",                    null: false
-    t.string   "atext",                    null: false 
+    t.integer "card_id", default: 0, null: false
+    t.integer "deck_id", default: 0, null: false
+    t.string  "qtext",               null: false
+    t.string  "atext",               null: false
   end
 
   create_table "courses", force: true do |t|
@@ -27,37 +27,28 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.string  "name"
   end
 
-  create_table "decks", force: true do |t|
-    t.integer "deck_id",        default: 0, null: false
-    t.string  "deckTitle",                  null: false
-    t.integer "uses",           default: 0, null: false
-    t.integer "user_id",        default: 0, null: false
-    t.string  "courseName"
-    t.integer "course_id"
-    t.string  "courseNum"
-    t.string  "subjectName",                null: false
-    t.integer "subject_id",     default: 0, null: false
-    t.string  "remember_token"
-    t.datetime "created_on"
-  end
-
-
-  create_table "saved_decks", force: true do |t|
-    t.integer "user_id", null: false
-    t.integer "deck_id", null: false
-    t.integer "card_id", null: false
-    t.integer "fav_id",  null: false
-  end
-
   create_table "deckratings", force: true do |t|
-    t.integer  "deckrating_id",              null: false
-    t.integer  "deck_id",                    null: false
-    t.integer  "user_id",                    null: false
-    t.boolean  "liked",      default: false
+    t.integer  "deckrating_id",                 null: false
+    t.integer  "deck_id",                       null: false
+    t.integer  "user_id",                       null: false
+    t.boolean  "liked",         default: false
     t.datetime "created_at"
   end
 
- 
+  create_table "decks", force: true do |t|
+    t.integer  "deck_id",        default: 0, null: false
+    t.string   "deckTitle",                  null: false
+    t.integer  "uses",           default: 0, null: false
+    t.integer  "user_id",        default: 0, null: false
+    t.string   "courseName"
+    t.integer  "course_id"
+    t.string   "courseNum"
+    t.string   "subjectName",                null: false
+    t.integer  "subject_id",     default: 0, null: false
+    t.string   "remember_token"
+    t.datetime "created_on"
+  end
+
   create_table "recent_decks", force: true do |t|
     t.integer  "user_id",  null: false
     t.integer  "deck_id",  null: false
@@ -67,6 +58,13 @@ ActiveRecord::Schema.define(version: 20131008164900) do
 
   create_table "results", force: true do |t|
     t.integer "deck_id", null: false
+  end
+
+  create_table "saved_decks", force: true do |t|
+    t.integer "user_id", null: false
+    t.integer "deck_id", null: false
+    t.integer "card_id", null: false
+    t.integer "fav_id",  null: false
   end
 
   create_table "subjects", force: true do |t|

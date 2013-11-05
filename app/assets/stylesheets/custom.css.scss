@@ -144,6 +144,7 @@ p.cardBody{
   letter-spacing: 0px;
   margin-bottom: 0px;
   font-weight: bold;
+  padding:20px;
 }
 p.cardBody2{
   font-size: 1.2em;
@@ -217,7 +218,8 @@ table.questionCard{
   border: 1px solid black;
   background-image:url('simplecard.jpg');
   background-repeat:no-repeat;
-  width: 400px;
+  background-origin: border-box;
+  width: 348px;
   height: 300px;
   text-align: center;
   vertical-align: middle;
@@ -227,7 +229,7 @@ table.answerCard{
  border: 1px solid black;
   background-image:url('simplecard.jpg');
   background-repeat:no-repeat;
-  width: 400px;
+  width: 348px;
   height: 300px;
   text-align: center;
   vertical-align: middle;
