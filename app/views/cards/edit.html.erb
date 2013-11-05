@@ -1,3 +1,4 @@
+<% if @deck.user_id == @userID %>
 <h1> Edit this Card </h1>
 
 <%= simple_form_for @card, :html => { :method => :put} do |f| %>
@@ -16,3 +17,4 @@
  <%= f.submit "Save Changes", class: "btn btn-large btn-primary" %>
 
  <%end%>
+ <% end %>

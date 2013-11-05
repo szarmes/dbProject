@@ -8,7 +8,9 @@ class CardsController < ApplicationController
   end
 
   def edit
-    @card = Card.find(params[:id])  
+    @card = Card.find(params[:id]) 
+    @userID = current_user.user_id 
+    @deck =  Deck.find_by(deck_id: @card.deck_id)
   end
 
   def update
@@ -28,7 +30,7 @@ class CardsController < ApplicationController
 end
   
   def new
-
+    @userID = current_user.user_id 
   	@card = Card.new
 
   	@deck =  Deck.find(params[:deck])
