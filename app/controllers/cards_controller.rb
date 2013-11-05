@@ -66,7 +66,7 @@ end
 
 def destroy
     
-    @card = Card.find_by(params[:id])
+    @card = Card.find(params[:id])
     @deckID = @card.deck_id
     @card.destroy
     flash[:success] = "Card deleted."

@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2.8em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
@@ -115,6 +115,13 @@ p.cardTitle{
   font-weight: bold;
   margin-right:16em;
 }
+p.tableHeading{
+  font-size: 1.8em;
+  letter-spacing: -1px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: center;
+}
 p.cardTitle1{
   border-bottom:2px solid black;
   font-size: 1.6em;
@@ -123,10 +130,23 @@ p.cardTitle1{
   font-weight: bold;
   margin-right:12em;
 }
+p.cardTitle2{
+  font-size: 1.6em;
+  letter-spacing: -1px;
+  margin-bottom: 0px;
+  font-weight: bold;
+  max-width: 185px;
+}
 p.cardBody{
   font-size: 1.2em;
   letter-spacing: 0px;
   margin-bottom: 30px;
+}
+p.cardBody2{
+  font-size: 1.2em;
+  letter-spacing: 0px;
+  margin-bottom: 30px;
+  max-width: 185px;
 }
 
 
@@ -173,6 +193,16 @@ div.likedText{
   font-size: 1.2em;
   line-height: 1.4em;
   font: Helvatica, serif;
+}
+
+table.deck{
+  border: 1px solid black;
+  background-image:url('card.jpg');
+  background-repeat:no-repeat;
+  text-align: center;
+  vertical-align: middle;
+  width: 185px;
+  height: 245px;
 }
 div.ex1{
   

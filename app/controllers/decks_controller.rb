@@ -16,7 +16,6 @@ class DecksController < ApplicationController
       @count= params[:count].to_i
     end
     @rating = Deckrating.new
-
     @deck =  Deck.find(params[:id])
     
     @cards = Card.where(deck_id: @deck.deck_id)
@@ -223,7 +222,7 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    @deck = Deck.find_by(params[:id])
+    @deck = Deck.find(params[:id])
     @deck.destroy
     flash[:success] = "Deck deleted."
     redirect_to '/your_decks'

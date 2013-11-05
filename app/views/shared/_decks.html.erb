@@ -1,42 +1,44 @@
-    <div>
-    <h2> <%= decks.deckTitle %> </h2>
-    </div>
-   
-    <% if !decks.courseName.nil? %>
-        <div>
-        <p class="ex4"><%= decks.subjectName %> - <%= decks.courseNum %> - <%= decks.courseName %> </p>
-        </div>
-    <% else %> 
-        <div>
-        <p class="ex4"><%= decks.subjectName %> - <%= decks.courseNum %> </p>
-        </div>
-    <% end %>
-
-   <% if Deckrating.where(deck_id: decks.deck_id).empty? %>
-        <div class = 'likedText'> No ratings </div>
-    <% else %>
-
-        <% @liked = Deckrating.where(deck_id: decks.deck_id, liked: true).count %>
-        <% @total = Deckrating.where(deck_id: decks.deck_id).count %>
-        <% @percent = (@liked * 100 / @total) %>
-        <% if @percent > 49 %>
-          <div class = 'likedText', style = "color:#488F45"><%= @percent %>% liked </div>
-        <% else %>
-          <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
+<head>
+</head>
+<body>    
+  <table class = "deck">
+    <tr style = "text-align: center">
+      <td><p class ="cardTitle2"><%= decks.deckTitle %></p></td>
+    </tr>
+    <tr style = "text-align: center">
+      <td>
+        <% if !decks.courseName.nil? %>
+          <div>
+          <p class="cardBody2"><%= decks.subjectName %> - <%= decks.courseNum %> - <%= decks.courseName %> </p>
+          </div>
+        <% else %> 
+          <div>
+          <p class="cardBody2"><%= decks.subjectName %> - <%= decks.courseNum %> </p>
+          </div>
         <% end %>
+      </td>
+    </tr>
+  </table>
+  <% if Deckrating.where(deck_id: decks.deck_id).empty? %>
+    <div class = 'likedText'> No ratings </div>
+  <% else %>
+    <% @liked = Deckrating.where(deck_id: decks.deck_id, liked: true).count %>
+    <% @total = Deckrating.where(deck_id: decks.deck_id).count %>
+    <% @percent = (@liked * 100 / @total) %>
+    <% if @percent > 49 %>
+      <div class = 'likedText', style = "color:#488F45"><%= @percent %>% liked </div>
+    <% else %>
+      <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
     <% end %>
-
-
-   
-    
-
-    <%= link_to "View this Deck ", deck_path(decks.deck_id) %>
-    <br/>
-    <%= link_to "Edit this Deck", edit_deck_path(decks.deck_id)%>
-     <br/>
-    <%= link_to "Add/edit cards", new_card_path(:deck => decks.deck_id) %>
-     <br/>
-    <%= link_to "Delete this Deck", @deck, method: :delete, data: { confirm: "You sure?" } %>
-    <br/>
+  <% end %>
+  <%= link_to "View this Deck ", deck_path(decks.deck_id) %>
+  <br/>
+  <%= link_to "Edit this Deck", edit_deck_path(decks.deck_id)%>
+  <br/>
+  <%= link_to "Add/edit cards", new_card_path(:deck => decks.deck_id) %>
+  <br/>
+  <%= link_to "Delete this Deck", decks, method: :delete, data: { confirm: "You sure?" } %>
+  <br/>
+</body>
    
    
