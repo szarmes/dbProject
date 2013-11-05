@@ -1,5 +1,9 @@
-<h1> Edit this Deck</h1>
-
+ <h1 class = "deckTitle"> <%= @deck.deckTitle %> </h1>
+  <% if !@deck.courseName.nil? %>
+    <h2 class = "deckInfo"><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
+  <% else %> 
+    <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> </h2>
+  <% end %>
 
 <%= simple_form_for @deck, :html => { :method => :put} do |f| %>
 

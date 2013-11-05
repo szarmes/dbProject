@@ -14,7 +14,7 @@
           </tr>
           <tr style = "text-align: center">
             <td>
-              <% if !@deck.courseName.nil? %>
+              <% if !@deck.courseName.nil? && !@deck.courseName == "" %>
                 <p class="cardBody2"><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </p>
               <% else %> 
                 <p class="cardBody2"><%= @deck.subjectName %> - <%= @deck.courseNum %> </p>
@@ -36,6 +36,20 @@
             <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
           <% end %>
         <% end %>
+      </td>
+      <td style="text-align:center">
+        <div class = 'likedText'> 
+          Created by <br/> 
+          <% if !@deck.nil? %>
+          <%= User.find_by(user_id: @deck.user_id).username %> 
+          <% end %>
+        </div>
+      </td>
+       <td style="text-align:center">
+        <div class = 'likedText'> 
+          Created on <br/> 
+          <%= Deck.find_by(deck_id: @deck.deck_id).created_on.strftime("%b-%d-%Y") %> 
+        </div>
       </td>
       <td style = "width:8em">
         <%= link_to "View this Deck ", deck_path(@deck.deck_id), class: "btn btn-small btn-success" %>

@@ -1,16 +1,10 @@
 <% if @deck.user_id == @userID %>
-<h1> Add/Edit Cards </h1>
-<h2> <%= @deck.deckTitle %> </h2>
- <% if !@deck.courseName.nil? %>
-       
-        <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
-        
-    <% else %> 
-        
-        <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> </h2>
-        
-    <% end %>
-
+ <h1 class = "deckTitle"> <%= @deck.deckTitle %> </h1>
+  <% if !@deck.courseName.nil? %>
+    <h2 class = "deckInfo"><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
+  <% else %> 
+    <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> </h2>
+  <% end %>
 
 <%= simple_form_for @card, :url => { :action => "create" } do |f| %>
 

@@ -31,12 +31,15 @@ class DecksController < ApplicationController
          deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
          @recent.save
        else
-          @earliest = RecentDeck.order(lastUsed: :asc).first
-         @earliest.destroy
-         @recent = RecentDeck.create(user_id: current_user.user_id, 
-           deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
-         @recent.save
+        @earliest = RecentDeck.order(lastUsed: :asc).first
+        @earliest.destroy
+        @recent = RecentDeck.create(user_id: current_user.user_id, 
+          deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
+        @recent.save
         end
+      else
+        @check.lastUsed = DateTime.now
+        @check.save
       end
       #increment uses
       @deck.uses=@deck.uses+1
@@ -51,10 +54,8 @@ class DecksController < ApplicationController
 
   end
   def recent
-
-  @recent = RecentDeck.new
-  @recents = RecentDeck.where(user_id: current_user.user_id).order(lastUsed: :desc).paginate(page: params[:page])
-
+    @recent = RecentDeck.new
+    @recents = RecentDeck.where(user_id: current_user.user_id).order(lastUsed: :desc).order(lastUsed: :desc).paginate(page: params[:page])
   end
 
   def unrate
@@ -205,6 +206,7 @@ class DecksController < ApplicationController
 
             @deck.course_id = @newCourse.course_id
           end
+          @deck.created_on = DateTime.now
           @deck.save
 
           flash[:success] = "Deck created!"

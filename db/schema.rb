@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.string  "subjectName",                null: false
     t.integer "subject_id",     default: 0, null: false
     t.string  "remember_token"
+    t.datetime "created_on"
   end
 
 

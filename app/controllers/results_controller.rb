@@ -1,9 +1,10 @@
 class ResultsController < ApplicationController
 
   def search
-          @subSearch = Deck.new
+    @subSearch = Deck.new
     @results = Result.all.paginate(page: params[:page])
     @result = Result.new
+    @userID = current_user.user_id
   end
 
   def index
@@ -33,6 +34,7 @@ class ResultsController < ApplicationController
       @result.save
     end
     @results = Result.all.paginate(page: params[:page])
+    @userID = current_user.user_id
     redirect_to '/index'
   end
 
