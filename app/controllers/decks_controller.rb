@@ -142,21 +142,23 @@ class DecksController < ApplicationController
     if @deck.update_attributes(deck_params)
 
       @course = Course.find_by(course_id: @deck.course_id)
-      if @course.name != @deck.courseName
+      if (!@course.nil? and @course.name != @deck.courseName )
         if !Course.find_by(name: @deck.courseName, subject_id: @deck.subject_id, course_id: @deck.course_id).nil?
           @newCourse = Course.find_by(name: @deck.courseName, subject_id: @deck.subject_id, course_id: @deck.course_id)
           @deck.course_id = @newCourse.course_id
+          @deck.courseName = @newCourse.name
           @deck.save
-        else 
+        end
+      else 
           @newCourse = Course.create(subject_id: @deck.subject_id, 
                         course_id:0, courseNum: @deck.courseNum, name: @deck.courseName)
           @deck.course_id = @newCourse.course_id
+          @deck.courseName = @newCourse.name
           @deck.save
           @newCourse.save
-        end
+      end
 
           
-      end
       flash[:success] = "Changes saved"
 
       redirect_to '/your_decks'         
