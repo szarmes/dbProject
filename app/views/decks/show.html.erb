@@ -2,146 +2,187 @@
  <script type="text/javascript">
         function showAns(){
           $("#showAnswer").show();
+          $("#hideAnswer").hide();
+          $("#hideAButton").show();
           $("#showAButton").hide();
         }
         function hideAns(){
-            $("#showAnswer").hide();
-            $("#showAButton").show();
+          $("#showAnswer").hide();
+          $("#hideAnswer").show();
+          $("#hideAButton").hide();
+          $("#showAButton").show();
         }
         </script>
 </head>
 <body>
-
-
-<h1 class = "deckTitle"> <%= @deck.deckTitle %> </h1>
- <% if !@deck.courseName.nil? %>
-       
-        <h2 class = "deckInfo"><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
-        
-    <% else %> 
-        
-        <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> </h2>
-        
-    <% end %>
-
-    
-      <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
-        <div class = 'likedText'> No ratings </div>
-    <% else %>
-
-        <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
-        <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
-        <% @percent = (@liked * 100 / @total) %>
-        <% if @percent > 49 %>
-          <div class = 'likedText', style = "color:#488F45"><%= @percent %>% liked </div>
+  <h1 class = "deckTitle"> <%= @deck.deckTitle %> </h1>
+  <% if !@deck.courseName.nil? %>
+    <h2 class = "deckInfo"><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
+  <% else %> 
+    <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> </h2>
+  <% end %>
+  <table class= "presentDeck">
+    <tr>
+      <td class = "ratingscol">
+        <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
+          <div class = 'likedText'> No ratings </div>
         <% else %>
-          <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
+          <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
+          <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
+          <% @percent = (@liked * 100 / @total) %>
+          <% if @percent > 49 %>
+            <div class = 'likedText', style = "color:#488F45"><%= @percent %>% liked </div>
+          <% else %>
+            <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
+          <% end %>
         <% end %>
-    <% end %>
-
-    
-     <%  if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).nil? %>
-         <p> <%= link_to "Like", {:controller => "decks", :action => 'rate', 
-        :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success"%> 
-        <%= link_to "Dislike", {:controller => "decks", :action => 'rate', 
-        :userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %> </p>
-
-    <% else %>
-        <%  if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).liked == true %>
-        <div class = 'likedText'>Deck liked</div> <%= link_to "Dislike", {:controller => "decks", :action => 'rate', 
-         :userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %> 
-          
+        <% if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).nil? %>
+          <p> 
+            <%= link_to "Like", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success"%> 
+            <%= link_to "Dislike", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %>
+          </p>
         <% else %>
-        <div class = 'likedText'>Deck disliked</div> <%= link_to "Like", {:controller => "decks", :action => 'rate', 
-        :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success" %>  
+          <% if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).liked == true %>
+            <div class = 'likedText'>
+            Deck liked
+            </div> 
+            <%= link_to "Dislike", {:controller => "decks", :action => 'rate',:userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %> 
+          <% else %>
+            <div class = 'likedText'>
+              Deck disliked
+            </div> 
+            <%= link_to "Like", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success" %>  
+          <% end %>
+          <%= link_to "Unrate", {:controller => "decks", :action => 'unrate', :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
         <% end %>
-        <%= link_to "Unrate", {:controller => "decks", :action => 'unrate', 
-         :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
-    <% end %>
-
-    <% if !@cards.empty? %>
-    <% @array = @cards.to_a %>
-  <% 
-      card = @array.at(@count)
-  %>
-
-  <div class = "row">
-       <aside class="span6">
-      <section>
-      <div>
-     
-    <p class = "cardTitle">Question: </p><br/><p class = "cardBody"> <%= card.qtext 
-    %></p>
-        <br/>
-        <div id="showAButton" ><button type="button" onclick="showAns()", class= "btn btn-small btn-success">Show Answer</button>
-               </div>
-  
-</div>
-         </section>
-    </aside>
-    <aside class="span6">
-      <section>
-<div id="showAnswer", style= "display: none">
-       <p class = "cardTitle">Answer: </p><br/><p class = "cardBody"> <%= card.atext 
-        %></p>
-         
-        <button type="button" onclick="hideAns()", class= "btn btn-small btn-danger">Hide Answer</button>
-              
-</div> 
-      </section>
-    </aside>
-    </div>
-
-
-
-    <div class="row">
-       <aside class="span6">
-      <section>
-
-      <% if @count>0 %>
-     <%= link_to "Previous Card", deck_path(card.deck_id, :count => @count-1), 
-     class: "btn btn-medium btn-primary" %>
-     <% end %>
-
-      <% if @count<(@array.size - 1) %>
-     <%= link_to "Next Card", deck_path(card.deck_id, :count => @count+1), 
-      class: "btn btn-medium btn-primary" %>
-     <% end %>
-     <br/><br/>
- 
-     <%= link_to "Random Card", deck_path(card.deck_id, :count => rand(@array.size)), 
-     class: "btn btn-medium btn-primary" %>
-
-   </section>
-    </aside>
-     </div>
-     <% if SavedDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
-
-    <%= link_to "Save this Deck", {:controller => "decks", :action => 'addfavorite', 
-    :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-info" %>
-     <br/><br/>
-     <% else %>
-     
-    <%= link_to "Un-Save this Deck", {:controller => "decks", :action => 'removefavorite', 
-    :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-danger" %>
-    <br/><br/>
-     <% end %>
-
-
-    <% if !card.nil? %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+    <% if !@cards.empty? && !@count.nil? %>
+      <% @array = @cards.to_a %>
+      <% card = @array.at(@count) %>
+      <td>
+        <table class = "questionCard">
+          <tr>
+            <td>
+              <p class = "cardBody"> 
+                <%= card.qtext %>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td class ="spacecol">
+      </td>
+      <td>
+        <table class = "answerCard">
+          <tr>
+            <td>
+              <div id="hideAnswer">
+                <p class = "cardTitle"> 
+                  Answer
+                </p>
+              </div>
+              <div id="showAnswer", style= "display: none">
+                <p class = "cardBody"> 
+                  <%= card.atext %>
+                </p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <% if @count>0 %>
+          <%= link_to "Previous", deck_path(card.deck_id, :count => @count-1), class: "btn btn-medium btn-primary" %>
+        <% end %>
+        <% if @count<(@array.size - 1) %>
+          <%= link_to "  Next  ", deck_path(card.deck_id, :count => @count+1), class: "btn btn-medium btn-primary" %>
+        <% end %>
+      </td>
+      <td class ="spacecol">
+      </td>
+      <td>
+        <div id="showAButton" >
+          <button type="button" onclick="showAns()", class= "btn btn-small btn-success">
+            Show Answer
+          </button>
+        </div>
+        <div id="hideAButton", style = "display: none" >
+          <button type="button" onclick="hideAns()", class= "btn btn-small btn-danger">
+            Hide Answer
+          </button>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <%= link_to "Random Card", deck_path(card.deck_id, :count => rand(@array.size)), class: "btn btn-medium btn-primary" %>
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+      <td>
+        <% if SavedDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
+          <%= link_to "Save this Deck", {:controller => "decks", :action => 'addfavorite',:userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-info" %>
+        <% else %>
+          <%= link_to "Un-Save this Deck", {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-danger" %>
+        <% end %>
+      </td>
+    <% else %>
+      <td>
+        <table class = "questionCard">
+          <tr>
+            <td>
+              <p class = "cardTitle"> 
+                Question
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td class ="spacecol">
+      </td>
+      <td>
+        <table class = "answerCard">
+          <tr>
+            <td>
+              <p class = "cardTitle"> 
+                Answer
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <%= link_to "Start", deck_path(@deck.deck_id, :count => 0), class: "btn btn-medium btn-primary" %>
+      </td>
+      <td>
+      </td>
+    <% end %>    
+    </tr> 
+  </table>
+  <br/>
+  <% if !card.nil? %>
     <% if Deck.find_by(deck_id: card.deck_id).user_id == @userID %>
-
-
-    <%= link_to "Edit this Card", edit_card_path(card.card_id), class: "btn btn-small btn-info"%>
-     <%= link_to "Delete this Card", card, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
-
-
+      <%= link_to "Edit this Card", edit_card_path(card.card_id), class: "btn btn-small btn-info"%>
+      <%= link_to "Delete this Card", card, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
     <% end %>
-    <% end %> 
-
   <% end %>  
-
-
 </body>
 
 

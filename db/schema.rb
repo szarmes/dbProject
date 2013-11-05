@@ -49,10 +49,11 @@ ActiveRecord::Schema.define(version: 20131008164900) do
   end
 
   create_table "deckratings", force: true do |t|
-    t.integer  "deckrating_id",                  null: false
+    t.integer  "deckrating_id",              null: false
     t.integer  "deck_id",                    null: false
     t.integer  "user_id",                    null: false
     t.boolean  "liked",      default: false
+    t.datetime "created_at"
   end
 
  

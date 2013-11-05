@@ -11,40 +11,36 @@ class DecksController < ApplicationController
 
   def show
     if params[:count].nil?
-      @count = 0
     else
       @count= params[:count].to_i
     end
-    @rating = Deckrating.new
-    @deck =  Deck.find(params[:id])
+      @rating = Deckrating.new
+      @deck =  Deck.find(params[:id])
     
-    @cards = Card.where(deck_id: @deck.deck_id)
+      @cards = Card.where(deck_id: @deck.deck_id)
   
-    @userID = current_user.user_id
-    @recents = RecentDeck.where(user_id: current_user.user_id)
-    #code to add deck to recent deck
-    @check = RecentDeck.find_by(user_id: current_user.user_id,
-          deck_id: @deck.deck_id)
+      @userID = current_user.user_id
+      @recents = RecentDeck.where(user_id: current_user.user_id)
+      #code to add deck to recent deck
+      @check = RecentDeck.find_by(user_id: current_user.user_id,
+            deck_id: @deck.deck_id)
 
-    if  @check.nil?
-      if  RecentDeck.count('deck_id', :distinct => true) <= 4            
-        @recent = RecentDeck.create(user_id: current_user.user_id, 
-        deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
-        @recent.save
-      else
-        @earliest = RecentDeck.order(lastUsed: :asc).first
-        @earliest.destroy
-        @recent = RecentDeck.create(user_id: current_user.user_id, 
-          deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
-        @recent.save
+      if  @check.nil?
+        if  RecentDeck.count('deck_id', :distinct => true) <= 4            
+         @recent = RecentDeck.create(user_id: current_user.user_id, 
+         deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
+         @recent.save
+       else
+          @earliest = RecentDeck.order(lastUsed: :asc).first
+         @earliest.destroy
+         @recent = RecentDeck.create(user_id: current_user.user_id, 
+           deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
+         @recent.save
+        end
       end
-    end
-
-    #increment uses
-    @deck.uses=@deck.uses+1
-    @deck.save
-
-
+      #increment uses
+      @deck.uses=@deck.uses+1
+      @deck.save
   end
   def your_decks
 

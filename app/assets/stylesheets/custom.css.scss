@@ -109,11 +109,13 @@ h4 {
 
 p.cardTitle{
   border-bottom:2px solid black;
-  font-size: 1.6em;
+  font-size: 1.8em;
   letter-spacing: -1px;
   margin-bottom: 0px;
   font-weight: bold;
-  margin-right:16em;
+  margin-left:1em;
+  margin-right:1em;
+  text-align: center;
 }
 p.tableHeading{
   font-size: 1.8em;
@@ -138,9 +140,10 @@ p.cardTitle2{
   max-width: 185px;
 }
 p.cardBody{
-  font-size: 1.2em;
+  font-size: 1.15em;
   letter-spacing: 0px;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
+  font-weight: bold;
 }
 p.cardBody2{
   font-size: 1.2em;
@@ -197,15 +200,45 @@ div.likedText{
 
 table.deck{
   border: 1px solid black;
-  background-image:url('card.jpg');
+  background-image:url('redcard.jpg');
   background-repeat:no-repeat;
   text-align: center;
   vertical-align: middle;
-  width: 185px;
-  height: 245px;
+  width: 158px;
+  height: 228px;
 }
 table.yourDeck{
   width:185px
+}
+table.presentDeck{
+}
+
+table.questionCard{
+  border: 1px solid black;
+  background-image:url('redcard.jpg');
+  background-repeat:no-repeat;
+  width: 11.2em;
+  height: 228px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+table.answerCard{
+ border: 1px solid black;
+  background-image:url('greencard.jpg');
+  background-repeat:no-repeat;
+  width: 11.2em;
+  height: 228px;
+  text-align: center;
+  vertical-align: middle;
+}
+td.ratingscol{
+  width: 17em;
+  text-align: left;
+  vertical-align: top;
+}
+td.spacecol{
+  width: 10.6em
 }
 div.ex1{
   
