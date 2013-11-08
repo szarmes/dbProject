@@ -57,7 +57,10 @@ ActiveRecord::Schema.define(version: 20131008164900) do
   end
 
   create_table "results", force: true do |t|
-    t.integer "deck_id", null: false
+    t.integer  "deck_id",    null: false
+    t.string  "username",    null: false
+    t.integer  "percent",    null: false
+    t.datetime "created_on", null: false
   end
 
   create_table "saved_decks", force: true do |t|

@@ -24,6 +24,7 @@ post   'unrate', to: 'decks#unrate'
   match '/recent_decks', to: 'decks#recent', via: 'get'
   match '/saved_decks', to: 'decks#favorite', via: 'get'
   match '/index', to: 'search#search', via: 'get'
+  match '/sort', to: 'search#sort', via: 'post'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

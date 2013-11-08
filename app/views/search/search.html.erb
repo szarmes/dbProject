@@ -1,53 +1,46 @@
-<h1>Results</h1>
-<% if @results.nil? %> 
-Reusults is nil
-<% else %>
-<div><%= render partial: 'shared/result', collection: @results %></div>
-<% end %>
-<p>Search Again</p> 
-
-
-<div class="search">
-<%= simple_form_for @subSearch, :url => { :action => "create" } do |f| %>
-
-   <div class="search">
-    <%= f.label "Browse by Subject" %>
-    <%= f.input :subjectName, collection: ['Agroecology', 'Anthropology','Applied Science','Arts CoOp','Art History and Visual Culture',
-      'Astronomy','Biochemistry','Biology','Creative and Critical Studies',
-      'Chemistry','Computer Science','Creative Writing','Cultural Studies',
-      'Curriculum Studies','Digital Humanities','Educational Administration',
-      'English for Academic Purposes','Early Childhood Education',
-      'Economics','Educational Studies','Education','Earth & Environmental Sciences',
-      'English','Engineering','Environmental Sciences',
-      'Educational Psychology and Special Education','Educational Technology',
-      'Exchange Programs','Film','French','Geography','German',
-      'Gerontology','Greek','Gender and Womens Studies',
-      'Health Studies','Hebrew','Health-Interprofessional',
-      'History','Human Kinetics','Interdisciplinary Graduate Studies',
-      'Indigenous Studies','Japanese Studies','Latin','Language and Literacy Education',  
-      'Mathematics','Management Co-Op','Management','Music','Nursing','Philosophy','Physics',
-      'Political Science','Psychology','Science Co-Op','Sociology','Social Work','Spanish',
-      'Statistics','Sustainability','Theatre','Visiting Graduate Students','Visual Arts',
-      'Visiting Undergraduate Research Students'],
-      :default => 1, label:'' %>
-
-  </div>
-
-   <div  class = "search">
-    <%= f.label "Browse by Course Name" %>
-    <%= f.text_field :courseName, :autofocus => true  %>
-  </div>
-
-   <div  class = "search">
-    <%= f.label "Browse by Course Number"%>
-    <%= f.text_field :courseNum, :autofocus => true %>
-
-  </div>
- 
-
- <%= f.submit "Search", class: "btn btn-medium btn-success" %>
-
-<% end %>
-</div>
-
-
+<head>
+</head>
+<body>
+  <h1>Results</h1>
+  <%= simple_form_for @thing, :url => {:action => 'sort'} do |f| %>
+    <%= f.label "Sort Results", params[:value]  %>
+    <%= f.input :subjectName, collection:['Rating', 'Author A-Z', 'Author Z-A',
+      'Date Created' ] %>
+    <%= f.submit "Search", class: "btn btn-medium btn-success" %>
+  <% end %>
+  <div><%= render partial: 'shared/result', collection: @results %></div>
+  <p>Search Again</p>
+  <%= simple_form_for @subSearch, :url => { :action => "create" } do |f| %>
+    <div>
+      <%= f.label "Browse by Subject", params[:search]  %>
+      <%= f.input :subjectName, collection: ['Agroecology', 'Anthropology',
+        'Applied Science','Arts CoOp','Art History and Visual Culture',
+        'Astronomy','Biochemistry','Biology','Creative and Critical Studies',
+        'Chemistry','Computer Science','Creative Writing','Cultural Studies',
+        'Curriculum Studies','Digital Humanities','Educational Administration',
+        'English for Academic Purposes','Early Childhood Education',
+        'Economics','Educational Studies','Education','Earth & Environmental Sciences',
+        'English','Engineering','Environmental Sciences',
+        'Educational Psychology and Special Education','Educational Technology',
+        'Exchange Programs','Film','French','Geography','German',
+        'Gerontology','Greek','Gender and Womens Studies',
+        'Health Studies','Hebrew','Health-Interprofessional',
+        'History','Human Kinetics','Interdisciplinary Graduate Studies',
+        'Indigenous Studies','Japanese Studies','Latin','Language and Literacy Education',  
+        'Mathematics','Management Co-Op','Management','Music','Nursing','Philosophy','Physics',
+        'Political Science','Psychology','Science Co-Op','Sociology','Social Work','Spanish',
+        'Statistics','Sustainability','Theatre','Visiting Graduate Students','Visual Arts',
+        'Visiting Undergraduate Research Students'],
+        :default => 1, label:'' %>
+    </div>
+    <div>
+      <%= f.label "Browse by Course Name", params[:search2]   %>
+      <%= f.text_field :courseName  %>
+    </div>
+    <div>
+      <%= f.label "Browse by Course Number", params[:search3]  %>
+      <%= f.text_field :courseName %>
+    </div>
+      <%= f.submit "Search", class: "btn btn-medium btn-success" %>
+  <% end %>
+</body>
