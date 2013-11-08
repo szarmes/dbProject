@@ -12,6 +12,7 @@
           $("#hideAButton").hide();
           $("#showAButton").show();
         }
+        
         </script>
 </head>
 <body>
@@ -102,16 +103,16 @@
           <tr>
             <td style = "text-align:right; width:174px">
               <% if @count>0 %>
-                <%= link_to "Previous", deck_path(card.deck_id, :count => @count-1), class: "btn btn-medium btn-primary" %>
+                <%= link_to "Previous", deck_path(card.deck_id, :count => @count-1), class: "btn btn-medium btn-primary", :id => "prev_link" %>
               <% else %>
-                <%= link_to "Previous", deck_path(card.deck_id, :count => @array.size-1), class: "btn btn-medium btn-primary" %>
+                <%= link_to "Previous", deck_path(card.deck_id, :count => @array.size-1), class: "btn btn-medium btn-primary", :id => "prev_link" %>
               <% end %>
             </td>
             <td style = "text-align:left">
               <% if @count<(@array.size - 1) %>
-                <%= link_to "Next", deck_path(card.deck_id, :count => @count+1), class: "btn btn-medium btn-primary" %>
+                <%= link_to "Next", deck_path(card.deck_id, :count => @count+1), class: "btn btn-medium btn-primary", :id => "next_link" %>
               <% else %>
-                <%= link_to "Next", deck_path(card.deck_id, :count => 0), class: "btn btn-medium btn-primary" %>
+                <%= link_to "Next", deck_path(card.deck_id, :count => 0), class: "btn btn-medium btn-primary", :id => "next_link" %>
               <% end %>
             </td>
           </tr>
