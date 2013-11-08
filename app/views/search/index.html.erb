@@ -1,8 +1,9 @@
 <h1>Search</h1>
 
+<div class="search">
 <%= simple_form_for @subSearch, :url => { :action => "create" } do |f| %>
 
-   <div>
+   <div class="search">
   	<%= f.label "Browse by Subject" %>
     <%= f.input :subjectName, collection: ['Agroecology', 'Anthropology','Applied Science','Arts CoOp','Art History and Visual Culture',
     	'Astronomy','Biochemistry','Biology','Creative and Critical Studies',
@@ -25,12 +26,12 @@
 
   </div>
 
-   <div>
+   <div  class = "search">
   	<%= f.label "Browse by Course Name" %>
     <%= f.text_field :courseName, :autofocus => true  %>
   </div>
 
-   <div>
+   <div  class = "search">
   	<%= f.label "Browse by Course Number"%>
     <%= f.text_field :courseNum, :autofocus => true %>
 
@@ -40,5 +41,6 @@
  <%= f.submit "Search", class: "btn btn-medium btn-success" %>
 
 <% end %>
+</div>
 
 
