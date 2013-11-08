@@ -40,7 +40,7 @@
         <%= link_to "View this Deck ", deck_path(decks.deck_id), class: "btn btn-small btn-success" %>
       </td>
       <td style = "width:8em">
-        <%= link_to "Edit this Deck", edit_deck_path(decks.deck_id), class: "btn btn-small btn-warning"%>
+        <%= link_to "Deck Properties", edit_deck_path(decks.deck_id), class: "btn btn-small btn-warning"%>
       </td>
       <td style = "width:8em">
         <%= link_to "Add/edit cards", new_card_path(:deck => decks.deck_id), class: "btn btn-small btn-info" %>
