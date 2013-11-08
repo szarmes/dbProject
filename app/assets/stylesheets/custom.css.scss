@@ -204,8 +204,8 @@ div.search{
 
 
 table.deck{
-  border: 1px solid black;
-  background-image:url('redcard.jpg');
+  
+  background-image:url('card1.jpg');
   background-repeat:no-repeat;
   text-align: center;
   vertical-align: middle;
@@ -219,8 +219,8 @@ table.presentDeck{
 }
 
 table.questionCard{
-  border: 1px solid black;
-  background-image:url('simplecard.jpg');
+ 
+  background-image:url('simplecard1.jpg');
   background-repeat:no-repeat;
   background-origin: border-box;
   width: 348px;
@@ -230,8 +230,8 @@ table.questionCard{
 }
 
 table.answerCard{
- border: 1px solid black;
-  background-image:url('simplecard.jpg');
+
+  background-image:url('simplecard1.jpg');
   background-repeat:no-repeat;
   width: 348px;
   height: 300px;
