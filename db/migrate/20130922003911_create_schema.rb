@@ -33,7 +33,7 @@ class CreateSchema < ActiveRecord::Migration
         t.string     :courseName
         t.integer     :course_id
         t.string     :courseNum
-        t.string     :subjectname,  null: false
+        t.string     :subjectName,  null: false
         t.integer     :subject_id, default:0,  null: false
         t.string   :remember_token
         t.datetime :created_on
