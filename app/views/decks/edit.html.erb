@@ -1,8 +1,8 @@
  <h1 class = "deckTitle"> <%= @deck.deckTitle %> </h1>
   <% if !@deck.courseName.nil? %>
-    <h2 class = "deckInfo"><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
+    <h2 class = "deckInfo"><%= @deck.subjectname %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
   <% else %> 
-    <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> </h2>
+    <h2><%= @deck.subjectname %> - <%= @deck.courseNum %> </h2>
   <% end %>
 
 <%= simple_form_for @deck, :html => { :method => :put} do |f| %>
@@ -17,7 +17,7 @@
   
   <div>
   	<%= f.label "Subject" %>
-    <%= f.input :subjectName, collection: ['Agroecology', 'Anthropology','Applied Science','Arts CoOp','Art History and Visual Culture',
+    <%= f.input :subjectname, collection: ['Agroecology', 'Anthropology','Applied Science','Arts CoOp','Art History and Visual Culture',
     	'Astronomy','Biochemistry','Biology','Creative and Critical Studies',
     	'Chemistry','Computer Science','Creative Writing','Cultural Studies',
     	'Curriculum Studies','Digital Humanities','Educational Administration',
@@ -34,7 +34,7 @@
     	'Political Science','Psychology','Science Co-Op','Sociology','Social Work','Spanish',
     	'Statistics','Sustainability','Theatre','Visiting Graduate Students','Visual Arts',
     	'Visiting Undergraduate Research Students'],
-    	:default => @deck.subjectName , label:'' %>
+    	:default => @deck.subjectname , label:'' %>
   </div>
 
   <div><%= f.label "Course Number *" %><br />

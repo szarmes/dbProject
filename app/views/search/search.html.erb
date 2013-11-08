@@ -5,7 +5,7 @@
   <div class="search">
   <%= simple_form_for @thing, :url => {:action => 'sort'} do |f| %>
     <%= f.label "Sort Results", params[:value]  %>
-    <%= f.input :subjectName, :label => "", collection:['Rating', 'Author A-Z', 'Author Z-A',
+    <%= f.input :subjectname, :label => "", collection:['Rating', 'Author A-Z', 'Author Z-A',
       'Date Created' ] %>
     <%= f.submit "Search", class: "btn btn-medium btn-success" %>
   <% end %>
@@ -16,7 +16,7 @@
   <%= simple_form_for @subSearch, :url => { :action => "create" } do |f| %>
     <div>
       <%= f.label "Browse by Subject", params[:search]  %>
-      <%= f.input :subjectName, collection: ['Agroecology', 'Anthropology',
+      <%= f.input :subjectname, collection: ['Agroecology', 'Anthropology',
         'Applied Science','Arts CoOp','Art History and Visual Culture',
         'Astronomy','Biochemistry','Biology','Creative and Critical Studies',
         'Chemistry','Computer Science','Creative Writing','Cultural Studies',

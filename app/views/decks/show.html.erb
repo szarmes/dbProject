@@ -18,9 +18,9 @@
 <body>
   <h1 class = "deckTitle"> <%= @deck.deckTitle %> </h1>
   <% if !@deck.courseName.nil? %>
-    <h2 class = "deckInfo"><%= @deck.subjectName %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
+    <h2 class = "deckInfo"><%= @deck.subjectname %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
   <% else %> 
-    <h2><%= @deck.subjectName %> - <%= @deck.courseNum %> </h2>
+    <h2><%= @deck.subjectname %> - <%= @deck.courseNum %> </h2>
   <% end %>
   <table class= "presentDeck">
     <tr>

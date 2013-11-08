@@ -178,7 +178,7 @@ class DecksController < ApplicationController
 
         @deck.user_id = current_user.user_id
 
-        sid = Subject.find_by(name: @deck.subjectName).subject_id 
+        sid = Subject.find_by(name: @deck.subjectname).subject_id 
         @deck.subject_id = sid
 
 
@@ -233,7 +233,7 @@ class DecksController < ApplicationController
    private
     
     def deck_params
-        params.require(:deck).permit(:deckTitle, :courseNum, :courseName, :subjectName)
+        params.require(:deck).permit(:deckTitle, :courseNum, :courseName, :subjectname)
     end
 
   

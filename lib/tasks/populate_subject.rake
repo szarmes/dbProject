@@ -73,23 +73,23 @@ namespace :db do
     Course.create(course_id: 1, subject_id:11, name:"Intro to Databases", courseNum: 304)
 
     Deck.create(deck_id: 1, deckTitle: "Cosc", uses:0, user_id: 1, 
-      courseName: "Intro to Databases", courseNum: 304, subjectName: "Computer Science", subject_id:11 )
+      courseName: "Intro to Databases", courseNum: 304, subjectname: "Computer Science", subject_id:11 )
     Deck.create(deck_id: 2, deckTitle: "Chem", uses:0, user_id: 1, 
-      courseName: "Basic Chemistry", courseNum: 101, subjectName: "Chemistry", subject_id:10 )
+      courseName: "Basic Chemistry", courseNum: 101, subjectname: "Chemistry", subject_id:10 )
     Deck.create(deck_id: 3, deckTitle: "French", uses:0, user_id: 1, 
-      courseName: "Tu-parles francais?", courseNum: 133, subjectName: "French", subject_id:27 )
+      courseName: "Tu-parles francais?", courseNum: 133, subjectname: "French", subject_id:27 )
     Deck.create(deck_id: 4, deckTitle: "Calc", uses:0, user_id: 1, 
-      courseName: "Calculus I", courseNum: 100, subjectName: "Mathematics", subject_id:43 )
+      courseName: "Calculus I", courseNum: 100, subjectname: "Mathematics", subject_id:43 )
      Deck.create(deck_id: 5, deckTitle: "Music", uses:0, user_id: 1, 
-      courseName: "Theory of Music", courseNum: 151, subjectName: "Music", subject_id:46 )
+      courseName: "Theory of Music", courseNum: 151, subjectname: "Music", subject_id:46 )
     
     
-    #Deck.create(deck_id: 6, deckTitle: "test6", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    #Deck.create(deck_id: 7, deckTitle: "test7", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    #Deck.create(deck_id: 8, deckTitle: "test8", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    #Deck.create(deck_id: 9, deckTitle: "test9", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    #Deck.create(deck_id: 10, deckTitle: "test10", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
-    #Deck.create(deck_id: 11, deckTitle: "test11", uses:0, user_id: 1, courseNum: 100, subjectName: "Biology", subject_id:8 )
+    #Deck.create(deck_id: 6, deckTitle: "test6", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
+    #Deck.create(deck_id: 7, deckTitle: "test7", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
+    #Deck.create(deck_id: 8, deckTitle: "test8", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
+    #Deck.create(deck_id: 9, deckTitle: "test9", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
+    #Deck.create(deck_id: 10, deckTitle: "test10", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
+    #Deck.create(deck_id: 11, deckTitle: "test11", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
 
     Card.create(card_id: 1, deck_id: 1, qtext: "What does DBMS stand for?", atext: "Database Management System")
     Card.create(card_id: 2, deck_id: 1, qtext: "What is a tuple?", atext: "A row in a relation") 

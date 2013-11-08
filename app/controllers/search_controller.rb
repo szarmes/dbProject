@@ -80,7 +80,7 @@ class SearchController < ApplicationController
   private 
 
   def subject_name
-    params.require(:deck).permit(:subjectName)
+    params.require(:deck).permit(:subjectname)
   end
   def course_name
     params.require(:deck).permit(:courseName)
