@@ -7,7 +7,7 @@
     <%= f.label "Sort Results", params[:value]  %>
     <%= f.input :subjectname, :label => "", collection:['Rating', 'Author A-Z', 'Author Z-A',
       'Date Created' ] %>
-    <%= f.submit "Search", class: "btn btn-medium btn-success" %>
+    <%= f.submit "Sort", class: "btn btn-medium btn-success" %>
   <% end %>
   </div>
   <div><%= render partial: 'shared/result', collection: @results %></div>
