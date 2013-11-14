@@ -1,11 +1,9 @@
 class User < ActiveRecord::Base
 
         has_many  :decks, dependent: :destroy
-        has_many  :ratings, dependent: :destroy
-        has_many  :cards, dependent: :destroy
+        has_many  :deckratings, dependent: :destroy
         has_many  :recent_decks, dependent: :destroy
-        has_many  :favorite_cards, dependent: :destroy
-        has_many  :favorite_decks, dependent: :destroy
+        has_many  :saved_decks, dependent: :destroy
 
 
 
