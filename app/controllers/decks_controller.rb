@@ -61,6 +61,7 @@ class DecksController < ApplicationController
   def recent
     @recent = RecentDeck.new
     @recents = RecentDeck.where(user_id: current_user.user_id).order(lastUsed: :desc).order(lastUsed: :desc).paginate(page: params[:page])
+    @deck = Deck.new
   end
 
   def unrate

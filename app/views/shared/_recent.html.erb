@@ -1,8 +1,8 @@
-
 <% @deck=Deck.find_by(deck_id: recent.deck_id) %>
 <head>
 </head>
 <body>
+  <% if !@deck.nil? %>
 <div class="row", style = "border-bottom: 3px solid black">
   <table> 
     <tr>
@@ -60,3 +60,4 @@
   </table>
 </div>
 </body>
+<% end %>
