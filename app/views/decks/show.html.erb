@@ -25,36 +25,38 @@
   <table class= "presentDeck">
     <tr>
       <td class = "ratingscol">
-        <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
-          <div class = 'likedText'> No ratings </div>
-        <% else %>
-          <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
-          <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
-          <% @percent = (@liked * 100 / @total) %>
-          <% if @percent > 49 %>
-            <div class = 'likedText', style = "color:#488F45"><%= @percent %>% liked </div>
+        <% if user_signed_in? %>
+          <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
+            <div class = 'likedText'> No ratings </div>
           <% else %>
-            <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
+            <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
+            <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
+            <% @percent = (@liked * 100 / @total) %>
+            <% if @percent > 49 %>
+              <div class = 'likedText', style = "color:#488F45"><%= @percent %>% liked </div>
+            <% else %>
+              <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
+            <% end %>
           <% end %>
-        <% end %>
-        <% if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).nil? %>
-          <p> 
-            <%= link_to "Like", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success"%> 
-            <%= link_to "Dislike", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %>
-          </p>
-        <% else %>
-          <% if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).liked == true %>
-            <div class = 'likedText'>
-            Deck liked
-            </div> 
-            <%= link_to "Dislike", {:controller => "decks", :action => 'rate',:userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %> 
+          <% if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).nil? %>
+            <p> 
+              <%= link_to "Like", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success"%> 
+              <%= link_to "Dislike", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %>
+            </p>
           <% else %>
-            <div class = 'likedText'>
-              Deck disliked
-            </div> 
-            <%= link_to "Like", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success" %>  
+            <% if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).liked == true %>
+              <div class = 'likedText'>
+                Deck liked
+              </div> 
+              <%= link_to "Dislike", {:controller => "decks", :action => 'rate',:userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %> 
+            <% else %>
+              <div class = 'likedText'>
+                Deck disliked
+              </div> 
+              <%= link_to "Like", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success" %>  
+            <% end %>
+            <%= link_to "Unrate", {:controller => "decks", :action => 'unrate', :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
           <% end %>
-          <%= link_to "Unrate", {:controller => "decks", :action => 'unrate', :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
         <% end %>
       </td>
     </tr>
@@ -146,10 +148,12 @@
     </tr>
     <tr>
       <td>
-        <% if SavedDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
-          <%= link_to "Save this Deck", {:controller => "decks", :action => 'addfavorite',:userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-info" %>
-        <% else %>
-          <%= link_to "Un-Save this Deck", {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-danger" %>
+        <% if user_signed_in? %>
+          <% if SavedDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
+            <%= link_to "Save this Deck", {:controller => "decks", :action => 'addfavorite',:userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-info" %>
+          <% else %>
+            <%= link_to "Un-Save this Deck", {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-danger" %>
+          <% end %>
         <% end %>
       </td>
     <% else %>

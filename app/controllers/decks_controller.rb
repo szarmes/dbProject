@@ -5,7 +5,9 @@ class DecksController < ApplicationController
     @deck = Deck.new
     @decks = Deck.where(user_id: current_user.user_id).paginate(page: params[:page])
     @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
-    @userID = current_user.user_id
+    if user_signed_in?
+      @userID = current_user.user_id
+    end
 
   end
 
@@ -19,28 +21,31 @@ class DecksController < ApplicationController
     
       @cards = Card.where(deck_id: @deck.deck_id)
   
-      @userID = current_user.user_id
-      @recents = RecentDeck.where(user_id: current_user.user_id)
-      #code to add deck to recent deck
-      @check = RecentDeck.find_by(user_id: current_user.user_id,
-            deck_id: @deck.deck_id)
+      if user_signed_in?
+        @userID = current_user.user_id
+        @recents = RecentDeck.where(user_id: current_user.user_id)
+        #code to add deck to recent deck
+        @check = RecentDeck.find_by(user_id: current_user.user_id,
+              deck_id: @deck.deck_id)
 
-      if  @check.nil?
-        if  RecentDeck.count('deck_id', :distinct => true) <= 4            
-         @recent = RecentDeck.create(user_id: current_user.user_id, 
-         deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
-         @recent.save
-       else
-        @earliest = RecentDeck.order(lastUsed: :asc).first
-        @earliest.destroy
-        @recent = RecentDeck.create(user_id: current_user.user_id, 
+        if  @check.nil?
+          if  RecentDeck.count('deck_id', :distinct => true) <= 4            
+          @recent = RecentDeck.create(user_id: current_user.user_id, 
           deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
-        @recent.save
+          @recent.save
+        else
+          @earliest = RecentDeck.order(lastUsed: :asc).first
+          @earliest.destroy
+          @recent = RecentDeck.create(user_id: current_user.user_id, 
+            deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
+          @recent.save
+          end
+        else
+          @check.lastUsed = DateTime.now
+          @check.save
         end
-      else
-        @check.lastUsed = DateTime.now
-        @check.save
       end
+      
       #increment uses
       @deck.uses=@deck.uses+1
       @deck.save
