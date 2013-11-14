@@ -67,8 +67,10 @@ class DecksController < ApplicationController
   def unrate
 
     @oldrating = Deckrating.find_by(deck_id: params[:deckID], user_id: params[:userID])
-    @oldrating.destroy
-    flash[:success] = "Rating removed"
+    if !@oldrating.nil?
+      @oldrating.destroy
+      flash[:success] = "Rating removed"
+    end
     redirect_to deck_path(params[:deckID], :count => params[:count])
 
   end

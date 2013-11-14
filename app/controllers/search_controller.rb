@@ -26,6 +26,13 @@ class SearchController < ApplicationController
     length = subject_name.to_s.length
     length -= 19
     @value = subject_name.to_s[17,length]
+    @results = Result.all
+    @results.each do |r|
+      @liked = Deckrating.where(deck_id: r.deck_id, liked: true).count 
+      @total = Deckrating.where(deck_id: r.deck_id).count 
+      @percent = (@liked * 100 / @total) 
+      r.update_attributes(:percent => @percent)
+    end
     if(@value == "Rating")
       @results = Result.order(percent: :desc).paginate(page: params[:page])
     elsif(@value == "Date Created")
