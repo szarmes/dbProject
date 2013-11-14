@@ -1,0 +1,53 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var keys = [];
+        var code = [37];
+        var keys1=[];
+        var code1 = [39];
+        var keys2=[];
+        var code2 = [38];
+        $(document).keydown(function(keyEvent) {
+          keys.push(keyEvent.keyCode);
+          keys1.push(keyEvent.keyCode);
+          keys2.push(keyEvent.keyCode);
+          if ( keys.length > code.length ) {
+            keys.shift();
+          }
+          if ( keys1.length > code1.length ) {
+            keys1.shift();
+          }
+          if ( keys2.length > code2.length ) {
+            keys2.shift();
+          }
+          if ( keys.toString() == code.toString() ) {
+            clickLink(document.getElementById("prev_link"));
+          }
+          if ( keys1.toString() == code1.toString() ) {
+              clickLink(document.getElementById("next_link"));
+          }
+          if ( keys2.toString() == code2.toString() ) {
+              clickLink(document.getElementById("rand_link"));
+          }
+        });
+      });
+    function clickLink(link) {
+    var cancelled = false;
+
+    if (document.createEvent) {
+        var event = document.createEvent("MouseEvents");
+        event.initMouseEvent("click", true, true, window,
+            0, 0, 0, 0, 0,
+            false, false, false, false,
+            0, null);
+        cancelled = !link.dispatchEvent(event);
+    }
+    else if (link.fireEvent) {
+        cancelled = !link.fireEvent("onclick");
+    }
+
+    if (!cancelled) {
+        window.location = link.href;
+    }
+}
+    </script>

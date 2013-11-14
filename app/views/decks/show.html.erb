@@ -12,8 +12,7 @@
           $("#hideAButton").hide();
           $("#showAButton").show();
         }
-        
-        </script>
+  </script>
 </head>
 <body>
   <h1 class = "deckTitle"> <%= @deck.deckTitle %> </h1>
@@ -104,10 +103,11 @@
         <table>
           <tr>
             <td style = "text-align:right; width:174px">
+              <%= render 'shared/prev' %>
               <% if @count>0 %>
-                <%= link_to "Previous", deck_path(card.deck_id, :count => @count-1), class: "btn btn-medium btn-primary", :id => "prev_link" %>
+                <%= link_to "Previous", deck_path(card.deck_id, :count => @count-1), class: "btn btn-medium btn-primary", :id => "prev_link"%>
               <% else %>
-                <%= link_to "Previous", deck_path(card.deck_id, :count => @array.size-1), class: "btn btn-medium btn-primary", :id => "prev_link" %>
+                <%= link_to "Previous", deck_path(card.deck_id, :count => @array.size-1), class: "btn btn-medium btn-primary", :id => "prev_link"%>
               <% end %>
             </td>
             <td style = "text-align:left">
@@ -127,6 +127,7 @@
           <button type="button" onclick="showAns()", class= "btn btn-small btn-success">
             Show Answer
           </button>
+          <%= render 'shared/show' %>
         </div>
         <div id="hideAButton", style = "display: none" >
           <button type="button" onclick="hideAns()", class= "btn btn-small btn-danger">
@@ -139,7 +140,11 @@
       <td>
       </td>
       <td style = "text-align:center">
-        <%= link_to "Random", deck_path(card.deck_id, :count => rand(@array.size)), class: "btn btn-medium btn-primary" %>
+        <% @rand = rand(@array.size) %>
+        <% while @count == @rand %>
+          <% @rand = rand(@array.size) %>
+        <% end %>
+        <%= link_to "Random", deck_path(card.deck_id, :count => @rand), class: "btn btn-medium btn-primary", :id => "rand_link" %>
       </td>
       <td>
       </td>

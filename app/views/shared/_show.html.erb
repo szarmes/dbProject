@@ -1,0 +1,26 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var keys = [];
+        var code = [13];
+        var keys1=[];
+        var code1 = [16];
+        $(document).keydown(function(keyEvent) {
+          keys.push(keyEvent.keyCode);
+          keys1.push(keyEvent.keyCode);
+          if ( keys.length > code.length ) {
+            keys.shift();
+          }
+          if ( keys1.length > code1.length ) {
+            keys1.shift();
+          }
+          if ( keys.toString() == code.toString() ) {
+            showAns();
+          }
+          if ( keys1.toString() == code1.toString() ) {
+            hideAns();
+          }
+      
+        });
+      });
+    </script>
