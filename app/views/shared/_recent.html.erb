@@ -35,7 +35,7 @@
           <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
           <% @percent = (@liked * 100 / @total) %>
           <% if @percent > 49 %>
-            <div class = 'likedText', style = "color:#488F45"><%= @percent %>% liked </div>
+            <div class = 'likedText', style = "color:#0D55D1"><%= @percent %>% liked </div>
           <% else %>
             <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
           <% end %>
