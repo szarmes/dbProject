@@ -3,23 +3,18 @@
     $(document).ready(function() {
         var keys = [];
         var code = [13];
-        var keys1=[];
-        var code1 = [16];
+        var toShow = true;
         $(document).keydown(function(keyEvent) {
           keys.push(keyEvent.keyCode);
-          keys1.push(keyEvent.keyCode);
           if ( keys.length > code.length ) {
             keys.shift();
           }
-          if ( keys1.length > code1.length ) {
-            keys1.shift();
+          if(keys.toString() == code.toString()){
+            $('#showAnswer').toggle(toShow);
+            $('#hideAnswer').toggle(!toShow);
+            toShow = !toShow;
           }
-          if ( keys.toString() == code.toString() ) {
-            showAns();
-          }
-          if ( keys1.toString() == code1.toString() ) {
-            hideAns();
-          }
+          
       
         });
       });
