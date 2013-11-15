@@ -39,7 +39,7 @@
           <% end %>
           <% if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).nil? %>
             <p> 
-              <%= link_to "Like", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success"%> 
+              <%= link_to "Like", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-primary"%> 
               <%= link_to "Dislike", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %>
             </p>
           <% else %>
@@ -52,7 +52,7 @@
               <div class = 'likedText'>
                 Deck disliked
               </div> 
-              <%= link_to "Like", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success" %>  
+              <%= link_to "Like", {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-primary" %>  
             <% end %>
             <%= link_to "Unrate", {:controller => "decks", :action => 'unrate', :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
           <% end %>
@@ -61,12 +61,6 @@
     </tr>
     <tr>
       <td>
-      <div class = "howto">
-      Right Arrow = Next <br/>
-      Left Arrow  = Previous <br/>
-      Enter = Show/hide answer <br/>
-      Shift = Random  <br/>
-      </div>
     <% if !@cards.empty? && !@count.nil? %>
       <% @array = @cards.to_a %>
       <% card = @array.at(@count) %>
@@ -108,19 +102,26 @@
       <td>
         <table>
           <tr>
-            <td style = "text-align:right; width:174px">
+            <td style = "text-align:right; width:144px">
               <%= render 'shared/prev' %>
               <% if @count>0 %>
-                <%= link_to "Previous", deck_path(card.deck_id, :count => @count-1), class: "btn btn-medium btn-primary", :id => "prev_link"%>
+                <%= link_to "Previous", deck_path(card.deck_id, :count => @count-1), class: "btn btn-small btn-primary", :id => "prev_link"%>
               <% else %>
-                <%= link_to "Previous", deck_path(card.deck_id, :count => @array.size-1), class: "btn btn-medium btn-primary", :id => "prev_link"%>
+                <%= link_to "Previous", deck_path(card.deck_id, :count => @array.size-1), class: "btn btn-small btn-primary", :id => "prev_link"%>
               <% end %>
+            </td>
+            <td style = "text-align:center">
+              <% @rand = rand(@array.size) %>
+              <% while @count == @rand %>
+                <% @rand = rand(@array.size) %>
+              <% end %>
+              <%= link_to "Random", deck_path(card.deck_id, :count => @rand), class: "btn btn-small btn-primary", :id => "rand_link" %>
             </td>
             <td style = "text-align:left">
               <% if @count<(@array.size - 1) %>
-                <%= link_to "Next", deck_path(card.deck_id, :count => @count+1), class: "btn btn-medium btn-primary", :id => "next_link" %>
+                <%= link_to "Next", deck_path(card.deck_id, :count => @count+1), class: "btn btn-small btn-primary", :id => "next_link" %>
               <% else %>
-                <%= link_to "Next", deck_path(card.deck_id, :count => 0), class: "btn btn-medium btn-primary", :id => "next_link" %>
+                <%= link_to "Next", deck_path(card.deck_id, :count => 0), class: "btn btn-small btn-primary", :id => "next_link" %>
               <% end %>
             </td>
           </tr>
@@ -130,7 +131,7 @@
       </td>
       <td>
         <div id="showAButton" >
-          <button type="button" onclick="showAns()", class= "btn btn-small btn-success">
+          <button type="button" onclick="showAns()", class= "btn btn-small btn-primary">
             Show Answer
           </button>
           <%= render 'shared/show' %>
@@ -145,12 +146,7 @@
     <tr>
       <td>
       </td>
-      <td style = "text-align:center">
-        <% @rand = rand(@array.size) %>
-        <% while @count == @rand %>
-          <% @rand = rand(@array.size) %>
-        <% end %>
-        <%= link_to "Random", deck_path(card.deck_id, :count => @rand), class: "btn btn-medium btn-primary", :id => "rand_link" %>
+      <td>
       </td>
       <td>
       </td>
@@ -205,12 +201,27 @@
     </tr> 
   </table>
   <br/>
-  <% if !card.nil? %>
-    <% if Deck.find_by(deck_id: card.deck_id).user_id == @userID %>
-      <%= link_to "Edit this Card", edit_card_path(card.card_id), class: "btn btn-small btn-info"%>
-      <%= link_to "Delete this Card", card, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
-    <% end %>
-  <% end %>  
+  <table>
+    <tr>
+      <% if !card.nil? && Deck.find_by(deck_id: card.deck_id).user_id == @userID %>
+        <td>
+            <%= link_to "Edit this Card", edit_card_path(card.card_id), class: "btn btn-small btn-info"%>
+            <%= link_to "Delete this Card", card, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
+        </td>
+        <td style="width:21em"></td>
+      <% else %>
+        <td style="width:37.5em"></td>
+      <% end %>
+      <td>
+        <div class = "howto">
+          Right Arrow - Next &nbsp&nbsp
+          Left Arrow  - Previous &nbsp&nbsp
+          Enter - Show/hide answer &nbsp&nbsp
+          Shift - Random
+        </div>
+      </td>
+    </tr>
+  </table>
 </body>
 
 
