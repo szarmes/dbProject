@@ -16,20 +16,20 @@
 </head>
 <body>
   
-        <p class = "deckInfo"><div style = "font-weight: bold; font-size: 1.9em"> <%= @deck.deckTitle %> </div>
+        <p class = "deckInfo"><div style = "font-weight: bold; font-size: 1.9em"> <%= @deck.deck_title %> </div>
      
-        <% if !@deck.courseName.blank? %>
-          <%= @deck.subjectname %> - <%= @deck.courseNum %> - <%= @deck.courseName %> 
+        <% if !@deck.course_name.blank? %>
+          <%= @deck.subject_name %> - <%= @deck.course_num %> - <%= @deck.course_name %> 
         <% else %> 
-          <%= @deck.subjectname %> - <%= @deck.courseNum %> 
+          <%= @deck.subject_name %> - <%= @deck.course_num %> 
         <% end %>
       
         <% if !@deck.school_name.eql? "~N/A~" %>
-         <%= @deck.school_name %>
+         - <%= @deck.school_name %>
         <% end %>
 
         <% if !@deck.prof_name.blank? %>
-         <%= @deck.prof_name %>
+         - <%= @deck.prof_name %>
         <% end %>
         </p>
       
@@ -98,6 +98,15 @@
                   <%= card.atext %>
                 </p>
               
+            </td>
+          </tr>
+        </table>
+        <table class = "answerCard" id = "hideAnswer">
+          <tr>
+            <td>
+              <p class = "cardTitle"> 
+                Answer
+              </p>
             </td>
           </tr>
         </table>

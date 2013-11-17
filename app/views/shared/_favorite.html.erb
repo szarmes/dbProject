@@ -10,15 +10,15 @@
         <table class = "deck">
           <tr style = "text-align: center">
             <td>
-                <p class ="cardTitle2"><%= @deck.deckTitle %></p>
+                <p class ="cardTitle2"><%= @deck.deck_title %></p>
             </td>
           </tr>
           <tr style = "text-align: center">
             <td>
-              <% if !@deck.courseName.nil? && !@deck.courseName == "" %>
-                <p class="cardBody2"><%= @deck.subjectname %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </p>
+              <% if !@deck.course_name.nil? && !@deck.course_name == "" %>
+                <p class="cardBody2"><%= @deck.subject_name %> - <%= @deck.course_num %> - <%= @deck.course_name %> </p>
               <% else %> 
-                <p class="cardBody2"><%= @deck.subjectname %> - <%= @deck.courseNum %> </p>
+                <p class="cardBody2"><%= @deck.subject_name %> - <%= @deck.course_num %> </p>
               <% end %>
             </td>
           </tr>

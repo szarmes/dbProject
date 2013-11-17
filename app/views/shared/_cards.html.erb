@@ -4,18 +4,14 @@
     
     <table>
       <tr>
-        <td><p class="cardTitle1"> Question:</p></td>
-        <td><p class="cardTitle1"> Answer:</p></td>
+        <td style = "width:26em; vertical-align: top;"><p class = "cardBody"><%= cards.qtext %></p></td>
+        <td style = "width:26em; vertical-align: top;"><p class = "cardBody"><%= cards.atext %></p></td>
         <% if !cards.nil? %>
           <% if Deck.find_by(deck_id: cards.deck_id).user_id == @userID %>
             <td><%= link_to "Edit this Card", edit_card_path(cards.card_id), class: "btn btn-small btn-info"%></td>
             <td><%= link_to "Delete this Card", cards, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %></td>
             <% end %>
           <% end %>
-      </tr>
-      <tr>
-        <td style = "max-width:12em"><p class = "cardBody"><%= cards.qtext %></p></td>
-        <td style = "max-width:12em"><p class = "cardBody"><%= cards.atext %></p></td>
       </tr>
     </table>
  </body>

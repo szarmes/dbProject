@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
  
   validates :username, uniqueness: true
 
-  validates :username, :decksMade,  presence:  true
+  validates :username, :decks_made,  presence:  true
   validates_inclusion_of  :admin, :in => [true, false]
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

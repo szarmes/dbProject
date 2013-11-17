@@ -5,7 +5,7 @@
   <div class="search">
   <%= simple_form_for @thing, :url => {:action => 'sort'} do |f| %>
     <%= f.label "Sort Results", params[:value]  %>
-    <%= f.input :subjectname, :label => "", collection:['Rating', 'Author A-Z', 'Author Z-A',
+    <%= f.input :subject_name, :label => "", collection:['Rating', 'Author A-Z', 'Author Z-A',
       'Date Created', 'School', 'Professor' ] %>
     <%= f.submit "Sort", class: "btn btn-medium btn-success" %>
   <% end %>
@@ -21,17 +21,17 @@
     </div>
     <div>
       <%= f.label "Search by Subject", params[:search]  %>
-      <%= f.autocomplete_field :subjectname, autocomplete_subject_name_search_path  %>
+      <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path  %>
     </div>
     <div  class = "search">
     <%= f.label "Search by Course Number"%>
-    <%= f.text_field :courseNum, :autofocus => true %>
+    <%= f.text_field :course_num, :autofocus => true %>
 
   </div>
 
   <div  class = "search">
     <%= f.label "Search by Course Name" %>
-    <%= f.autocomplete_field :courseName,autocomplete_course_name_search_path  %>
+    <%= f.autocomplete_field :course_name,autocomplete_course_name_search_path  %>
   </div>
 
   <div  class = "search">

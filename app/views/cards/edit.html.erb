@@ -20,10 +20,12 @@
 
   <p> Fields marked with * are required </p>
   
-  <div><%= f.label "Question (255 character limit) *" %> <br />
+  <div>
+  	<p>* Question (255 character limit)</p> 
   <%= f.text_area :qtext, :autofocus => true, :default => @card.qtext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255  %></div>
 
-  <div><%= f.label "Answer (255 character limit) *" %> <br />
+  <div>
+  	<p>* Answer (255 character limit) </p> 
   <%= f.text_area :atext, :autofocus => true, :default => @card.atext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255 %></div>
 
   <%= f.hidden_field :deck_id, :value => @card.deck_id %>

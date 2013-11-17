@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
   create_table "courses", force: true do |t|
     t.integer "subject_id", null: false
     t.integer "course_id",  null: false
-    t.string  "courseNum",  null: false
+    t.string  "course_num",  null: false
     t.string  "name"
     t.integer "school_id"
     t.string "school_name"
@@ -39,13 +39,13 @@ ActiveRecord::Schema.define(version: 20131008164900) do
 
   create_table "decks", force: true do |t|
     t.integer  "deck_id",        default: 0, null: false
-    t.string   "deckTitle",                  null: false
+    t.string   "deck_title",                  null: false
     t.integer  "uses",           default: 0, null: false
     t.integer  "user_id",        default: 0, null: false
-    t.string   "courseName"
+    t.string   "course_name"
     t.integer  "course_id"
-    t.string   "courseNum"
-    t.string   "subjectname",                null: false
+    t.string   "course_num"
+    t.string   "subject_name",                null: false
     t.integer  "subject_id",     default: 0, null: false
     t.string   "remember_token"
     t.datetime "created_on"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer  "user_id",  null: false
     t.integer  "deck_id",  null: false
     t.integer  "card_id",  null: false
-    t.datetime "lastUsed"
+    t.datetime "last_used"
   end
 
   create_table "results", force: true do |t|
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.string   "username"
     t.integer  "user_id",                default: 0,     null: false
     t.string   "email",                  default: "",    null: false
-    t.integer  "decksMade",              default: 0,     null: false
+    t.integer  "decks_made",              default: 0,     null: false
     t.boolean  "paid",                   default: false
     t.boolean  "admin",                  default: false
     t.datetime "created_at"

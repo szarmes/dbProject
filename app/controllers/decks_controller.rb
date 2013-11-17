@@ -37,17 +37,17 @@ class DecksController < ApplicationController
         if  @check.nil?
           if  RecentDeck.count('deck_id', :distinct => true) <= 4            
           @recent = RecentDeck.create(user_id: current_user.user_id, 
-          deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
+          deck_id: @deck.deck_id, last_used: DateTime.now, card_id: 0)
           @recent.save
         else
-          @earliest = RecentDeck.order(lastUsed: :asc).first
+          @earliest = RecentDeck.order(last_used: :asc).first
           @earliest.destroy
           @recent = RecentDeck.create(user_id: current_user.user_id, 
-            deck_id: @deck.deck_id, lastUsed: DateTime.now, card_id: 0)
+            deck_id: @deck.deck_id, last_used: DateTime.now, card_id: 0)
           @recent.save
           end
         else
-          @check.lastUsed = DateTime.now
+          @check.last_used = DateTime.now
           @check.save
         end
       end
@@ -66,7 +66,7 @@ class DecksController < ApplicationController
   end
   def recent
     @recent = RecentDeck.new
-    @recents = RecentDeck.where(user_id: current_user.user_id).order(lastUsed: :desc).order(lastUsed: :desc).paginate(page: params[:page])
+    @recents = RecentDeck.where(user_id: current_user.user_id).order(last_used: :desc).order(last_used: :desc).paginate(page: params[:page])
     @deck = Deck.new
   end
 
@@ -155,11 +155,11 @@ class DecksController < ApplicationController
     @deck = Deck.find(params[:id])
     if @deck.update_attributes(deck_params)
 
-      if !@deck.courseName.blank? #set up course info
-          @check = Course.find_by(name: @deck.courseName)
+      if !@deck.course_name.blank? #set up course info
+          @check = Course.find_by(name: @deck.course_name)
           if @check.nil?    #create a new course
             @newCourse = Course.create(subject_id: 0, 
-                        course_id:0, courseNum: @deck.courseNum, name: @deck.courseName)
+                        course_id:0, course_num: @deck.course_num, name: @deck.course_name)
             @newCourse.save
 
             @deck.course_id = @newCourse.course_id
@@ -168,10 +168,10 @@ class DecksController < ApplicationController
           end
         end
 
-        if !@deck.subjectname.blank? #set up subject info
-          @check = Subject.find_by(name: @deck.subjectname)
+        if !@deck.subject_name.blank? #set up subject info
+          @check = Subject.find_by(name: @deck.subject_name)
           if @check.nil? #create a new subject
-            @newSubject = Subject.create(subject_id: 0, name: @deck.subjectname)
+            @newSubject = Subject.create(subject_id: 0, name: @deck.subject_name)
             @newSubject.save
 
             @deck.subject_id = @newSubject.subject_id
@@ -206,7 +206,6 @@ class DecksController < ApplicationController
 
 
   def create
-
   	if user_signed_in?
       @deck = Deck.new(deck_params)
       if @deck.save
@@ -214,11 +213,11 @@ class DecksController < ApplicationController
         @deck.user_id = current_user.user_id
 
         
-        if !@deck.courseName.blank? #set up course info
-          @check = Course.find_by(name: @deck.courseName)
+        if !@deck.course_name.blank? #set up course info
+          @check = Course.find_by(name: @deck.course_name)
           if @check.nil?    #create a new course
             @newCourse = Course.create(subject_id: 0, 
-                        course_id:0, courseNum: @deck.courseNum, name: @deck.courseName)
+                        course_id:0, course_num: @deck.course_num, name: @deck.course_name)
             @newCourse.save
 
             @deck.course_id = @newCourse.course_id
@@ -227,10 +226,10 @@ class DecksController < ApplicationController
           end
         end
 
-        if !@deck.subjectname.blank? #set up subject info
-          @check = Subject.find_by(name: @deck.subjectname)
+        if !@deck.subject_name.blank? #set up subject info
+          @check = Subject.find_by(name: @deck.subject_name)
           if @check.nil? #create a new subject
-            @newSubject = Subject.create(subject_id: 0, name: @deck.subjectname)
+            @newSubject = Subject.create(subject_id: 0, name: @deck.subject_name)
             @newSubject.save
 
             @deck.subject_id = @newSubject.subject_id
@@ -255,6 +254,9 @@ class DecksController < ApplicationController
 
         @deck.created_on = DateTime.now
         @deck.save
+        @user = current_user
+        @user.decks_made +=1
+        @user.save
 
         flash[:success] = "Deck created!"
         redirect_to '/your_decks'
@@ -278,7 +280,7 @@ class DecksController < ApplicationController
    private
     
     def deck_params
-        params.require(:deck).permit(:deckTitle, :courseNum, :courseName, :subjectname, :school_name, :prof_name)
+        params.require(:deck).permit(:deck_title, :course_num, :course_name, :subject_name, :school_name, :prof_name)
     end
 
   

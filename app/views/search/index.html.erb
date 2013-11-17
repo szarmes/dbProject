@@ -5,17 +5,17 @@
 
    <div class="search">
   	<%= f.label "Search by Subject" %>
-    <%= f.autocomplete_field :subjectname, autocomplete_subject_name_search_path  %>
+    <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path  %>
   </div>
 
    <div  class = "search">
   	<%= f.label "Search by Course Name" %>
-    <%= f.autocomplete_field :courseName, autocomplete_course_name_search_path  %>
+    <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path  %>
   </div>
 
    <div  class = "search">
   	<%= f.label "Search by Course Number"%>
-    <%= f.text_field :courseNum, :autofocus => true %>
+    <%= f.text_field :course_num, :autofocus => true %>
 
   </div>
  

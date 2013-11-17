@@ -63,17 +63,17 @@ namespace :db do
    	Subject.create!(subject_id: 0, name: 'Visual Arts')
    	Subject.create!(subject_id: 0, name: 'Visiting Undergraduate Research Students')
     User.create!(email: 'test@test.com', username: 'test', password: 'testtest', password_confirmation: 'testtest', school_name: 'University of British Columbia - Okanagan')
-    Course.create(course_id: 1, subject_id:11, name:"Intro to Databases", courseNum: 304)
-    Deck.create(deck_id: 1, deckTitle: "Cosc", uses:0, user_id: 1, 
-      courseName: "Intro to Databases", courseNum: 304, subjectname: "Computer Science", subject_id:11, school_name: 'University of British Columbia - Okanagan', prof_name: "Lawrence, R." )
-    Deck.create(deck_id: 2, deckTitle: "Chem", uses:0, user_id: 1, 
-      courseName: "Basic Chemistry", courseNum: 101, subjectname: "Chemistry", subject_id:10, school_name: 'University of British Columbia - Okanagan', prof_name: "Smith, J." ) 
-    Deck.create(deck_id: 3, deckTitle: "French", uses:0, user_id: 1, 
-      courseName: "Tu-parles francais?", courseNum: 133, subjectname: "French", subject_id:27, school_name: 'University of British Columbia - Okanagan', prof_name: "LaFleur, G." ) 
-    Deck.create(deck_id: 4, deckTitle: "Calc", uses:0, user_id: 1, 
-      courseName: "Calculus I", courseNum: 100, subjectname: "Mathematics", subject_id:43, school_name: 'University of British Columbia - Okanagan', prof_name: "Spearman, B." ) 
-     Deck.create(deck_id: 5, deckTitle: "Music", uses:0, user_id: 1, 
-      courseName: "Theory of Music", courseNum: 151, subjectname: "Music", subject_id:46, prof_name: "Van Bethoven, L.")
+    Course.create(course_id: 1, subject_id:11, name:"Intro to Databases", course_num: 304)
+    Deck.create(deck_id: 1, deck_title: "Cosc", uses:0, user_id: 1, 
+      course_name: "Intro to Databases", course_num: 304, subject_name: "Computer Science", subject_id:11, school_name: 'University of British Columbia - Okanagan', prof_name: "Lawrence, R." )
+    Deck.create(deck_id: 2, deck_title: "Chem", uses:0, user_id: 1, 
+      course_name: "Basic Chemistry", course_num: 101, subject_name: "Chemistry", subject_id:10, school_name: 'University of British Columbia - Okanagan', prof_name: "Smith, J." ) 
+    Deck.create(deck_id: 3, deck_title: "French", uses:0, user_id: 1, 
+      course_name: "Tu-parles francais?", course_num: 133, subject_name: "French", subject_id:27, school_name: 'University of British Columbia - Okanagan', prof_name: "LaFleur, G." ) 
+    Deck.create(deck_id: 4, deck_title: "Calc", uses:0, user_id: 1, 
+      course_name: "Calculus I", course_num: 100, subject_name: "Mathematics", subject_id:43, school_name: 'University of British Columbia - Okanagan', prof_name: "Spearman, B." ) 
+     Deck.create(deck_id: 5, deck_title: "Music", uses:0, user_id: 1, 
+      course_name: "Theory of Music", course_num: 151, subject_name: "Music", subject_id:46, prof_name: "Van Bethoven, L.")
     Card.create(card_id: 1, deck_id: 1, qtext: "What does DBMS stand for?", atext: "Database Management System")
     Card.create(card_id: 2, deck_id: 1, qtext: "What is a tuple?", atext: "A row in a relation") 
     Card.create(card_id: 3, deck_id: 1, qtext: "Who invented the ER diagram and when?", atext: "Patrick Chen, 1976") 

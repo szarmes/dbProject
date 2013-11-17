@@ -72,14 +72,14 @@ class SearchController < ApplicationController
     Result.delete_all
     @subject = subject_name
     subjectlength = @subject.to_s.length
-    length = subjectlength-19
-    @subjectString = @subject.to_s[17,length]
+    length = subjectlength-20
+    @subjectString = @subject.to_s[18,length]
     length = course_name.to_s.length
-    length -= 18
-    @courseString = course_name.to_s[16,length]
+    length -= 19
+    @courseString = course_name.to_s[17,length]
     length = course_num.to_s.length
-    length -= 17
-    @nameString = course_num.to_s[15,length]
+    length -= 18
+    @nameString = course_num.to_s[16,length]
     length = school_name.to_s.length
     length -= 19
     @schoolString = school_name.to_s[17, length]
@@ -108,13 +108,13 @@ class SearchController < ApplicationController
   private 
 
   def subject_name
-    params.require(:deck).permit(:subjectname)
+    params.require(:deck).permit(:subject_name)
   end
   def course_name
-    params.require(:deck).permit(:courseName)
+    params.require(:deck).permit(:course_name)
   end
   def course_num
-    params.require(:deck).permit(:courseNum)
+    params.require(:deck).permit(:course_num)
   end
   def school_name
     params.require(:deck).permit(:school_name)

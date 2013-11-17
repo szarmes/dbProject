@@ -8,15 +8,15 @@
         <table class = "deck">
           <tr style = "text-align: center">
             <td>
-                <p class ="cardTitle2"><%= decks.deckTitle %></p>
+                <p class ="cardTitle2"><%= decks.deck_title %></p>
             </td>
           </tr>
           <tr style = "text-align: center">
             <td>
-              <% if !decks.courseName.nil? %>
-                <p class="cardBody2"><%= decks.subjectname %> - <%= decks.courseNum %> - <%= decks.courseName %> </p>
+              <% if !decks.course_name.nil? %>
+                <p class="cardBody2"><%= decks.subject_name %> - <%= decks.course_num %> - <%= decks.course_name %> </p>
               <% else %> 
-                <p class="cardBody2"><%= decks.subjectname %> - <%= decks.courseNum %> </p>
+                <p class="cardBody2"><%= decks.subject_name %> - <%= decks.course_num %> </p>
               <% end %>
             </td>
           </tr>

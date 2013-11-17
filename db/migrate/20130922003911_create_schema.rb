@@ -4,7 +4,7 @@ class CreateSchema < ActiveRecord::Migration
     t.string   :username
     t.integer   :user_id,  default: 0, null: false
     t.string   :email, default: "",    null: false               
-    t.integer   :decksMade, default: 0, null:false             
+    t.integer   :decks_made, default: 0, null:false             
     t.boolean   :paid , default:false               
     t.boolean  :admin , default:false               
 
@@ -27,13 +27,13 @@ class CreateSchema < ActiveRecord::Migration
  
     create_table :decks do |t|
         t.integer   :deck_id, default:0,  null: false
-        t.string    :deckTitle,  null: false
+        t.string    :deck_title,  null: false
         t.integer   :uses, default:0,  null: false
         t.integer   :user_id, default:0,  null: false
-        t.string     :courseName
+        t.string     :course_name
         t.integer     :course_id
-        t.string     :courseNum
-        t.string     :subjectname,  null: false
+        t.string     :course_num
+        t.string     :subject_name,  null: false
         t.integer     :subject_id, default:0,  null: false
         t.string   :remember_token
         t.datetime :created_on
@@ -67,7 +67,7 @@ class CreateSchema < ActiveRecord::Migration
         t.integer   :user_id,  null: false
         t.integer   :deck_id,  null: false
         t.integer   :card_id,  null: false
-        t.datetime  :lastUsed
+        t.datetime  :last_used
 
     end
 
@@ -79,7 +79,7 @@ class CreateSchema < ActiveRecord::Migration
     create_table :courses do |t|
         t.integer   :subject_id,  null: false
         t.integer   :course_id,  null: false
-        t.string   :courseNum,  null: false
+        t.string   :course_num,  null: false
         t.string    :name
 
     end

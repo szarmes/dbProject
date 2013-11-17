@@ -1,18 +1,32 @@
+<head>
+  <script language="javascript" type="text/javascript">
+    function CheckMaxlength(x)
+    {
+          var max = parseInt(x.getAttribute('maxlength'));
+          var cur = x.value.length;
 
-        <p class = "deckInfo"><div style = "font-weight: bold; font-size: 1.9em"> <%= @deck.deckTitle %> </div>
+          if ( x.getAttribute && cur > max )
+          {
+              x.value = x.value.substring(0, max);
+          }
+    } 
+</script>
+</head>
+<body>
+        <p class = "deckInfo"><div style = "font-weight: bold; font-size: 1.9em"> <%= @deck.deck_title %> </div>
      
-        <% if !@deck.courseName.blank? %>
-          <%= @deck.subjectname %> - <%= @deck.courseNum %> - <%= @deck.courseName %> 
+        <% if !@deck.course_name.blank? %>
+          <%= @deck.subject_name %> - <%= @deck.course_num %> - <%= @deck.course_name %> 
         <% else %> 
-          <%= @deck.subjectname %> - <%= @deck.courseNum %> 
+          <%= @deck.subject_name %> - <%= @deck.course_num %> 
         <% end %>
       
         <% if !@deck.school_name.eql? "~N/A~" %>
-         <%= @deck.school_name %>
+         - <%= @deck.school_name %>
         <% end %>
 
         <% if !@deck.prof_name.blank? %>
-         <%= @deck.prof_name %>
+         - <%= @deck.prof_name %>
         <% end %>
         </p>
         <br/><br/><br/>
@@ -22,15 +36,14 @@
   <p> Fields marked with * are required </p>
   
   <div  class = "search">
-  <%= f.label "Title *" %> 
-  E.g. "Bio Midterm 1" <br />
+  <p>* Title (50 character limit) </p> 
 
-  <%= f.text_field :deckTitle, :autofocus => true, :default => @deck.deckTitle%></div>
+  <%= f.text_field :deck_title, :autofocus => true, :default => @deck.deck_title, :onkeyup => "CheckMaxlength(this);", :maxlength => 50%></div>
 
   <div  class = "search">
 
-    <%= f.label "Subject *" %>
-    <%= f.autocomplete_field :subjectname, autocomplete_subject_name_search_path  %>
+    <p>* Subject (40 character limit)</p>
+    <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path, :default => @deck.subject_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 40  %>
   </div>
   
 
@@ -41,11 +54,11 @@
   </div>
   
 
-  <div  class = "search"><%= f.label "Course Number *" %>
-  <%= f.text_field :courseNum, :autofocus => true, :default => @deck.courseNum %></div>
+  <div  class = "search"><%= f.label "Course Number (5 character limit)" %>
+  <%= f.text_field :course_num, :autofocus => true, :default => @deck.course_num, :onkeyup => "CheckMaxlength(this);", :maxlength => 5  %></div>
 
-  <div  class = "search"><%= f.label "Course Name" %>
-  <%= f.autocomplete_field :courseName, autocomplete_course_name_search_path, :default => @deck.courseName %></div>
+  <div  class = "search"><%= f.label "Course Name (70 character limit)" %>
+  <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path, :default => @deck.course_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 70 %></div>
 
    <div  class = "search">
     <%= f.label "Instructor (Last name, first name)" %>
@@ -58,3 +71,4 @@
  <%= f.submit "Save Changes", class: "btn btn-medium btn-success" %>
 
  <% end %>
+</body>

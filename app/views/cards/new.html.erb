@@ -1,19 +1,29 @@
-<% if @deck.user_id == @userID %>
- <h1 class = "deckTitle"> <%= @deck.deckTitle %> </h1>
-  <% if !@deck.courseName.nil? %>
-    <h2 class = "deckInfo"><%= @deck.subjectname %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
-  <% else %> 
-    <h2><%= @deck.subjectname %> - <%= @deck.courseNum %> </h2>
-  <% end %>
+ <p class = "deckInfo"><div style = "font-weight: bold; font-size: 1.9em"> <%= @deck.deck_title %> </div>
+     
+        <% if !@deck.course_name.blank? %>
+          <%= @deck.subject_name %> - <%= @deck.course_num %> - <%= @deck.course_name %> 
+        <% else %> 
+          <%= @deck.subject_name %> - <%= @deck.course_num %> 
+        <% end %>
+      
+        <% if !@deck.school_name.eql? "~N/A~" %>
+         - <%= @deck.school_name %>
+        <% end %>
+
+        <% if !@deck.prof_name.blank? %>
+         - <%= @deck.prof_name %>
+        <% end %>
+        </p>
+        <br/><br/><br/>
 
 <%= simple_form_for @card, :url => { :action => "create" } do |f| %>
 
   <p> Fields marked with * are required </p>
   
-  <div><%= f.label "Question *" %> <br />
+  <div><p>* Question (255 character limit)</p> 
   <%= f.text_area :qtext, :autofocus => true %></div>
 
-  <div><%= f.label "Answer *" %> <br />
+  <div><p>* Answer (255 character limit)</p> 
   <%= f.text_area :atext, :autofocus => true %></div>
 
   <%= f.hidden_field :deck_id, :value => @card.deck_id %>
@@ -22,9 +32,14 @@
  <%= f.submit "Create Card", class: "btn btn-medium btn-success" %>
 
  <p class = "tableHeading"> Cards in this Deck </p>
+ <table>
+  <tr>
+    <td style = "width: 25em"> <p class = "cardTitle1">Question:</p> </td>
+    <td style = "width: 25em"> <p class = "cardTitle1">Answer:</p> </td>
+  </tr>
+</table>
 
 
   <div><%= render partial: 'shared/cards', collection: @cards %></div>
 
-<% end %>
 <% end %>
