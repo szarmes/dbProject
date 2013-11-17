@@ -1,10 +1,6 @@
-
-
-
 namespace :db do
   desc "Fill database with Hardcoded Subject"
   task populate: :environment do
-    
     Subject.create!(subject_id: 0, name: 'Agroecology')
     Subject.create!(subject_id: 0, name: 'Anthropology')
     Subject.create!(subject_id: 0, name: 'Applied Science')
@@ -21,7 +17,7 @@ namespace :db do
     Subject.create!(subject_id: 0, name: 'Curriculum Studies')
     Subject.create!(subject_id: 0, name: 'Digital Humanities')
     Subject.create!(subject_id: 0, name: 'Educational Administration')
-     Subject.create!(subject_id: 0, name: 'Educational Studies')
+    Subject.create!(subject_id: 0, name: 'Educational Studies')
     Subject.create!(subject_id: 0, name: 'English for Academic Purposes')
     Subject.create!(subject_id: 0, name: 'Early Childhood Education')
     Subject.create!(subject_id: 0, name: 'Economics')
@@ -66,55 +62,38 @@ namespace :db do
    	Subject.create!(subject_id: 0, name: 'Visiting Graduate Students')
    	Subject.create!(subject_id: 0, name: 'Visual Arts')
    	Subject.create!(subject_id: 0, name: 'Visiting Undergraduate Research Students')
-
-
     User.create!(email: 'test@test.com', username: 'test', password: 'testtest', password_confirmation: 'testtest')
-
     Course.create(course_id: 1, subject_id:11, name:"Intro to Databases", courseNum: 304)
-
     Deck.create(deck_id: 1, deckTitle: "Cosc", uses:0, user_id: 1, 
-      courseName: "Intro to Databases", courseNum: 304, subjectname: "Computer Science", subject_id:11 )
+      courseName: "Intro to Databases", courseNum: 304, subjectname: "Computer Science", subject_id:11, school_name: 'University of British Columbia - Okanagan' )
     Deck.create(deck_id: 2, deckTitle: "Chem", uses:0, user_id: 1, 
-      courseName: "Basic Chemistry", courseNum: 101, subjectname: "Chemistry", subject_id:10 )
+      courseName: "Basic Chemistry", courseNum: 101, subjectname: "Chemistry", subject_id:10, school_name: 'University of British Columbia - Okanagan' ) 
     Deck.create(deck_id: 3, deckTitle: "French", uses:0, user_id: 1, 
-      courseName: "Tu-parles francais?", courseNum: 133, subjectname: "French", subject_id:27 )
+      courseName: "Tu-parles francais?", courseNum: 133, subjectname: "French", subject_id:27, school_name: 'University of British Columbia - Okanagan' ) 
     Deck.create(deck_id: 4, deckTitle: "Calc", uses:0, user_id: 1, 
-      courseName: "Calculus I", courseNum: 100, subjectname: "Mathematics", subject_id:43 )
+      courseName: "Calculus I", courseNum: 100, subjectname: "Mathematics", subject_id:43, school_name: 'University of British Columbia - Okanagan' ) 
      Deck.create(deck_id: 5, deckTitle: "Music", uses:0, user_id: 1, 
-      courseName: "Theory of Music", courseNum: 151, subjectname: "Music", subject_id:46 )
-    
-    
-    #Deck.create(deck_id: 6, deckTitle: "test6", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
-    #Deck.create(deck_id: 7, deckTitle: "test7", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
-    #Deck.create(deck_id: 8, deckTitle: "test8", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
-    #Deck.create(deck_id: 9, deckTitle: "test9", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
-    #Deck.create(deck_id: 10, deckTitle: "test10", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
-    #Deck.create(deck_id: 11, deckTitle: "test11", uses:0, user_id: 1, courseNum: 100, subjectname: "Biology", subject_id:8 )
-
+      courseName: "Theory of Music", courseNum: 151, subjectname: "Music", subject_id:46)
     Card.create(card_id: 1, deck_id: 1, qtext: "What does DBMS stand for?", atext: "Database Management System")
     Card.create(card_id: 2, deck_id: 1, qtext: "What is a tuple?", atext: "A row in a relation") 
     Card.create(card_id: 3, deck_id: 1, qtext: "Who invented the ER diagram and when?", atext: "Patrick Chen, 1976") 
     Card.create(card_id: 4, deck_id: 1, qtext: "Explain entity integrity constraint", atext: "All values of primary keys must be unique and not null") 
     Card.create(card_id: 5, deck_id: 1, qtext: "Return a list of all employees", atext: "Select * from Employee") 
-
     Card.create(card_id: 1, deck_id: 2, qtext: "What is Chemistry?", atext: "The study of matter") 
     Card.create(card_id: 1, deck_id: 2, qtext: "Define matter", atext: "Anything that has mass and occupies space")
     Card.create(card_id: 3, deck_id: 2, qtext: "What is an element", atext: "Pure chemical substance composed of 1 type of atom") 
     Card.create(card_id: 4, deck_id: 2, qtext: "What is the element with atomic number 6?", atext: "Carbon") 
     Card.create(card_id: 5, deck_id: 2, qtext: "Explain Bohr's theory", atext: "Rings around nucleus with electrons") 
-
     Card.create(card_id: 1, deck_id: 3, qtext: "Tu-parles francais?", atext: "Oui, un peu")
     Card.create(card_id: 2, deck_id: 3, qtext: "We are (in french)", atext: "Nous sommes") 
     Card.create(card_id: 3, deck_id: 3, qtext: "You are fat (in french)", atext: "Tu es gros") 
     Card.create(card_id: 4, deck_id: 3, qtext: "I am (in french)", atext: "test4") 
     Card.create(card_id: 5, deck_id: 3, qtext: "May I drink water? (in french)", atext: "Puis-je boire de l'eau?") 
-
     Card.create(card_id: 1, deck_id: 4, qtext: "d/dx x^2", atext: "2x")
     Card.create(card_id: 2, deck_id: 4, qtext: "d/dx ln(x)", atext: "1/x") 
     Card.create(card_id: 3, deck_id: 4, qtext: "What is the formula for linear approximation?", atext: "f(x) ≈ f(a)+f'(a)(x-a) = L(x)") 
     Card.create(card_id: 4, deck_id: 4, qtext: "d/dx sin(x)", atext: "cos(x)") 
     Card.create(card_id: 5, deck_id: 4, qtext: "Countinuous Function", atext: "No breaks in the graph duh") 
-
     Card.create(card_id: 1, deck_id: 5, qtext: "What is music?", atext: "The universal language of emotions communicated through intelligently ordered sounds consisting of rhythm and pitch")
     Card.create(card_id: 2, deck_id: 5, qtext: "How does music affect our moral character?", atext: "It affects our emotions") 
     Card.create(card_id: 3, deck_id: 5, qtext: "How is music universal?", atext: "It is understood by everyone everywhere, through all time") 
@@ -122,6 +101,5 @@ namespace :db do
 while upholding contemporary tonal material.") 
     Card.create(card_id: 5, deck_id: 5, qtext: "Shifted Tonality", atext: "Sudden tonality change without modulation according to common practice 
 standards.")   
-
   end
 end

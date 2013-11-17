@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer "course_id",  null: false
     t.string  "courseNum",  null: false
     t.string  "name"
+    t.integer "school_id"
+    t.string "school_name"
   end
 
   create_table "deckratings", force: true do |t|
@@ -47,6 +49,8 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer  "subject_id",     default: 0, null: false
     t.string   "remember_token"
     t.datetime "created_on"
+    t.integer "school_id"
+    t.string "school_name"
   end
 
   create_table "recent_decks", force: true do |t|
@@ -61,6 +65,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.string  "username",    null: false
     t.integer  "percent",    null: false
     t.datetime "created_on", null: false
+    t.string "school_name"
   end
 
   create_table "saved_decks", force: true do |t|
@@ -96,6 +101,12 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
   end
+
+  create_table "schools", force: true do |t|
+    t.integer "school_id", null: false
+    t.string  "name",       null: false
+  end
+
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"

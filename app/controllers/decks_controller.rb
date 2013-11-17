@@ -149,26 +149,47 @@ class DecksController < ApplicationController
     @deck = Deck.find(params[:id])
     if @deck.update_attributes(deck_params)
 
-      @course = Course.find_by(course_id: @deck.course_id)
-      if (!@course.nil? and @course.name != @deck.courseName )
-        if !Course.find_by(name: @deck.courseName, subject_id: @deck.subject_id, course_id: @deck.course_id).nil?
-          @newCourse = Course.find_by(name: @deck.courseName, subject_id: @deck.subject_id, course_id: @deck.course_id)
-          @deck.course_id = @newCourse.course_id
-          @deck.courseName = @newCourse.name
-          @deck.save
-        end
-      else 
-          @newCourse = Course.create(subject_id: @deck.subject_id, 
+      if !@deck.courseName.blank? #set up course info
+          @check = Course.find_by(name: @deck.courseName)
+          if @check.nil?    #create a new course
+            @newCourse = Course.create(subject_id: 0, 
                         course_id:0, courseNum: @deck.courseNum, name: @deck.courseName)
-          @deck.course_id = @newCourse.course_id
-          @deck.courseName = @newCourse.name
-          @deck.save
-          @newCourse.save
-      end
+            @newCourse.save
+
+            @deck.course_id = @newCourse.course_id
+          else #match the course id
+            @deck.course_id = @check.course_id
+          end
+        end
+
+        if !@deck.subjectname.blank? #set up subject info
+          @check = Subject.find_by(name: @deck.subjectname)
+          if @check.nil? #create a new subject
+            @newSubject = Subject.create(subject_id: 0, name: @deck.subjectname)
+            @newSubject.save
+
+            @deck.subject_id = @newSubject.subject_id
+          else  #match the subject id
+            @deck.subject_id = @check.subject_id
+          end
+
+        end
+
+        if !@deck.school_name.blank? #set up school info
+          @check = School.find_by(name: @deck.school_name)
+          if @check.nil? #create a new school
+            @newSchool = School.create(school_id: 0, name: @deck.school_name)
+            @newSchool.save
+          else 
+            @deck.school_id = @check.school_id
+          end
+        else
+          @deck.school_name = "~N/A~"
+        end
+      @deck.save
 
           
       flash[:success] = "Changes saved"
-
       redirect_to '/your_decks'         
     
     else
@@ -186,41 +207,51 @@ class DecksController < ApplicationController
 
         @deck.user_id = current_user.user_id
 
-        sid = Subject.find_by(name: @deck.subjectname).subject_id 
-        @deck.subject_id = sid
-
-
-        if @deck.courseName.nil?
-
-          if !Course.find_by(courseNum: @deck.courseNum, subject_id: sid).nil?
-            cid = Course.find_by(courseNum: @deck.courseNum,
-            subject_id: sid).course_id 
-            @deck.course_id = cid
-          end
-        else
-          if !Course.find_by(courseNum: @deck.courseNum, subject_id: sid, 
-            name: @deck.courseName).nil?
-            cid = Course.find_by(courseNum: @deck.courseNum,
-            subject_id: sid, name: @deck.courseName).course_id 
-            @deck.course_id = cid
-          end
-
-
-        end
         
-         if cid.nil?
-
-            @newCourse = Course.create(subject_id: sid, 
+        if !@deck.courseName.blank? #set up course info
+          @check = Course.find_by(name: @deck.courseName)
+          if @check.nil?    #create a new course
+            @newCourse = Course.create(subject_id: 0, 
                         course_id:0, courseNum: @deck.courseNum, name: @deck.courseName)
             @newCourse.save
 
             @deck.course_id = @newCourse.course_id
+          else #match the course id
+            @deck.course_id = @check.course_id
           end
-          @deck.created_on = DateTime.now
-          @deck.save
+        end
 
-          flash[:success] = "Deck created!"
-          redirect_to '/your_decks'
+        if !@deck.subjectname.blank? #set up subject info
+          @check = Subject.find_by(name: @deck.subjectname)
+          if @check.nil? #create a new subject
+            @newSubject = Subject.create(subject_id: 0, name: @deck.subjectname)
+            @newSubject.save
+
+            @deck.subject_id = @newSubject.subject_id
+          else  #match the subject id
+            @deck.subject_id = @check.subject_id
+          end
+
+        end
+
+        if !@deck.school_name.blank? #set up school info
+          @check = School.find_by(name: @deck.school_name)
+          if @check.nil? #create a new school
+            @newSchool = School.create(school_id: 0, name: @deck.school_name)
+            @newSchool.save
+          else 
+            @deck.school_id = @check.school_id
+          end
+        else
+          @deck.school_name = "~N/A~"
+        end
+
+
+        @deck.created_on = DateTime.now
+        @deck.save
+
+        flash[:success] = "Deck created!"
+        redirect_to '/your_decks'
       else
           flash[:error] = "Please fill in all required fields."
           redirect_to '/decks'
@@ -241,7 +272,7 @@ class DecksController < ApplicationController
    private
     
     def deck_params
-        params.require(:deck).permit(:deckTitle, :courseNum, :courseName, :subjectname)
+        params.require(:deck).permit(:deckTitle, :courseNum, :courseName, :subjectname, :school_name)
     end
 
   

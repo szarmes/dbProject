@@ -12,6 +12,8 @@
           if(keys.toString() == code.toString()){
             $('#showAnswer').toggle(toShow);
             $('#hideAnswer').toggle(!toShow);
+            $("#hideAButton").toggle(toShow);
+            $("#showAButton").toggle(!toShow);
             toShow = !toShow;
           }
           

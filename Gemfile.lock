@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/francisd/rails3-jquery-autocomplete
+  revision: 9884a40f2bb1a8fa3ffab445e6d2c74c3ee99a0d
+  specs:
+    rails3-jquery-autocomplete (1.0.11)
+      rails (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -85,7 +92,7 @@ GEM
     i18n (0.6.5)
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
-    jquery-rails (3.0.4)
+    jquery-rails (2.3.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.0)
@@ -224,9 +231,10 @@ DEPENDENCIES
   guard-rspec (= 2.5.0)
   guard-spork (= 1.5.0)
   jbuilder (= 1.0.2)
-  jquery-rails (= 3.0.4)
+  jquery-rails (~> 2.3.0)
   pg (= 0.15.1)
   rails (= 4.0.0)
+  rails3-jquery-autocomplete!
   rails_12factor
   rspec-rails (= 2.13.1)
   sass-rails (= 4.0.0)

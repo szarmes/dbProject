@@ -3,7 +3,13 @@ devise_for :users
  
 resources :decks
 resources :cards
-resource :search, :controller => :search
+resource :search, :controller => :search do
+
+  get :autocomplete_course_name, :on => :collection
+  get :autocomplete_subject_name, :on => :collection
+  get :autocomplete_school_name, :on => :collection
+
+end
  
 root to: 'static_pages#home'
 

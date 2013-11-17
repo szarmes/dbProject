@@ -73,12 +73,11 @@ h2 {
   font-weight: normal;
   color: black;
 }
-h2.deckInfo {
+p.deckInfo {
   font-size: 1.2em;
   letter-spacing: -1px;
-  margin-bottom: 10px;
-  text-align: center;
   color: black;
+  vertical-align: bottom;
 }
 h2.refer {
   font-size: 1.6em;
@@ -239,12 +238,17 @@ table.answerCard{
   vertical-align: middle;
 }
 td.ratingscol{
-  width: 17em;
+  width: 9em;
   text-align: left;
   vertical-align: top;
 }
 td.spacecol{
-  width: 10.6em
+  width: 4em
+}
+
+td.newdecktitle{
+  padding-right: 6px; 
+  max-width: 24em;
 }
 div.ex1{
   

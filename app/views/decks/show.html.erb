@@ -15,12 +15,21 @@
   </script>
 </head>
 <body>
-  <h1 class = "deckTitle"> <%= @deck.deckTitle %> </h1>
-  <% if !@deck.courseName.nil? %>
-    <h2 class = "deckInfo"><%= @deck.subjectname %> - <%= @deck.courseNum %> - <%= @deck.courseName %> </h2>
-  <% else %> 
-    <h2><%= @deck.subjectname %> - <%= @deck.courseNum %> </h2>
-  <% end %>
+  
+        <p class = "deckInfo"><div style = "font-weight: bold; font-size: 1.9em"> <%= @deck.deckTitle %> </div>
+     
+        <% if !@deck.courseName.blank? %>
+          <%= @deck.subjectname %> - <%= @deck.courseNum %> - <%= @deck.courseName %> 
+        <% else %> 
+          <%= @deck.subjectname %> - <%= @deck.courseNum %> 
+        <% end %>
+      
+        <% if !@deck.school_name.eql? "~N/A~" %>
+         <%= @deck.school_name %>
+        <% end %>
+      
+        Prof name</p>
+      
   <table class= "presentDeck">
     <tr>
       <td class = "ratingscol">
@@ -78,19 +87,14 @@
       <td class ="spacecol">
       </td>
       <td>
-        <table class = "answerCard">
+        <table id = "showAnswer" class = "answerCard" style= "display: none">
           <tr>
             <td>
-              <div id="hideAnswer">
-                <p class = "cardTitle"> 
-                  Answer
-                </p>
-              </div>
-              <div id="showAnswer", style= "display: none">
+             
                 <p class = "cardBody"> 
                   <%= card.atext %>
                 </p>
-              </div>
+              
             </td>
           </tr>
         </table>
@@ -102,7 +106,7 @@
       <td>
         <table>
           <tr>
-            <td style = "text-align:right; width:144px">
+            <td style = "text-align:right; width:99px">
               <%= render 'shared/prev' %>
               <% if @count>0 %>
                 <%= link_to "Previous", deck_path(card.deck_id, :count => @count-1), class: "btn btn-small btn-primary", :id => "prev_link"%>
@@ -124,23 +128,25 @@
                 <%= link_to "Next", deck_path(card.deck_id, :count => 0), class: "btn btn-small btn-primary", :id => "next_link" %>
               <% end %>
             </td>
+            <td>
+            <div id="showAButton" >
+              <button type="button" onclick="showAns()", class= "btn btn-small btn-primary">
+                Show Answer
+              </button>
+              <%= render 'shared/show' %>
+            </div>
+            <div id="hideAButton", style = "display: none" >
+              <button type="button" onclick="hideAns()", class= "btn btn-small btn-danger">
+                Hide Answer
+              </button>
+            </div>
+            </td>
           </tr>
         </table>
       </td>
       <td class ="spacecol">
       </td>
       <td>
-        <div id="showAButton" >
-          <button type="button" onclick="showAns()", class= "btn btn-small btn-primary">
-            Show Answer
-          </button>
-          <%= render 'shared/show' %>
-        </div>
-        <div id="hideAButton", style = "display: none" >
-          <button type="button" onclick="hideAns()", class= "btn btn-small btn-danger">
-            Hide Answer
-          </button>
-        </div>
       </td>
     </tr>
     <tr>
