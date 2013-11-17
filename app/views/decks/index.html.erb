@@ -9,25 +9,32 @@
     E.g. "Bio Midterm 1" <br />
 
   <%= f.text_field :deckTitle, :autofocus => true %></div>
-
   <div  class = "search">
-    <%= f.label "School Name" %>
-    <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path %>
-
-  </div>
-  
-  <div  class = "search">
-  	<%= f.label "Subject *" %>
+    <%= f.label "Subject *" %>
     <%= f.autocomplete_field :subjectname, autocomplete_subject_name_search_path  %>
   </div>
 
   <div  class = "search">
-  <%= f.label "Course Number *" %><br />
+    <%= f.label "School Name" %>
+    <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path, value: "#{@user.school_name}" %>
+
+  </div>
+
+
+
+  <div  class = "search">
+  <%= f.label "Course Number" %><br />
   <%= f.text_field :courseNum, :autofocus => true %></div>
 
   <div  class = "search">
   <%= f.label "Course Name" %><br />
   <%= f.autocomplete_field :courseName, autocomplete_course_name_search_path  %>
+
+   <div  class = "search">
+    <%= f.label "Instructor (Last name, first name)" %>
+    <%= f.text_field :prof_name %>
+
+  </div>
  
   <p style= "font-size:10px;">Note: If either school, subject, and/or course name not found, a new entry will be created </p>
 

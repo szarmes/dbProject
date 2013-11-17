@@ -15,16 +15,23 @@
 
   </div>
 
-   <div  class = "search">
-    <%= f.label "Search by Course Name" %>
-    <%= f.autocomplete_field :courseName,autocomplete_course_name_search_path  %>
-  </div>
-
-   <div  class = "search">
+  <div  class = "search">
     <%= f.label "Search by Course Number"%>
     <%= f.text_field :courseNum, :autofocus => true %>
 
   </div>
+
+  <div  class = "search">
+    <%= f.label "Search by Course Name" %>
+    <%= f.autocomplete_field :courseName,autocomplete_course_name_search_path  %>
+  </div>
+
+  <div  class = "search">
+    <%= f.label "Search by Instuctor (last name, first name)" %>
+    <%= f.text_field :prof_name  %>
+  </div>
+
+   
  <%= f.submit "Search", class: "btn btn-medium btn-success" %>
 
 <% end %>

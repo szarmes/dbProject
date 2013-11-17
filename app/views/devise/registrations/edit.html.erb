@@ -19,6 +19,9 @@
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></div>
 
+  <div><%= f.label "School Name (Optional)" %><br />
+  <%= f.text_field :school_name, :autofocus => true %></div>
+
   <div><%= f.submit "Update", class: "btn btn-medium btn-primary" %></div>
 <% end %>
 

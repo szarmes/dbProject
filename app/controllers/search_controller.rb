@@ -52,9 +52,12 @@ class SearchController < ApplicationController
       @results = Result.order(username: :asc).paginate(page: params[:page])
     elsif(@value == "School")
       @results = Result.order(school_name: :asc).paginate(page: params[:page])
+    elsif(@value == "Professor")
+      @results = Result.order(prof_name: :asc).paginate(page: params[:page])
     end
     @results.each do |r|
-        @result = Result.create(:deck_id => (r.deck_id), :username => (r.username), :percent => r.percent, :created_on => r.created_on, :school_name => (r.school_name))
+        @result = Result.create(:deck_id => (r.deck_id), :username => (r.username), :percent => r.percent, :created_on => r.created_on, 
+        :school_name => (r.school_name), :prof_name => r.prof_name)
         @id = @result.id
         Result.where(:deck_id => (r.deck_id), :username => (r.username), :percent => r.percent).where.not(:id => @id).delete_all
         @result.save
@@ -80,7 +83,10 @@ class SearchController < ApplicationController
     length = school_name.to_s.length
     length -= 19
     @schoolString = school_name.to_s[17, length]
-    @results = Deck.search(@subjectString, @courseString, @nameString, @schoolString)
+    length = prof_name.to_s.length
+    length -= 17
+    @profString = prof_name.to_s[15, length]
+    @results = Deck.search(@subjectString, @courseString, @nameString, @schoolString, @profString)
     @results.each do |r|
       if Deckrating.where(deck_id: r.deck_id).empty?
         @percent = 0
@@ -90,7 +96,8 @@ class SearchController < ApplicationController
         @percent = (@liked * 100 / @total) 
       end
       @username = User.find_by(:user_id => r.user_id).username
-      @result = Result.create(:deck_id => (r.deck_id), :username => (r.user_id), :percent => @percent, :created_on => r.created_on, :school_name => (r.school_name))
+      @result = Result.create(:deck_id => (r.deck_id), :username => (r.user_id), :percent => @percent, 
+        :created_on => r.created_on, :school_name => (r.school_name), :prof_name => r.prof_name)
       @result.save
     end
     @results = Result.all.paginate(page: params[:page])
@@ -111,6 +118,9 @@ class SearchController < ApplicationController
   end
   def school_name
     params.require(:deck).permit(:school_name)
+  end
+  def prof_name
+    params.require(:deck).permit(:prof_name)
   end
   def value
     params.require(:deck).permit(:value)

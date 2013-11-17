@@ -27,8 +27,11 @@
         <% if !@deck.school_name.eql? "~N/A~" %>
          <%= @deck.school_name %>
         <% end %>
-      
-        Prof name</p>
+
+        <% if !@deck.prof_name.blank? %>
+         <%= @deck.prof_name %>
+        <% end %>
+        </p>
       
   <table class= "presentDeck">
     <tr>

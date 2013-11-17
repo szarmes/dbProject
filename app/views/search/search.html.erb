@@ -6,7 +6,7 @@
   <%= simple_form_for @thing, :url => {:action => 'sort'} do |f| %>
     <%= f.label "Sort Results", params[:value]  %>
     <%= f.input :subjectname, :label => "", collection:['Rating', 'Author A-Z', 'Author Z-A',
-      'Date Created', 'School' ] %>
+      'Date Created', 'School', 'Professor' ] %>
     <%= f.submit "Sort", class: "btn btn-medium btn-success" %>
   <% end %>
   </div>
@@ -23,14 +23,21 @@
       <%= f.label "Search by Subject", params[:search]  %>
       <%= f.autocomplete_field :subjectname, autocomplete_subject_name_search_path  %>
     </div>
-    <div>
-      <%= f.label "Search by Course Name", params[:search2]   %>
-       <%= f.autocomplete_field :courseName, autocomplete_course_name_search_path  %>
-    </div>
-    <div>
-      <%= f.label "Search by Course Number", params[:search3]  %>
-      <%= f.text_field :courseName %>
-    </div>
+    <div  class = "search">
+    <%= f.label "Search by Course Number"%>
+    <%= f.text_field :courseNum, :autofocus => true %>
+
+  </div>
+
+  <div  class = "search">
+    <%= f.label "Search by Course Name" %>
+    <%= f.autocomplete_field :courseName,autocomplete_course_name_search_path  %>
+  </div>
+
+  <div  class = "search">
+    <%= f.label "Search by Instuctor (last name, first name)" %>
+    <%= f.text_field :prof_name  %>
+  </div>
       <%= f.submit "Search", class: "btn btn-medium btn-success" %>
   <% end %>
   </div>

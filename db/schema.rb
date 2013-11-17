@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.datetime "created_on"
     t.integer "school_id"
     t.string "school_name"
+    t.string "prof_name"
   end
 
   create_table "recent_decks", force: true do |t|
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer  "percent",    null: false
     t.datetime "created_on", null: false
     t.string "school_name"
+    t.string "prof_name"
   end
 
   create_table "saved_decks", force: true do |t|
@@ -100,6 +102,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "school_name"
   end
 
   create_table "schools", force: true do |t|

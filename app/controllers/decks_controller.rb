@@ -7,6 +7,7 @@ class DecksController < ApplicationController
     @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
     if user_signed_in?
       @userID = current_user.user_id
+      @user = current_user
     end
 
   end
@@ -272,7 +273,7 @@ class DecksController < ApplicationController
    private
     
     def deck_params
-        params.require(:deck).permit(:deckTitle, :courseNum, :courseName, :subjectname, :school_name)
+        params.require(:deck).permit(:deckTitle, :courseNum, :courseName, :subjectname, :school_name, :prof_name)
     end
 
   

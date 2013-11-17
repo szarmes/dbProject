@@ -24,10 +24,7 @@
           </tr>
         </table>
       </td>
-       <td style = "width:8em">
-        <%= link_to "View this Deck ", deck_path(@deck.deck_id), class: "btn btn-small btn-success" %>
-      </td>
-      <td style = "width:8em; text-align:center;padding-left:15px;">
+     <td class= "deckPartial">
         <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
           <div class = 'likedText'> No ratings </div>
         <% else %>
@@ -41,7 +38,7 @@
           <% end %>
         <% end %>
       </td>
-      <td style="text-align:center;padding-left:15px;">
+      <td class= "deckPartial">
         <div class = 'likedText'> 
           Created by: <br/> 
           <% if !@deck.nil? %>
@@ -49,23 +46,38 @@
           <% end %>
         </div>
       </td>
-       <td style="text-align:center;padding-left:15px;">
+       <td class= "deckPartial">
         <div class = 'likedText'> 
           Created on: <br/> 
-          <%= Deck.find_by(deck_id: @deck.deck_id).created_on.strftime("%b-%d-%Y") %> 
+          <%= @deck.created_on.strftime("%b-%d-%Y") %> 
         </div>
       </td>
-      <td style="text-align:center; width:200px; padding-left:15px;">
+      <td class= "deckPartial" style="width:200px">
         <div class = 'likedText'> 
           School: <br/> 
           <%if @deck.school_name.nil? %> 
-          N/A
+          Unspecified
           <%else%> 
           <%= @deck.school_name %>
           <%end%> 
         </div>
       </td>
+      <td class= "deckPartial">
+        <div class = 'likedText'> 
+          Instructor: <br/> 
+          <%if @deck.prof_name.nil? %> 
+          Unspecified
+          <%else%> 
+          <%= @deck.prof_name %>
+          <%end%> 
+        </div>
+      </td>
      
+    </tr>
+    <tr>
+      <td style = "width:158px">
+        <%= link_to "View this Deck ", deck_path(@deck.deck_id), class: "btn btn-small btn-success", style: "width:137px;" %>
+      </td>
     </tr>
   </table>
 </div>
