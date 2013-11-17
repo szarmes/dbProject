@@ -18,7 +18,7 @@
   <%= f.password_field :password_confirmation %></div>
 
   <div><%= f.label "School Name (Optional)" %><br />
-  <%= f.text_field :school_name, :autofocus => true %></div>
+  <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path %></div>
 
  
  <!-- ADD EMPLOYER OPTION HERE and extra fields that come with it-->

@@ -8,6 +8,7 @@ class DecksController < ApplicationController
     if user_signed_in?
       @userID = current_user.user_id
       @user = current_user
+      @school_name = @user.school_name
     end
 
   end
