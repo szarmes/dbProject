@@ -11,7 +11,12 @@ class DecksController < ApplicationController
     end
 
   end
-
+  def thier_decks
+    @deck = Deck.new
+    @user = User.find_by(:username => params[:username])
+    @decks = Deck.where(user_id: @user.user_id).paginate(page: params[:page])
+    @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
+  end
   def show
     if params[:count].nil?
     else

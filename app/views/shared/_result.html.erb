@@ -42,7 +42,8 @@
         <div class = 'likedText'> 
           Created by: <br/> 
           <% if !@deck.nil? %>
-          <%= User.find_by(user_id: @deck.user_id).username %> 
+            <% @username = User.find_by(user_id: @deck.user_id).username %>
+            <%= link_to @username, {:controller => "decks", :action => "thier_decks", :username => @username } %>
           <% end %>
         </div>
       </td>
