@@ -203,17 +203,39 @@
        <td>
         <% if user_signed_in? %>
           <% if SavedDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
-            <%= link_to image_tag('save.png', :title=>"Save this Deck"), {:controller => "decks", :action => 'addfavorite',:userID => @userID,:favid => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success" %>
+          <div class= "hover">
+            <%= link_to image_tag('save.png'), {:controller => "decks", :action => 'addfavorite',:userID => @userID,:favid => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success"%>
+            <div class = "tooltip">
+              Save this Deck
+            </div>
+          </div>
           <% else %>
-            <%= link_to image_tag('unsave.png', :title=>"Un-Save this Deck"), {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
+          <div class= "hover">
+            <%= link_to image_tag('unsave.png'), {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
+            <div class = "tooltip">
+              Forget this Deck
+            </div>
+          </div>
           <% end %>
         <% else %>
         <% end %>
       </td>
       <% if !card.nil? && Deck.find_by(deck_id: card.deck_id).user_id == @userID %>
         <td>
-            <%= link_to image_tag('edit.png', :title=>"Edit this card"), {:controller => "cards", :action => 'edit', :count => @count, :id => card.card_id}, class: "btn btn-small btn-info"%>
-            <%= link_to image_tag('delete.png', :title=>"Delete this card"), card, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
+          <div class= "hover">
+            <%= link_to image_tag('edit.png'), {:controller => "cards", :action => 'edit', :count => @count, :id => card.card_id}, class: "btn btn-small btn-info"%>
+            <div class = "tooltip" style = "width:6.5em;">
+              Edit this Card
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class= "hover">
+            <%= link_to image_tag('delete.png'), card, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
+            <div class = "tooltip">
+              Delete this Card
+            </div>
+          </div>
         </td>
         <td style="width:21em"></td>
       <% else %>
@@ -237,9 +259,19 @@
       %>
 
       <% if user_signed_in? %>
-       <%= link_to image_tag('flag.png', :title=>"Flag this deck/card for inappropriate content"), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => @userID, :cardID => @cardID}, class: "btn btn-small btn-warning"%>
+      <div class= "hover">
+       <%= link_to image_tag('flag.png'), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => @userID, :cardID => @cardID}, class: "btn btn-small btn-warning"%>
+       <div class = "tooltip" style = "width:10em; top:25px">
+              Flag as Inappropriate
+            </div>
+          </div>
       <% else %>
+      <div class= "hover">
        <%= link_to image_tag('flag.png', :title=>"Flag this deck/card for inappropriate content"), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => 0, :cardID => @cardID}, class: "btn btn-small btn-warning"%>
+       <div class = "tooltip" style = "width:10em; top:25px">
+              Flag as Inappropriate
+            </div>
+          </div>
       <% end %>
       </td>
     </tr>
