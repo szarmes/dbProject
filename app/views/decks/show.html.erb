@@ -206,6 +206,7 @@
           <% else %>
             <%= link_to image_tag('unsave.png', :title=>"Un-Save this Deck"), {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
           <% end %>
+        <% else %>
         <% end %>
       </td>
       <% if !card.nil? && Deck.find_by(deck_id: card.deck_id).user_id == @userID %>
@@ -224,6 +225,15 @@
           Enter - Show/hide answer &nbsp&nbsp
           Shift - Random
         </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <% if user_signed_in? %>
+       <%= link_to image_tag('flag.png', :title=>"Flag this deck for inappropriate content"), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => @userID}, class: "btn btn-small btn-warning"%>
+      <% else %>
+       <%= link_to image_tag('flag.png', :title=>"Flag this deck for inappropriate content"), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => 0}, class: "btn btn-small btn-warning"%>
+      <% end %>
       </td>
     </tr>
   </table>

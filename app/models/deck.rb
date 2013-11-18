@@ -7,6 +7,7 @@ class Deck < ActiveRecord::Base
         has_one  :subject
         has_one  :school
         has_many :deckratings, dependent: :destroy
+        has_many :flagged_decks, dependent: :destroy
  	
     validates :deck_title, :subject_name, presence: true
     validates_length_of :deck_title, :maximum => 50

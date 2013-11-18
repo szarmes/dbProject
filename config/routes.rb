@@ -21,6 +21,7 @@ get   'rate', to: 'decks#rate'
 post   'rate', to: 'decks#rate'
 get   'unrate', to: 'decks#unrate'
 post   'unrate', to: 'decks#unrate'
+get   'flag', to: 'decks#flag'
 
 #post  'search', to: 'results#search'
 #get   'search', to: 'results#search'

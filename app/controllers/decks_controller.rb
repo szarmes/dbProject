@@ -288,6 +288,17 @@ class DecksController < ApplicationController
     redirect_to '/your_decks'
   end
 
+  def flag
+
+    if FlaggedDeck.find_by(:user_id => params[:userID], :deck_id => params[:deckID]).nil?
+    @flag = FlaggedDeck.create(:user_id => params[:userID], :deck_id => params[:deckID])
+    end
+
+    flash[:success] = "Deck flagged. Thank you."
+    redirect_to deck_path(params[:deckID], :count => params[:count])
+
+  end
+
 
 
    private
