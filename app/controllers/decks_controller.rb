@@ -68,6 +68,13 @@ class DecksController < ApplicationController
     @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
     @user = current_user
     @userID = @user.user_id
+
+    if user_signed_in?
+      if session[:display_welcome].nil?
+        flash.now[:notice] = "Welcome back, " + current_user.username + "!"
+        session[:display_welcome] = true
+      end
+    end
            
 
   end
