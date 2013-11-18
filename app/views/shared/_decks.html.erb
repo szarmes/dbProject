@@ -1,41 +1,53 @@
 <head>
 </head>
 <body>
-<div class="row", style = "border-bottom: 3px solid black">
+<div>
   <table> 
     <tr>
       <td style = "width:158px">
         <table class = "deck">
-          <tr style = "text-align: center; height:4em;">
+          <tr style = "text-align: center">
             <td>
-                <p class ="cardTitle2">
-                  <% if decks.deck_title.length <27 %>
-                    <%= decks.deck_title %>
-                  <% else %>
-                    <%= decks.deck_title[0,27]%>...
-                  <% end %>
-                </p>
+                <p class ="cardTitle2"><%= decks.deck_title %></p>
             </td>
           </tr>
-          <tr style = "text-align:center; vertical-align:top; padding-top: 5px;">
+          <tr style = "text-align: center">
             <td>
-              <p class="cardBody2"><%= decks.subject_name %>
-              <% if !decks.course_num.blank? %>
-                - <%= decks.course_num %>
-               <% end %>
-              <% if !decks.course_name.blank?  %> 
-                <% if decks.course_name.length <27 %>
-                    -<%= decks.course_name %>
-                  <% else %>
-                    -<%= decks.course_name[0,27]%>...
-                  <% end %>
+              <% if !decks.course_name.nil? %>
+                <p class="cardBody2"><%= decks.subject_name %> - <%= decks.course_num %> - <%= decks.course_name %> </p>
+              <% else %> 
+                <p class="cardBody2"><%= decks.subject_name %> - <%= decks.course_num %> </p>
               <% end %>
-              </p>
             </td>
           </tr>
         </table>
+      <td style = "vertical-align: top;">
+        <table styel = "vertical-align: top;">
+          <tr>
+              <td style = "width:8em">
+                <%= link_to image_tag('view.png', :title=>"View this deck"), deck_path(decks.deck_id),class: "btn btn-small btn-success" %>
+              </td>
+            </tr>
+              <td style = "width:8em">
+                <%= link_to image_tag('edit.png', :title=>"Deck properties"), edit_deck_path(decks.deck_id), class: "btn btn-small btn-warning"%>
+              </td>
+            </tr>
+            <tr>
+              <td style = "width:8em">
+                <%= link_to image_tag('add.png', :title=>"Add/edit cards"), new_card_path(:deck => decks.deck_id), class: "btn btn-small btn-info" %>
+              </td>
+            </tr>
+            <tr>
+              <td style = "width:8em">
+               <%= link_to image_tag('delete.png', :title=>"Delete this deck"), decks, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
+              </td>
+            </tr>
+          </table>
+        </td>
       </td>
-      <td style = "width:8em; text-align:center">
+    </tr>
+    <tr>
+       <td style = "width:8em; text-align:center">
         <% if Deckrating.where(deck_id: decks.deck_id).empty? %>
           <div class = 'likedText'> No ratings </div>
         <% else %>
@@ -49,21 +61,10 @@
           <% end %>
         <% end %>
       </td>
-      <td style = "width:8em">
-        <%= link_to "View this Deck ", deck_path(decks.deck_id), class: "btn btn-small btn-success" %>
-      </td>
-      <td style = "width:8em">
-        <%= link_to "Deck Properties", edit_deck_path(decks.deck_id), class: "btn btn-small btn-warning"%>
-      </td>
-      <td style = "width:8em">
-        <%= link_to "Add/edit cards", new_card_path(:deck => decks.deck_id), class: "btn btn-small btn-info" %>
-      </td>
-      <td style = "width:8em">
-        <%= link_to "Delete this Deck", decks, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
-      </td>
     </tr>
   </table>
 </div>
+</br>
 </body>
    
    

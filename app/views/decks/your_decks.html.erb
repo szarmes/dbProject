@@ -9,7 +9,41 @@
 	
 	<% if @decks.any? %>
 		  <div>
-		    <%= render partial: 'shared/decks', collection: @decks %>
+		  	<% @count = 0
+		  	%><%@deck1 = Deck.where(id: 0)
+		  	%><%@deck2 = Deck.where(id: 0)
+		  	%><%@deck3 = Deck.where(id: 0)
+		  	%><%@deck4 = Deck.where(id: 0)
+		  	%><%@decks.each do |d|
+			  	%><%if(@count % 4 == 0)
+			  	 	%><%@deck1.push(d)
+			  	%><%elsif(@count % 4 == 1)
+			  	   	%><%@deck2.push(d)
+			  	%><%elsif(@count % 4 == 2)
+			  	   	%><%@deck3.push(d)
+			  	%><%else
+			  	  	%><%@deck4.push(d)
+			  	%>
+			  	<% end %>
+			  	<% @count += 1 %>
+			<% end %>
+		  	<table>
+		  		<tr>
+		  			<td style ="vertical-align: top;">
+						<%= render partial: 'shared/decks', collection: @deck1 %>
+					</td>
+					<td style ="vertical-align: top;">
+						<%= render partial: 'shared/decks', collection: @deck2 %>
+					</td>
+					<td style ="vertical-align: top;">
+						<%= render partial: 'shared/decks', collection: @deck3 %>
+					</td>
+					<td style ="vertical-align: top;">
+						<%= render partial: 'shared/decks', collection: @deck4 %>
+					</td>
+				</tr>
+			</table>
+
 		  </div>
 		  <%= will_paginate @decks %>
 	<% end %>
