@@ -36,7 +36,7 @@
           <% end %>
           <% if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).nil? %>
             <p> 
-              <%= link_to image_tag('like.png', :title=>"Like"), {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-primary"%> 
+              <%= link_to image_tag('like.png', :title=>"Like"), {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-info"%> 
               <%= link_to image_tag('dislike.png', :title=>"Dislike"), {:controller => "decks", :action => 'rate', :userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %>
             </p>
           <% else %>
@@ -49,7 +49,7 @@
               <div class = 'likedText' style = "text-align:left;">
                 Deck disliked
               </div> 
-              <%= link_to image_tag('like.png', :title=>"Dislike"), {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-primary" %>  
+              <%= link_to image_tag('like.png', :title=>"Dislike"), {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-info" %>  
             <% end %>
             <%= link_to "Unrate", {:controller => "decks", :action => 'unrate', :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
           <% end %>
@@ -106,9 +106,9 @@
             <td style = "text-align:right; width:127px">
               <%= render 'shared/prev' %>
               <% if @count>0 %>
-                <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @count-1), class: "btn btn-small btn-primary", :id => "prev_link"%>
+                <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @count-1), class: "btn btn-small btn-info", :id => "prev_link"%>
               <% else %>
-                <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @array.size-1), class: "btn btn-small btn-primary", :id => "prev_link"%>
+                <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @array.size-1), class: "btn btn-small btn-info", :id => "prev_link"%>
               <% end %>
             </td>
             <td style = "text-align:center">
@@ -116,18 +116,18 @@
               <% while @count == @rand %>
                 <% @rand = rand(@array.size) %>
               <% end %>
-              <%= link_to image_tag('shuffle.png', :title=>"Random Card"), deck_path(card.deck_id, :count => @rand), class: "btn btn-small btn-primary", :id => "rand_link" %>
+              <%= link_to image_tag('shuffle.png', :title=>"Random Card"), deck_path(card.deck_id, :count => @rand), class: "btn btn-small btn-info", :id => "rand_link" %>
             </td>
             <td style = "text-align:left">
               <% if @count<(@array.size - 1) %>
-                <%= link_to image_tag('next.png', :title=>"Next Card"), deck_path(card.deck_id, :count => @count+1), class: "btn btn-small btn-primary", :id => "next_link" %>
+                <%= link_to image_tag('next.png', :title=>"Next Card"), deck_path(card.deck_id, :count => @count+1), class: "btn btn-small btn-info", :id => "next_link" %>
               <% else %>
-                <%= link_to image_tag('next.png', :title=>"Next Card"), deck_path(card.deck_id, :count => 0), class: "btn btn-small btn-primary", :id => "next_link" %>
+                <%= link_to image_tag('next.png', :title=>"Next Card"), deck_path(card.deck_id, :count => 0), class: "btn btn-small btn-info", :id => "next_link" %>
               <% end %>
             </td>
             <td>
             <div id="showAButton" >
-              <button type="button" onclick="showAns()", class= "btn btn-small btn-primary">
+              <button type="button" onclick="showAns()", class= "btn btn-small btn-info">
                 <%=image_tag('view.png', :title=>"Show Answer")%>
               </button>
               <%= render 'shared/show' %>
@@ -189,7 +189,7 @@
       <td>
       </td>
       <td>
-        <%= link_to image_tag('play.png', :title=>"Start studying"), deck_path(@deck.deck_id, :count => 0), class: "btn btn-medium btn-primary" %>
+        <%= link_to image_tag('play.png', :title=>"Start studying"), deck_path(@deck.deck_id, :count => 0), class: "btn btn-medium btn-info" %>
       </td>
       <td>
       </td>

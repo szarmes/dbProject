@@ -32,6 +32,22 @@
               </p>
             </td>
           </tr>
+            <tr>
+              <td style = "width:8em; padding-left:60px;:right;vertical-align:bottom">
+                <% if Deckrating.where(deck_id: decks.deck_id).empty? %>
+                  <div class = 'likedText'> No ratings </div>
+                <% else %>
+                  <% @liked = Deckrating.where(deck_id: decks.deck_id, liked: true).count %>
+                  <% @total = Deckrating.where(deck_id: decks.deck_id).count %>
+                  <% @percent = (@liked * 100 / @total) %>
+                  <% if @percent > 49 %>
+                    <div class = 'likedText', style = "color:#0D55D1"><%= @percent %>% liked </div>
+                  <% else %>
+                    <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
         </table> </a>
       <td style = "vertical-align: top;">
         <table styel = "vertical-align: top;">
@@ -64,22 +80,7 @@
         </td>
       </td>
     </tr>
-    <tr>
-       <td style = "width:8em; text-align:center">
-        <% if Deckrating.where(deck_id: decks.deck_id).empty? %>
-          <div class = 'likedText'> No ratings </div>
-        <% else %>
-          <% @liked = Deckrating.where(deck_id: decks.deck_id, liked: true).count %>
-          <% @total = Deckrating.where(deck_id: decks.deck_id).count %>
-          <% @percent = (@liked * 100 / @total) %>
-          <% if @percent > 49 %>
-            <div class = 'likedText', style = "color:#0D55D1"><%= @percent %>% liked </div>
-          <% else %>
-            <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
-          <% end %>
-        <% end %>
-      </td>
-    </tr>
+   
   </table>
 </div>
 </br>
