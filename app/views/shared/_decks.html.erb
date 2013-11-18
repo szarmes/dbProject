@@ -1,4 +1,17 @@
 <head>
+  <style>
+  #container {
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #000;
+    overflow: hidden;
+    }
+
+  #container > div {
+    height: 200px;
+    background-color: red;
+}
+  </style>
 </head>
 <body>
 <div>
@@ -41,10 +54,40 @@
                   <% @total = Deckrating.where(deck_id: decks.deck_id).count %>
                   <% @percent = (@liked * 100 / @total) %>
                   <% if @percent > 49 %>
-                    <div class = 'likedText', style = "color:#0D55D1"><%= @percent %>% liked </div>
+                   <div class = 'likedText', style = "color:#0D55D1">
+                      <%= @percent %>% liked <br>
+                      <div id="container" style="width: 83px; height: 14px; ">
+                      <canvas id="myCanvas" width="85" height="30" style = "solid #FF0000"></canvas>          <script type = "text/javaScript">
+                          var pct = <%=@percent.to_json%>;
+                          var c=document.getElementById("myCanvas");
+                          var ctx=c.getContext("2d");
+                          ctx.fillStyle="red";
+                          ctx.fillRect(0,0, 85, 30);
+                          ctx.fillStyle="#0D55D1";
+                          ctx.fillRect(0,0, 85*(pct/100), 30);
+
+
+                        </script>
+                      </div>
+                    </div>
+                    </div>
                   <% else %>
-                    <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
-                  <% end %>
+                    <div class = 'likedText', style = "color:#FF0000">
+                      <%= @percent %>% liked <br>
+                      <div id="container" style="width: 83px; height: 14px; ">
+                      <canvas id="myCanvas" width="85" height="30" style = "solid #FF0000"></canvas>          <script type = "text/javaScript">
+                          var pct = <%=@percent.to_json%>;
+                          var c=document.getElementById("myCanvas");
+                          var ctx=c.getContext("2d");
+                          ctx.fillStyle="red";
+                          ctx.fillRect(0,0, 85, 30);
+                          ctx.fillStyle="#0D55D1";
+                          ctx.fillRect(0,0, 85*(pct/100), 30);
+
+
+                        </script>
+                      </div>
+                    </div>                  <% end %>
                 <% end %>
               </td>
             </tr>
