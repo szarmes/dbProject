@@ -5,7 +5,7 @@
   <table> 
     <tr>
       <td style = "width:158px">
-        <table class = "deck">
+        <a href = "/decks/<%= decks.deck_id %>" style = "color:black;"><table class = "deck">
           <tr style = "text-align: center; height:4em;">
             <td>
                 <p class ="cardTitle2">
@@ -32,27 +32,33 @@
               </p>
             </td>
           </tr>
-        </table>
+        </table> </a>
       <td style = "vertical-align: top;">
         <table styel = "vertical-align: top;">
           <tr>
-              <td style = "width:8em">
-                <%= link_to image_tag('view.png', :title=>"View this deck"), deck_path(decks.deck_id),class: "btn btn-small btn-success" %>
-              </td>
             </tr>
+            <% if !@user.nil? && @userID == decks.user_id %>
               <td style = "width:8em">
                 <%= link_to image_tag('edit.png', :title=>"Deck properties"), edit_deck_path(decks.deck_id), class: "btn btn-small btn-warning"%>
               </td>
+              <% else %>
+              <td style = "width:8em">
+              </td>
+            <% end %>
             </tr>
             <tr>
+              <% if !@user.nil? && @userID == decks.user_id %>
               <td style = "width:8em">
                 <%= link_to image_tag('add.png', :title=>"Add/edit cards"), new_card_path(:deck => decks.deck_id), class: "btn btn-small btn-info" %>
               </td>
+              <% end %>
             </tr>
             <tr>
+              <% if !@user.nil? && @userID == decks.user_id %>
               <td style = "width:8em">
                <%= link_to image_tag('delete.png', :title=>"Delete this deck"), decks, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
               </td>
+              <% end %>
             </tr>
           </table>
         </td>

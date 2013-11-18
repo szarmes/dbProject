@@ -16,6 +16,10 @@ class DecksController < ApplicationController
     @deck = Deck.new
     @user = User.find_by(:username => params[:username])
     @decks = Deck.where(user_id: @user.user_id).paginate(page: params[:page])
+    if user_signed_in?
+      @userID = current_user.user_id
+      @school_name = @user.school_name
+    end
     @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
   end
   def show

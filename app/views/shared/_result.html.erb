@@ -7,23 +7,34 @@
    <table> 
     <tr>
       <td style = "width:158px">
-        <a href = "/decks/<%= @deck.deck_id %>" style = "color:black;"> <table class = "deck">
-          <tr style = "text-align: center">
+         <a href = "/decks/<%= @deck.deck_id %>" style = "color:black;"><table class = "deck">
+          <tr style = "text-align: center; height:4em;">
             <td>
-                <p class ="cardTitle2"><%= @deck.deck_title %></p>
+                <p class ="cardTitle2">
+                  <% if @deck.deck_title.length <27 %>
+                    <%= @deck.deck_title %>
+                  <% else %>
+                    <%= @deck.deck_title[0,27]%>...
+                  <% end %>
+                </p>
+          </tr>
+          <tr style = "text-align:center; vertical-align:top; padding-top: 5px;">
+            <td>
+              <p class="cardBody2"><%= @deck.subject_name %>
+              <% if !@deck.course_num.blank? %>
+                - <%= @deck.course_num %>
+               <% end %>
+              <% if !@deck.course_name.blank?  %> 
+                <% if @deck.course_name.length <27 %>
+                    -<%= @deck.course_name %>
+                  <% else %>
+                    -<%= @deck.course_name[0,27]%>...
+                  <% end %>
+                <% end %>
+              </p>
             </td>
           </tr>
-          <tr style = "text-align: center">
-            <td>
-              <% if !@deck.course_name.nil? && !@deck.course_name == "" %>
-                <p class="cardBody2"><%= @deck.subject_name %> - <%= @deck.course_num %> - <%= @deck.course_name %> </p>
-              <% else %> 
-                <p class="cardBody2"><%= @deck.subject_name %> - <%= @deck.course_num %> </p>
-              <% end %>
-            </td>
-          </tr>
-        </table>
-      </a>
+        </table> </a>
       </td>
       <td class= "deckPartial">
         <div class = 'likedText'> 
