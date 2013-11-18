@@ -44,14 +44,15 @@
               <div class = 'likedText' style = "text-align:left;">
                 Deck liked
               </div> 
+              <%= link_to image_tag('like.png', :title=>"Remove Rating"), {:controller => "decks", :action => 'unrate', :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
               <%= link_to image_tag('dislike.png', :title=>"Dislike"), {:controller => "decks", :action => 'rate',:userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %> 
             <% else %>
               <div class = 'likedText' style = "text-align:left;">
                 Deck disliked
               </div> 
-              <%= link_to image_tag('like.png', :title=>"Dislike"), {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-info" %>  
+              <%= link_to image_tag('like.png', :title=>"Like"), {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-info" %>  
+              <%= link_to image_tag('dislike.png', :title=>"Remove Rating"), {:controller => "decks", :action => 'unrate', :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
             <% end %>
-            <%= link_to "Unrate", {:controller => "decks", :action => 'unrate', :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
           <% end %>
         <% end %>
       </td>
