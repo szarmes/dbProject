@@ -55,7 +55,12 @@
             </tr>
             <% if !@user.nil? && @userID == decks.user_id %>
               <td style = "width:8em">
-                <%= link_to image_tag('edit.png', :title=>"Deck properties"), edit_deck_path(decks.deck_id), class: "btn btn-small btn-warning"%>
+                <div class = "hover">
+                <%= link_to image_tag('edit.png'), edit_deck_path(decks.deck_id), class: "btn btn-small btn-warning"%>
+                <div class = "tooltip" style = "width:8em; top:25px">
+              Deck properties
+            </div>
+          </div>
               </td>
               <% else %>
               <td style = "width:8em">
@@ -65,14 +70,24 @@
             <tr>
               <% if !@user.nil? && @userID == decks.user_id %>
               <td style = "width:8em">
-                <%= link_to image_tag('add.png', :title=>"Add/edit cards"), new_card_path(:deck => decks.deck_id), class: "btn btn-small btn-info" %>
+                <div class = "hover">
+                <%= link_to image_tag('add.png'), new_card_path(:deck => decks.deck_id), class: "btn btn-small btn-info" %>
+                 <div class = "tooltip" style = "width:7em; top:25px">
+              Add/edit cards
+            </div>
+          </div>
               </td>
               <% end %>
             </tr>
             <tr>
               <% if !@user.nil? && @userID == decks.user_id %>
               <td style = "width:8em">
-               <%= link_to image_tag('delete.png', :title=>"Delete this deck"), decks, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
+                <div class = "hover">
+               <%= link_to image_tag('delete.png', :title=>"Delete this deck"), decks, method: :delete, data: { confirm: "Are you sure you want to delete this deck?" }, class: "btn btn-small btn-danger" %>
+               <div class = "tooltip" style = "width:7.5em; top:25px">
+              Delete this deck
+            </div>
+          </div>
               </td>
               <% end %>
             </tr>

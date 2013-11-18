@@ -127,16 +127,22 @@
               <% end %>
             </td>
             <td>
-            <div id="showAButton" >
+            <div id="showAButton" class = "hover" >
               <button type="button" onclick="showAns()", class= "btn btn-small btn-info">
                 <%=image_tag('view.png', :title=>"Show Answer")%>
               </button>
               <%= render 'shared/show' %>
+              <div class = "tooltip" style = "width:6.1em; top:25px">
+              Show Answer
             </div>
-            <div id="hideAButton", style = "display: none" >
+            </div>
+            <div id="hideAButton", style = "display: none" class = "hover" >
               <button type="button" onclick="hideAns()", class= "btn btn-small btn-danger">
                 <%=image_tag('hide.png', :title=>"Hide Answer")%>
               </button>
+              <div class = "tooltip" style = "width:6em; top:25px">
+              Hide Answer
+            </div>
             </div>
             </td>
           </tr>
@@ -190,7 +196,12 @@
       <td>
       </td>
       <td>
-        <%= link_to image_tag('play.png', :title=>"Start studying"), deck_path(@deck.deck_id, :count => 0), class: "btn btn-medium btn-info" %>
+        <div class = "hover">
+        <%= link_to image_tag('play.png'), deck_path(@deck.deck_id, :count => 0), class: "btn btn-small btn-info" %>
+        <div class = "tooltip" style = "width:6.5em; top:25px">
+              Start Studying
+            </div>
+          </div>
       </td>
       <td>
       </td>
@@ -231,7 +242,7 @@
         </td>
         <td>
           <div class= "hover">
-            <%= link_to image_tag('delete.png'), card, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
+            <%= link_to image_tag('delete.png'), card, method: :delete, data: { confirm: "Are you sure you want to delete this deck?" }, class: "btn btn-small btn-danger" %>
             <div class = "tooltip">
               Delete this Card
             </div>
