@@ -21,6 +21,7 @@ class DecksController < ApplicationController
       @school_name = @user.school_name
     end
     @cards = Card.where(deck_id: @deck.deck_id).paginate(page: params[:page])
+
   end
   def show
     if params[:count].nil?
@@ -31,10 +32,10 @@ class DecksController < ApplicationController
       @deck =  Deck.find(params[:id])
     
       @cards = Card.where(deck_id: @deck.deck_id)
-  
+      @owner = User.find_by(user_id: @deck.user_id)
+      @username = @owner.username
       if user_signed_in?
         @userID = current_user.user_id
-        @username = current_user.username
         @recents = RecentDeck.where(user_id: current_user.user_id)
         #code to add deck to recent deck
         @check = RecentDeck.find_by(user_id: current_user.user_id,
@@ -71,10 +72,17 @@ class DecksController < ApplicationController
     @userID = @user.user_id
 
     if user_signed_in?
-      if session[:display_welcome].nil?
-        flash.now[:notice] = "Welcome back, " + current_user.username + "!"
-        session[:display_welcome] = true
-      end
+      if current_user.sign_in_count == 1
+        if session[:display_welcome].nil?
+          flash.now[:notice] = "Welcome, " + current_user.username + "!"
+          session[:display_welcome] = true
+        end
+      else 
+        if session[:display_welcome].nil?
+          flash.now[:notice] = "Welcome back, " + current_user.username + "!"
+          session[:display_welcome] = true
+        end
+      end 
     end
            
 
