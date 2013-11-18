@@ -160,9 +160,9 @@
       <td>
         <% if user_signed_in? %>
           <% if SavedDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
-            <%= link_to "Save this Deck", {:controller => "decks", :action => 'addfavorite',:userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-info" %>
+            <%= link_to "Save this Deck", {:controller => "decks", :action => 'addfavorite',:userID => @userID,:favid => @deck.deck_id, :count => @count}, class: "btn btn-small btn-info" %>
           <% else %>
-            <%= link_to "Un-Save this Deck", {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-danger" %>
+            <%= link_to "Un-Save this Deck", {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %>
           <% end %>
         <% end %>
       </td>

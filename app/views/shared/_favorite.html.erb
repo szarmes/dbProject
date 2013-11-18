@@ -4,10 +4,10 @@
 </head>
 <body>
 <div class="row", style = "border-bottom: 3px solid black">
-  <table> 
+   <table> 
     <tr>
       <td style = "width:158px">
-        <table class = "deck">
+        <a href = "/decks/<%= @deck.deck_id %>" style = "color:black;"> <table class = "deck">
           <tr style = "text-align: center">
             <td>
                 <p class ="cardTitle2"><%= @deck.deck_title %></p>
@@ -23,20 +23,7 @@
             </td>
           </tr>
         </table>
-      </td>
-     <td class= "deckPartial">
-        <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
-          <div class = 'likedText'> No ratings </div>
-        <% else %>
-          <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
-          <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
-          <% @percent = (@liked * 100 / @total) %>
-          <% if @percent > 49 %>
-            <div class = 'likedText', style = "color:#0D55D1"><%= @percent %>% liked </div>
-          <% else %>
-            <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
-          <% end %>
-        <% end %>
+      </a>
       </td>
       <td class= "deckPartial">
         <div class = 'likedText'> 
@@ -77,7 +64,18 @@
     </tr>
     <tr>
       <td style = "width:158px">
-        <%= link_to "View this Deck ", deck_path(@deck.deck_id), class: "btn btn-small btn-success", style: "width:137px;" %>
+        <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
+          <div class = 'likedText'> No ratings </div>
+        <% else %>
+          <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
+          <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
+          <% @percent = (@liked * 100 / @total) %>
+          <% if @percent > 49 %>
+            <div class = 'likedText', style = "color:#0D55D1"><%= @percent %>% liked </div>
+          <% else %>
+            <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
+          <% end %>
+        <% end %>
       </td>
     </tr>
   </table>

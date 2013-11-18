@@ -118,15 +118,12 @@ class DecksController < ApplicationController
 
   end
   def addfavorite
-
     @deck = Deck.find(params[:favid])
     @user = User.find(params[:userID])
+    @count = params[:count].to_i
     if !SavedDeck.find_by(user_id: @user.user_id, deck_id: @deck.deck_id).nil?
-      flash[:error] = "Deck already saved."
-      redirect_to deck_path(@deck.deck_id)
-
-    else
-  
+      redirect_to deck_path(@deck.deck_id, :count => @count)
+    else  
       @favorite = SavedDeck.create(user_id: @user.user_id, deck_id: @deck.deck_id, 
                                       card_id:0, fav_id:0)
       @favorite.save
@@ -138,14 +135,14 @@ class DecksController < ApplicationController
   def removefavorite
     @deck = Deck.find(params[:favid])
     @userID = current_user.user_id
+    @count = params[:count].to_i
     @favorite = SavedDeck.find_by(user_id: @userID, deck_id: @deck.deck_id)
     if @favorite.nil?
-      flash[:error] = "Cannot find deck in saved decks"
     else
-      @favorite.delete
+      @favorite.destroy
       flash[:success] = "Deck un-saved."
     end
-    redirect_to '/saved_decks'
+    redirect_to deck_path(@deck.deck_id, :count => @count)
   end
 
   def edit

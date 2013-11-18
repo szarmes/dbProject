@@ -6,18 +6,30 @@
     <tr>
       <td style = "width:158px">
         <table class = "deck">
-          <tr style = "text-align: center">
+          <tr style = "text-align: center; height:4em;">
             <td>
-                <p class ="cardTitle2"><%= decks.deck_title %></p>
-            </td>
+                <p class ="cardTitle2">
+                  <% if decks.deck_title.length <27 %>
+                    <%= decks.deck_title %>
+                  <% else %>
+                    <%= decks.deck_title[0,27]%>...
+                  <% end %>
+                </p>
           </tr>
-          <tr style = "text-align: center">
+          <tr style = "text-align:center; vertical-align:top; padding-top: 5px;">
             <td>
-              <% if !decks.course_name.nil? %>
-                <p class="cardBody2"><%= decks.subject_name %> - <%= decks.course_num %> - <%= decks.course_name %> </p>
-              <% else %> 
-                <p class="cardBody2"><%= decks.subject_name %> - <%= decks.course_num %> </p>
-              <% end %>
+              <p class="cardBody2"><%= decks.subject_name %>
+              <% if !decks.course_num.blank? %>
+                - <%= decks.course_num %>
+               <% end %>
+              <% if !decks.course_name.blank?  %> 
+                <% if decks.course_name.length <27 %>
+                    -<%= decks.course_name %>
+                  <% else %>
+                    -<%= decks.course_name[0,27]%>...
+                  <% end %>
+                <% end %>
+              </p>
             </td>
           </tr>
         </table>
