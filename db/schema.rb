@@ -21,12 +21,12 @@ ActiveRecord::Schema.define(version: 20131008164900) do
   end
 
   create_table "courses", force: true do |t|
-    t.integer "subject_id", null: false
-    t.integer "course_id",  null: false
+    t.integer "subject_id",  null: false
+    t.integer "course_id",   null: false
     t.string  "course_num",  null: false
     t.string  "name"
     t.integer "school_id"
-    t.string "school_name"
+    t.string  "school_name"
   end
 
   create_table "deckratings", force: true do |t|
@@ -39,35 +39,35 @@ ActiveRecord::Schema.define(version: 20131008164900) do
 
   create_table "decks", force: true do |t|
     t.integer  "deck_id",        default: 0, null: false
-    t.string   "deck_title",                  null: false
+    t.string   "deck_title",                 null: false
     t.integer  "uses",           default: 0, null: false
     t.integer  "user_id",        default: 0, null: false
     t.string   "course_name"
     t.integer  "course_id"
     t.string   "course_num"
-    t.string   "subject_name",                null: false
+    t.string   "subject_name",               null: false
     t.integer  "subject_id",     default: 0, null: false
     t.string   "remember_token"
     t.datetime "created_on"
-    t.integer "school_id"
-    t.string "school_name"
-    t.string "prof_name"
+    t.integer  "school_id"
+    t.string   "school_name"
+    t.string   "prof_name"
   end
 
   create_table "recent_decks", force: true do |t|
-    t.integer  "user_id",  null: false
-    t.integer  "deck_id",  null: false
-    t.integer  "card_id",  null: false
+    t.integer  "user_id",   null: false
+    t.integer  "deck_id",   null: false
+    t.integer  "card_id",   null: false
     t.datetime "last_used"
   end
 
   create_table "results", force: true do |t|
-    t.integer  "deck_id",    null: false
-    t.string  "username",    null: false
-    t.integer  "percent",    null: false
-    t.datetime "created_on", null: false
-    t.string "school_name"
-    t.string "prof_name"
+    t.integer  "deck_id",     null: false
+    t.string   "username",    null: false
+    t.integer  "percent",     null: false
+    t.datetime "created_on",  null: false
+    t.string   "school_name"
+    t.string   "prof_name"
   end
 
   create_table "saved_decks", force: true do |t|
@@ -75,6 +75,11 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer "deck_id", null: false
     t.integer "card_id", null: false
     t.integer "fav_id",  null: false
+  end
+
+  create_table "schools", force: true do |t|
+    t.integer "school_id", null: false
+    t.string  "name",      null: false
   end
 
   create_table "subjects", force: true do |t|
@@ -86,7 +91,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.string   "username"
     t.integer  "user_id",                default: 0,     null: false
     t.string   "email",                  default: "",    null: false
-    t.integer  "decks_made",              default: 0,     null: false
+    t.integer  "decks_made",             default: 0,     null: false
     t.boolean  "paid",                   default: false
     t.boolean  "admin",                  default: false
     t.datetime "created_at"
@@ -104,12 +109,6 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.string   "last_sign_in_ip"
     t.string   "school_name"
   end
-
-  create_table "schools", force: true do |t|
-    t.integer "school_id", null: false
-    t.string  "name",       null: false
-  end
-
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
