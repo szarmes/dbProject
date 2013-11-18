@@ -1,7 +1,8 @@
 class Deck < ActiveRecord::Base
 
 		belongs_to :user
-    belongs_to :saved_deck
+        belongs_to :saved_deck
+        
         has_many  :cards, dependent: :destroy
         has_one  :course 
         has_one  :subject

@@ -229,10 +229,16 @@
     </tr>
     <tr>
       <td>
+      <% if card.nil?
+        @cardID = 0
+      else @cardID = card.card_id
+      end
+      %>
+
       <% if user_signed_in? %>
-       <%= link_to image_tag('flag.png', :title=>"Flag this deck for inappropriate content"), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => @userID}, class: "btn btn-small btn-warning"%>
+       <%= link_to image_tag('flag.png', :title=>"Flag this deck/card for inappropriate content"), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => @userID, :cardID => @cardID}, class: "btn btn-small btn-warning"%>
       <% else %>
-       <%= link_to image_tag('flag.png', :title=>"Flag this deck for inappropriate content"), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => 0}, class: "btn btn-small btn-warning"%>
+       <%= link_to image_tag('flag.png', :title=>"Flag this deck/card for inappropriate content"), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => 0, :cardID => @cardID}, class: "btn btn-small btn-warning"%>
       <% end %>
       </td>
     </tr>

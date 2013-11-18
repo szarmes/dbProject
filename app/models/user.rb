@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
         has_many  :deckratings, dependent: :destroy
         has_many  :recent_decks, dependent: :destroy
         has_many  :saved_decks, dependent: :destroy
+        has_many :flagged_decks, dependent: :destroy
 
 
 

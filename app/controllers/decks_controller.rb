@@ -290,8 +290,8 @@ class DecksController < ApplicationController
 
   def flag
 
-    if FlaggedDeck.find_by(:user_id => params[:userID], :deck_id => params[:deckID]).nil?
-    @flag = FlaggedDeck.create(:user_id => params[:userID], :deck_id => params[:deckID])
+    if FlaggedDeck.find_by(:user_id => params[:userID], :deck_id => params[:deckID], :card_id => params[:cardID]).nil?
+    @flag = FlaggedDeck.create(:user_id => params[:userID], :deck_id => params[:deckID], :card_id => params[:cardID])
     end
 
     flash[:success] = "Deck flagged. Thank you."
