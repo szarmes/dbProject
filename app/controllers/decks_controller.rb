@@ -122,7 +122,6 @@ class DecksController < ApplicationController
     @deck = Deck.find(params[:favid])
     @user = User.find(params[:userID])
     if !SavedDeck.find_by(user_id: @user.user_id, deck_id: @deck.deck_id).nil?
-      flash[:error] = "Deck already saved."
       redirect_to deck_path(@deck.deck_id)
 
     else
@@ -130,7 +129,6 @@ class DecksController < ApplicationController
       @favorite = SavedDeck.create(user_id: @user.user_id, deck_id: @deck.deck_id, 
                                       card_id:0, fav_id:0)
       @favorite.save
-      flash[:success] = "Deck saved."
       redirect_to '/saved_decks'
     end
   end
@@ -140,12 +138,10 @@ class DecksController < ApplicationController
     @userID = current_user.user_id
     @favorite = SavedDeck.find_by(user_id: @userID, deck_id: @deck.deck_id)
     if @favorite.nil?
-      flash[:error] = "Cannot find deck in saved decks"
     else
-      @favorite.delete
-      flash[:success] = "Deck un-saved."
+      @favorite.destroy
     end
-    redirect_to '/saved_decks'
+    redirect_to deck_path(@deck.deck_id)
   end
 
   def edit
