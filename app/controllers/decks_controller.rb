@@ -127,7 +127,6 @@ class DecksController < ApplicationController
       @favorite = SavedDeck.create(user_id: @user.user_id, deck_id: @deck.deck_id, 
                                       card_id:0, fav_id:0)
       @favorite.save
-      flash[:success] = "Deck saved."
       redirect_to '/saved_decks'
     end
   end

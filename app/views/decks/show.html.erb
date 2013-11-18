@@ -157,6 +157,7 @@
     <tr>
     </tr>
     <tr>
+<<<<<<< HEAD
       <td>
         <% if user_signed_in? %>
           <% if SavedDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
@@ -166,6 +167,8 @@
           <% end %>
         <% end %>
       </td>
+=======
+>>>>>>> 47f9c60a3cd4a8bb1191e12e6d64c1acb86f4030
     <% else %>
       <td>
         <table class = "questionCard">
@@ -206,10 +209,19 @@
   <br/>
   <table>
     <tr>
+       <td>
+        <% if user_signed_in? %>
+          <% if SavedDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
+            <%= link_to image_tag('save.png', :title=>"Save this Deck"), {:controller => "decks", :action => 'addfavorite',:userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-success" %>
+          <% else %>
+            <%= link_to image_tag('unsave.png', :title=>"Un-Save this Deck"), {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-warning" %>
+          <% end %>
+        <% end %>
+      </td>
       <% if !card.nil? && Deck.find_by(deck_id: card.deck_id).user_id == @userID %>
         <td>
-            <%= link_to "Edit this Card", edit_card_path(card.card_id), class: "btn btn-small btn-info"%>
-            <%= link_to "Delete this Card", card, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
+            <%= link_to image_tag('edit.png', :title=>"Edit this card"), edit_card_path(card.card_id), class: "btn btn-small btn-info"%>
+            <%= link_to image_tag('delete.png', :title=>"Delete this card"), card, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %>
         </td>
         <td style="width:21em"></td>
       <% else %>
