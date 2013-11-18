@@ -2,7 +2,6 @@
 
 <div class="search">
 <%= simple_form_for @subSearch, :url => { :action => "create" } do |f| %>
-
   <div class="search">
     <%= f.label "Search by School" %>
     <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path  %>
