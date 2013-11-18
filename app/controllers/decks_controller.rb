@@ -32,8 +32,6 @@ class DecksController < ApplicationController
       @deck =  Deck.find(params[:id])
     
       @cards = Card.where(deck_id: @deck.deck_id)
-      @owner = User.find_by(user_id: @deck.user_id)
-      @username = @owner.username
       if user_signed_in?
         @userID = current_user.user_id
         @recents = RecentDeck.where(user_id: current_user.user_id)
