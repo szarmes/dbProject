@@ -1,4 +1,9 @@
- <p class = "deckInfo"><div style = "font-weight: bold; font-size: 1.9em"> <%= @deck.deck_title %> </div>
+  <p class = "deckInfo">
+  <div style = "font-weight: bold; font-size: 1.9em"> 
+    <%= @deck.deck_title %>  
+    <p style = "font-size:.5em;display:inline"> by 
+      <%= link_to @username, {:controller => "decks", :action => "thier_decks", :username => @username }%></p> 
+  </div>
      
         <%= @deck.subject_name %>
         

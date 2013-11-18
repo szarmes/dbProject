@@ -34,6 +34,7 @@ class DecksController < ApplicationController
   
       if user_signed_in?
         @userID = current_user.user_id
+        @username = current_user.username
         @recents = RecentDeck.where(user_id: current_user.user_id)
         #code to add deck to recent deck
         @check = RecentDeck.find_by(user_id: current_user.user_id,
