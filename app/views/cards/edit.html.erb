@@ -22,11 +22,11 @@
   
   <div>
   	<p>* Question (255 character limit)</p> 
-  <%= f.text_area :qtext, :autofocus => true, :default => @card.qtext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255  %></div>
+  <%= f.text_area :qtext, :default => @card.qtext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255  %></div>
 
   <div>
   	<p>* Answer (255 character limit) </p> 
-  <%= f.text_area :atext, :autofocus => true, :default => @card.atext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255 %></div>
+  <%= f.text_area :atext, :default => @card.atext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255 %></div>
 
   <%= f.hidden_field :deck_id, :value => @card.deck_id %>
  
