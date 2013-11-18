@@ -52,6 +52,9 @@
             </tr>
         </table> </a>
       </td>
+      <td style = "vertical-align: top;">
+        <%= link_to image_tag('unsave.png', :title=>"Un-Save this Deck"), {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-warning" %>
+      </td>
       <td class= "deckPartial">
         <div class = 'likedText'> 
           Created by: <br/> 
@@ -86,11 +89,6 @@
           <%= @deck.prof_name %>
           <%end%> 
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td style = "vertical-align: top;">
-        <%= link_to image_tag('unsave.png', :title=>"Un-Save this Deck"), {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-warning" %>
       </td>
     </tr>
   </table>
