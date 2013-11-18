@@ -23,7 +23,7 @@
   <div  class = "search">
   <p>* Title (50 character limit) </p> 
 
-  <%= f.text_field :deck_title, :autofocus => true, :default => @deck.deck_title, :onkeyup => "CheckMaxlength(this);", :maxlength => 50%></div>
+  <%= f.text_field :deck_title, :default => @deck.deck_title, :onkeyup => "CheckMaxlength(this);", :maxlength => 50%></div>
 
   <div  class = "search">
 
@@ -40,7 +40,7 @@
   
 
   <div  class = "search"><%= f.label "Course Number (5 character limit)" %>
-  <%= f.text_field :course_num, :autofocus => true, :default => @deck.course_num, :onkeyup => "CheckMaxlength(this);", :maxlength => 5  %></div>
+  <%= f.text_field :course_num, :default => @deck.course_num, :onkeyup => "CheckMaxlength(this);", :maxlength => 5  %></div>
 
   <div  class = "search"><%= f.label "Course Name (70 character limit)" %>
   <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path, :default => @deck.course_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 70 %></div>
