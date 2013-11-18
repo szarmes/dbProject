@@ -16,4 +16,6 @@
         <% if !@deck.prof_name.blank? %>
          - <%= @deck.prof_name %>
         <% end %>
+
+        - <%= @deck.created_on.strftime("%b-%d-%Y") %>
         </p>
