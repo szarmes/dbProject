@@ -1,7 +1,7 @@
 <head>
 </head>
 <body>
-  <h1>Results</h1>
+  <h1><%= @resultcount %> Results</h1>
   <div class="search">
   <%= simple_form_for @thing, :url => {:action => 'sort'} do |f| %>
     <%= f.label "Sort Results", params[:value]  %>
@@ -41,4 +41,11 @@
       <%= f.submit "Search", class: "btn btn-medium btn-success" %>
   <% end %>
   </div>
+
+  <div>
+    <p> Can't find what you're looking for? </p>
+    <p> <%= link_to "Sign Up", new_user_registration_path %> or <%= link_to "Sign In", new_user_session_path%>
+        and create a deck to study with specific to your school, subject, and course! </p>
+  </div>
+
 </body>

@@ -10,6 +10,7 @@ class SearchController < ApplicationController
     @results = Result.all.paginate(page: params[:page])
     @result = Result.new
     @thing = Deck.new
+    @resultcount = @results.size
   end
 
   def index
@@ -55,6 +56,7 @@ class SearchController < ApplicationController
     elsif(@value == "Professor")
       @results = Result.order(prof_name: :asc).paginate(page: params[:page])
     end
+    @resultcount = @results.size
     @results.each do |r|
         @result = Result.create(:deck_id => (r.deck_id), :username => (r.username), :percent => r.percent, :created_on => r.created_on, 
         :school_name => (r.school_name), :prof_name => r.prof_name)
@@ -87,6 +89,7 @@ class SearchController < ApplicationController
     length -= 17
     @profString = prof_name.to_s[15, length]
     @results = Deck.search(@subjectString, @courseString, @nameString, @schoolString, @profString)
+    @resultcount = @results.size
     @results.each do |r|
       if Deckrating.where(deck_id: r.deck_id).empty?
         @percent = 0
