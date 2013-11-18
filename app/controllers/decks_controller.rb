@@ -135,6 +135,7 @@ class DecksController < ApplicationController
 
   @favorite = SavedDeck.new
   @favorites = SavedDeck.where(user_id: current_user.user_id).paginate(page: params[:page])
+  @userID = current_user.user_id
 
   end
   def addfavorite

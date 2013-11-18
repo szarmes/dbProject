@@ -1,3 +1,35 @@
 <h1>Saved Decks</h1>
 
-<div><%= render partial: 'shared/favorite', collection: @favorites %></div>
+<% if user_signed_in? %>
+  			<br/>
+  			<br/>
+	
+	<% if @favorites.any? %>
+		  <div>
+		  	<% @count = 0
+		  	%><%@favorites1 = Deck.where(id: 0)
+		  	%><%@favorites2 = Deck.where(id: 0)
+		  	%><%@favorites.each do |d|
+			  	%><%if(@count % 2 == 0)
+			  	 	%><%@favorites1.push(d)
+			  	%><%elsif(@count % 2 == 1)
+			  	   	%><%@favorites2.push(d)
+			  	%>
+			  	<% end %>
+			  	<% @count += 1 %>
+			<% end %>
+		  	<table>
+		  		<tr>
+		  			<td style ="vertical-align: top; padding-right: 4em;">
+						<%= render partial: 'shared/favorite', collection: @favorites1 %>
+					</td>
+					<td style ="vertical-align: top;">
+						<%= render partial: 'shared/favorite', collection: @favorites2 %>
+					</td>
+				</tr>
+			</table>
+
+		  </div>
+		  <%= will_paginate @favorites %>
+	<% end %>
+<% end %>

@@ -1,4 +1,35 @@
 <h1>Recent Decks</h1>
 
+<% if user_signed_in? %>
+  			<br/>
+  			<br/>
+	
+	<% if @recents.any? %>
+		  <div>
+		  	<% @count = 0
+		  	%><%@recents1 = Deck.where(id: 0)
+		  	%><%@recents2 = Deck.where(id: 0)
+		  	%><%@recents.each do |d|
+			  	%><%if(@count % 2 == 0)
+			  	 	%><%@recents1.push(d)
+			  	%><%elsif(@count % 2 == 1)
+			  	   	%><%@recents2.push(d)
+			  	%>
+			  	<% end %>
+			  	<% @count += 1 %>
+			<% end %>
+		  	<table>
+		  		<tr>
+		  			<td style ="vertical-align: top; padding-right: 4em;">
+						<%= render partial: 'shared/recent', collection: @recents1 %>
+					</td>
+					<td style ="vertical-align: top;">
+						<%= render partial: 'shared/recent', collection: @recents2 %>
+					</td>
+				</tr>
+			</table>
 
-<div><%= render partial: 'shared/recent', collection: @recents %></div>
+		  </div>
+		  <%= will_paginate @recents %>
+	<% end %>
+<% end %>

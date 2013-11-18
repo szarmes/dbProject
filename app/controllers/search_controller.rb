@@ -11,38 +11,32 @@ class SearchController < ApplicationController
     @result = Result.new
     @thing = Deck.new
     @resultcount = @results.size
+    @userID = current_user.user_id
   end
 
   def index
     @subSearch = Deck.new
     @thing = Result.new
     @results = Result.all.paginate(page: params[:page])
+    @userID = current_user.user_id
   end
 
   def show
     @thing = Result.new
     @subSearch = Deck.new
     @results = Result.all.paginate(page: params[:page])
+    @userID = current_user.user_id
   end
 
   def sort
+    @userID = current_user.user_id
     @subSearch = Deck.new
     @results = Result.all.paginate(page: params[:page])
     @result = Result.new
     length = subject_name.to_s.length
-    length -= 19
-    @value = subject_name.to_s[17,length]
+    length -= 20
+    @value = subject_name.to_s[18,length]
     @results = Result.all
-    @results.each do |r|
-      @liked = Deckrating.where(deck_id: r.deck_id, liked: true).count 
-      @total = Deckrating.where(deck_id: r.deck_id).count 
-      if(!@total == 0)
-        @percent = (@liked * 100 / @total) 
-      else
-        @percent = 0
-      end
-      r.update_attributes(:percent => @percent)
-    end
     if(@value == "Rating")
       @results = Result.order(percent: :desc).paginate(page: params[:page])
     elsif(@value == "Date Created")
@@ -104,6 +98,7 @@ class SearchController < ApplicationController
       @result.save
     end
     @results = Result.all.paginate(page: params[:page])
+    @userID = current_user.user_id
     redirect_to '/index'
   end
 

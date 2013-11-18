@@ -10,7 +10,39 @@
     <%= f.submit "Sort", class: "btn btn-medium btn-success" %>
   <% end %>
   </div>
-  <div><%= render partial: 'shared/result', collection: @results %></div>
+  <div><% if user_signed_in? %>
+        <br/>
+        <br/>
+  
+  <% if @results.any? %>
+      <div>
+        <% @count = 0
+        %><%@results1 = Deck.where(id: 0)
+        %><%@results2 = Deck.where(id: 0)
+        %><%@results.each do |d|
+          %><%if(@count % 2 == 0)
+            %><%@results1.push(d)
+          %><%elsif(@count % 2 == 1)
+              %><%@results2.push(d)
+          %>
+          <% end %>
+          <% @count += 1 %>
+      <% end %>
+        <table>
+          <tr>
+            <td style ="vertical-align: top; padding-right: 4em;">
+            <%= render partial: 'shared/result', collection: @results1 %>
+          </td>
+          <td style ="vertical-align: top;">
+            <%= render partial: 'shared/result', collection: @results2 %>
+          </td>
+        </tr>
+      </table>
+
+      </div>
+      <%= will_paginate @results %>
+  <% end %>
+<% end %></div>
   <p>Search Again</p>
   <div class="search">
   <%= simple_form_for @subSearch, :url => { :action => "create" } do |f| %>

@@ -3,94 +3,155 @@
 <head>
 </head>
 <body>
-<div class="row", style = "border-bottom: 3px solid black">
-   <table> 
+  <% if !@deck.nil? %>
+<div class="row">
+  <br>
+
+   <table>
     <tr>
-      <td style = "width:158px">
-         <a href = "/decks/<%= @deck.deck_id %>" style = "color:black;"><table class = "deck">
-          <tr style = "text-align: center; height:4em;">
+      <td>
+       <table> 
+        <tr>
+          <td style = "width:158px">
+             <a href = "/decks/<%= @deck.deck_id %>" style = "color:black;"><table class = "deck">
+              <tr style = "text-align: center; height:4em;">
+                <td>
+                    <p class ="cardTitle2">
+                      <% if @deck.deck_title.length <27 %>
+                        <%= @deck.deck_title %>
+                      <% else %>
+                        <%= @deck.deck_title[0,27]%>...
+                      <% end %>
+                    </p>
+                  </td>
+              </tr>
+              <tr style = "text-align:center; vertical-align:top; padding-top: 5px;">
+                <td>
+                  <p class="cardBody2"><%= @deck.subject_name %>
+                  <% if !@deck.course_num.blank? %>
+                    - <%= @deck.course_num %>
+                   <% end %>
+                  <% if !@deck.course_name.blank?  %> 
+                    <% if @deck.course_name.length <27 %>
+                        -<%= @deck.course_name %>
+                      <% else %>
+                        -<%= @deck.course_name[0,27]%>...
+                      <% end %>
+                    <% end %>
+                  </p>
+                </td>
+              </tr>
+               <tr>
+                  <td style = "width:8em; padding-left:60px; vertical-align: bottom;">
+                    <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
+                      <div class = 'likedText'> No ratings </div>
+                    <% else %>
+                      <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
+                      <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
+                      <% @percent = (@liked * 100 / @total) %>
+                      <% if @percent > 49 %>
+                        <div class = 'likedText', style = "color:#0D55D1"><%= @percent %>% liked </div>
+                      <% else %>
+                        <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+            </table> </a>
+          </td>
+        </table>
+      </td>
+      <td>
+        <table>
+          <tr>
             <td>
-                <p class ="cardTitle2">
-                  <% if @deck.deck_title.length <27 %>
-                    <%= @deck.deck_title %>
-                  <% else %>
-                    <%= @deck.deck_title[0,27]%>...
-                  <% end %>
-                </p>
-          </tr>
-          <tr style = "text-align:center; vertical-align:top; padding-top: 5px;">
-            <td>
-              <p class="cardBody2"><%= @deck.subject_name %>
-              <% if !@deck.course_num.blank? %>
-                - <%= @deck.course_num %>
-               <% end %>
-              <% if !@deck.course_name.blank?  %> 
-                <% if @deck.course_name.length <27 %>
-                    -<%= @deck.course_name %>
-                  <% else %>
-                    -<%= @deck.course_name[0,27]%>...
-                  <% end %>
+            <table>
+              <tr>
+             <td class= "deckPartial" style = "width:150px;">
+              <p class = 'cardTitle2' style = "vertical-align:top; text-align:left;"> 
+                Created by
+              </p>
+                <p class = 'cardBody2' style = "vertical-align:top; text-align:left; margin-bottom: 0px">
+                <% if !@deck.nil? %>
+                  <% @username = User.find_by(user_id: @deck.user_id).username %>
+                  <%= link_to @username, {:controller => "decks", :action => "thier_decks", :username => @username } %>
                 <% end %>
               </p>
             </td>
+
+            <td class= "deckPartial" style ="width:150px">
+              <p class = 'cardTitle2' style = "vertical-align:top; text-align:left;"> 
+                Created on
+              </p>
+              <p class = 'cardBody2' style = "vertical-align:top; text-align:left; margin-bottom: 0px"> 
+                <%= @deck.created_on.strftime("%b-%d-%Y") %> 
+              </p>
+            </td>
+           </tr>
+          </table>
+        </td>
           </tr>
-           <tr>
-              <td style = "width:8em; padding-left:60px;:right;vertical-align:bottom">
-                <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
-                  <div class = 'likedText'> No ratings </div>
+          <tr>
+            <td class= "deckPartial" style="width:300px">
+              <p class = 'cardTitle2' style = "vertical-align:top; text-align:left;"> 
+                School
+              </p>
+                <p class = 'cardBody2' style = "vertical-align:top; text-align:left; max-width: 300px; margin-bottom: 0px"> 
+                <%if @deck.school_name.nil? %> 
+                Unspecified
+                <%else%> 
+                <%= @deck.school_name %>
+                <%end%>
+                </p> 
+            </td>
+
+          </tr>
+          <tr>
+            <td class= "deckPartial">
+              <p class = 'cardTitle2' style = "vertical-align:top; text-align:left;"> 
+                Instructor 
+              </p>
+              <p class = 'cardBody2' style = "vertical-align:top; text-align:left; margin-bottom: 0px">
+                <%if @deck.prof_name.nil? %> 
+                Unspecified
+                <%else%> 
+                <%= @deck.prof_name %>
+                <%end%> 
+              </p>
+            </td>
+          </tr>
+          <tr>
+    <td>
+      <table style = "height:50px">
+        <tr>
+          <td style = "vertical-align:bottom;">
+            <% if user_signed_in? %>
+                <% if SavedDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
+                <div class= "hover">
+                  <%= link_to image_tag('save.png'), {:controller => "decks", :action => 'addfavorite',:userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-success"%>
+                  <div class = "tooltip">
+                    Save this Deck
+                  </div>
+                </div>
                 <% else %>
-                  <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
-                  <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
-                  <% @percent = (@liked * 100 / @total) %>
-                  <% if @percent > 49 %>
-                    <div class = 'likedText', style = "color:#0D55D1"><%= @percent %>% liked </div>
-                  <% else %>
-                    <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
-                  <% end %>
+                <div class= "hover">
+                  <%= link_to image_tag('unsave.png'), {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-warning" %>
+                  <div class = "tooltip">
+                    Forget this Deck
+                  </div>
+                </div>
                 <% end %>
-              </td>
-            </tr>
-        </table> </a>
-      </td>
-      <td style = "vertical-align: top;">
-        <%= link_to image_tag('unsave.png', :title=>"Un-Save this Deck"), {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id}, class: "btn btn-small btn-warning" %>
-      </td>
-      <td class= "deckPartial">
-        <div class = 'likedText'> 
-          Created by: <br/> 
-          <% if !@deck.nil? %>
-            <% @username = User.find_by(user_id: @deck.user_id).username %>
-            <%= link_to @username, {:controller => "decks", :action => "thier_decks", :username => @username } %>
-          <% end %>
-        </div>
-      </td>
-       <td class= "deckPartial">
-        <div class = 'likedText'> 
-          Created on: <br/> 
-          <%= @deck.created_on.strftime("%b-%d-%Y") %> 
-        </div>
-      </td>
-      <td class= "deckPartial" style="width:200px">
-        <div class = 'likedText'> 
-          School: <br/> 
-          <%if @deck.school_name.nil? %> 
-          Unspecified
-          <%else%> 
-          <%= @deck.school_name %>
-          <%end%> 
-        </div>
-      </td>
-      <td class= "deckPartial">
-        <div class = 'likedText'> 
-          Instructor: <br/> 
-          <%if @deck.prof_name.nil? %> 
-          Unspecified
-          <%else%> 
-          <%= @deck.prof_name %>
-          <%end%> 
-        </div>
-      </td>
-    </tr>
-  </table>
+              <% else %>
+              <% end %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+      </table>
+    </td>
+  </tr>
+</table>
 </div>
+<% end %>
 </body>
