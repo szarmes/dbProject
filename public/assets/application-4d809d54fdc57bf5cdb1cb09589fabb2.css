@@ -5071,8 +5071,7 @@ div.likedText {
   font-size: 1.2em;
   line-height: 1.4em;
   font: Helvatica, serif;
-  text-align: center;
-  border-width: 3px solid; }
+  text-align: center; }
 
 .hover {
   position: relative; }
@@ -5106,33 +5105,8 @@ td.deckPartial {
   text-align: center;
   padding-left: 10px; }
 
-table.deck {
-  background-image: url("card1-6eb99ac61b498dd5de8d6a2ac9e359cc.jpg");
-  background-repeat: no-repeat;
-  text-align: center;
-  vertical-align: middle;
-  width: 158px;
-  height: 233px; }
-
 table.yourDeck {
   width: 185px; }
-
-table.questionCard {
-  background-image: url("simplecard1-e7376ed9beb477dfb56b1393d347fd2a.jpg");
-  background-repeat: no-repeat;
-  background-origin: border-box;
-  width: 348px;
-  height: 300px;
-  text-align: center;
-  vertical-align: middle; }
-
-table.answerCard {
-  background-image: url("simplecard1-e7376ed9beb477dfb56b1393d347fd2a.jpg");
-  background-repeat: no-repeat;
-  width: 348px;
-  height: 300px;
-  text-align: center;
-  vertical-align: middle; }
 
 td.ratingscol {
   width: 9em;
@@ -5322,6 +5296,130 @@ li.mynav {
   text-align: center;
   vertical-align: center;
   padding-left: 10px; }
+table.deck1 {
+  background-image: url("card1-6eb99ac61b498dd5de8d6a2ac9e359cc.jpg");
+  background-repeat: no-repeat;
+  text-align: center;
+  vertical-align: middle;
+  width: 158px;
+  height: 233px; }
+
+table.questionCard1 {
+  background-image: url("simplecard1-e7376ed9beb477dfb56b1393d347fd2a.jpg");
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  width: 348px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle; }
+
+table.answerCard1 {
+  background-image: url("simplecard1-e7376ed9beb477dfb56b1393d347fd2a.jpg");
+  background-repeat: no-repeat;
+  width: 348px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle; }
+
+table.deck2 {
+  background-image: url("card2-44898f1306913eed194696f4ba5d825d.png");
+  background-repeat: no-repeat;
+  text-align: center;
+  vertical-align: middle;
+  width: 158px;
+  height: 233px; }
+
+table.questionCard2 {
+  background-image: url("simplecard2-dfa43e3feafa64dcf072607603832ee0.png");
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  width: 348px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle; }
+
+table.answerCard2 {
+  background-image: url("simplecard2-dfa43e3feafa64dcf072607603832ee0.png");
+  background-repeat: no-repeat;
+  width: 348px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle; }
+
+table.deck3 {
+  background-image: url("card3-91370e66d7bf6782e80bbfc0bcb6b185.png");
+  background-repeat: no-repeat;
+  text-align: center;
+  vertical-align: middle;
+  width: 158px;
+  height: 233px; }
+
+table.questionCard3 {
+  background-image: url("simplecard3-2aa82a11b832a2c0c820305de7e8cf91.png");
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  width: 348px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle; }
+
+table.answerCard3 {
+  background-image: url("simplecard3-2aa82a11b832a2c0c820305de7e8cf91.png");
+  background-repeat: no-repeat;
+  width: 348px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle; }
+
+table.deck4 {
+  background-image: url("card4-05a6a951b1d7dfa800801585a159e7d8.png");
+  background-repeat: no-repeat;
+  text-align: center;
+  vertical-align: middle;
+  width: 158px;
+  height: 233px; }
+
+table.questionCard4 {
+  background-image: url("simplecard4-23511ea27413dddbca90d3e6dc3e738c.png");
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  width: 348px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle; }
+
+table.answerCard4 {
+  background-image: url("simplecard4-23511ea27413dddbca90d3e6dc3e738c.png");
+  background-repeat: no-repeat;
+  width: 348px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle; }
+
+table.deck5 {
+  background-image: url("card5-aa8c004f6d145eb03020ae296543917d.png");
+  background-repeat: no-repeat;
+  text-align: center;
+  vertical-align: middle;
+  width: 158px;
+  height: 233px; }
+
+table.questionCard5 {
+  background-image: url("simplecard5-db3e293fc6853a70669a42f6c0984592.png");
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  width: 348px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle; }
+
+table.answerCard5 {
+  background-image: url("simplecard5-db3e293fc6853a70669a42f6c0984592.png");
+  background-repeat: no-repeat;
+  width: 348px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle; }
 /*! jQuery UI - v1.10.3 - 2013-11-16
 * http://jqueryui.com
 * Includes: jquery.ui.core.css, jquery.ui.autocomplete.css, jquery.ui.menu.css, jquery.ui.theme.css
