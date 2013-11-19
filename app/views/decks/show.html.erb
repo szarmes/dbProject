@@ -15,9 +15,7 @@
   </script>
 </head>
 <body>
-  
-    <%= render partial: 'shared/title'%>
-      
+    <%= render partial: 'shared/title'%>   
   <table class= "presentDeck">
     <tr>
       <td class = "ratingscol">
@@ -61,7 +59,7 @@
       <td>
     <% if !@cards.empty? && !@count.nil? %>
       <% @array = @cards.to_a %>
-      <% card = @array.at(@count) %>
+      <% card = @array.at(@count-1) %>
       <td>
         <table class = "questionCard<%= @deck.background%>">
           <tr>
@@ -109,7 +107,7 @@
               <% if @count>0 %>
                 <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @count-1), class: "btn btn-small btn-info", :id => "prev_link"%>
               <% else %>
-                <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @array.size-1), class: "btn btn-small btn-info", :id => "prev_link"%>
+                <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @array.size), class: "btn btn-small btn-info", :id => "prev_link"%>
               <% end %>
             </td>
             <td style = "text-align:center">
@@ -120,10 +118,10 @@
               <%= link_to image_tag('shuffle.png', :title=>"Random Card"), deck_path(card.deck_id, :count => @rand), class: "btn btn-small btn-info", :id => "rand_link" %>
             </td>
             <td style = "text-align:left">
-              <% if @count<(@array.size - 1) %>
+              <% if @count<(@array.size) %>
                 <%= link_to image_tag('next.png', :title=>"Next Card"), deck_path(card.deck_id, :count => @count+1), class: "btn btn-small btn-info", :id => "next_link" %>
               <% else %>
-                <%= link_to image_tag('next.png', :title=>"Next Card"), deck_path(card.deck_id, :count => 0), class: "btn btn-small btn-info", :id => "next_link" %>
+                <%= link_to image_tag('next.png', :title=>"Next Card"), deck_path(card.deck_id, :count => 1), class: "btn btn-small btn-info", :id => "next_link" %>
               <% end %>
             </td>
             <td>
@@ -197,7 +195,7 @@
       </td>
       <td>
         <div class = "hover">
-        <%= link_to image_tag('play.png'), deck_path(@deck.deck_id, :count => 0), class: "btn btn-small btn-info" %>
+        <%= link_to image_tag('play.png'), deck_path(@deck.deck_id, :count => 1), class: "btn btn-small btn-info" %>
         <div class = "tooltip" style = "width:6.5em; top:25px">
               Start Studying
             </div>
