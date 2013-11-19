@@ -319,7 +319,7 @@ class DecksController < ApplicationController
    private
     
     def deck_params
-        params.require(:deck).permit(:deck_title, :course_num, :course_name, :subject_name, :school_name, :prof_name)
+        params.require(:deck).permit(:deck_title, :course_num, :course_name, :subject_name, :school_name, :prof_name, :background)
     end
 
   

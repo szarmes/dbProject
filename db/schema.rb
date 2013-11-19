@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer  "school_id"
     t.string   "school_name"
     t.string   "prof_name"
+    t.integer  "background", default: 1
   end
 
   create_table "recent_decks", force: true do |t|

@@ -16,44 +16,80 @@
        <%= render partial: 'shared/title'%>
         <br/><br/><br/>
 
-<%= simple_form_for @deck, :html => { :method => :put} do |f| %>
+ <%= simple_form_for @deck, :html => { :method => :put} do |f| %>
 
-  <p> Fields marked with * are required </p>
+  <table>
+    <tr>
+      <td>
+        <div>
+        <p> Fields marked with * are required </p>
+        
+        <div  class = "search">
+        <p>* Title (50 character limit) </p> 
+        
+
+        <%= f.text_field :deck_title, :default => @deck.deck_title, :onkeyup => "CheckMaxlength(this);", :maxlength => 50%></div>
+
+        <div  class = "search">
+
+          <p>* Subject (40 character limit)</p>
+          <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path, :default => @deck.subject_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 40  %>
+        </div>
+        
+
+        <div  class = "search">
+          <%= f.label "School Name" %>
+          <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path, :default => @deck.school_name  %>
+
+        </div>
+        
+
+        <div  class = "search"><%= f.label "Course Number (5 character limit) " %>
+        <%= f.text_field :course_num, :default => @deck.course_num, :onkeyup => "CheckMaxlength(this);", :maxlength => 5  %></div>
+
+        <div  class = "search"><%= f.label "Course Name (70 character limit)" %>
+        <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path, :default => @deck.course_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 70 %></div>
+
+         <div  class = "search">
+          <%= f.label "Instructor (Last name, first name)" %>
+          <%= f.text_field :prof_name, :default => @deck.prof_name %>
+
+        </div>
+       
+        <p style= "font-size:10px;">Note: If either school, subject, and/or course name not found, a new entry will be created </p>
+
+       <%= f.submit "Save Changes", class: "btn btn-medium btn-success" %>
+       </div>
+
+      </td>
+      <td style = "padding-left:2em;">
+      <div >
+      <%= f.label "Background image" %>
+      <%= image_tag('/assets/card1-6eb99ac61b498dd5de8d6a2ac9e359cc.jpg')  %>
+      <%= f.radio_button :background, 1, :default => @deck.background  %>
+      
+      <%= image_tag('/assets/card2-44898f1306913eed194696f4ba5d825d.png')  %>
+      <%= f.radio_button :background, 2 %>
+      
+      <%= image_tag('/assets/card3-91370e66d7bf6782e80bbfc0bcb6b185.png')  %>
+      <%= f.radio_button :background, 3  %>
+      
+      <%= image_tag('/assets/card4-05a6a951b1d7dfa800801585a159e7d8.png')  %>
+      <%= f.radio_button :background, 4  %>
+      
+      <%= image_tag('/assets/card5-aa8c004f6d145eb03020ae296543917d.png')  %>
+      <%= f.radio_button :background, 5 %>
+
   
-  <div  class = "search">
-  <p>* Title (50 character limit) </p> 
 
-  <%= f.text_field :deck_title, :default => @deck.deck_title, :onkeyup => "CheckMaxlength(this);", :maxlength => 50%></div>
 
-  <div  class = "search">
 
-    <p>* Subject (40 character limit)</p>
-    <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path, :default => @deck.subject_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 40  %>
-  </div>
-  
 
-  <div  class = "search">
-    <%= f.label "School Name" %>
-    <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path, :default => @deck.school_name  %>
+      </div>
+      </td>
+    </tr>
+  </table>
 
-  </div>
-  
+<% end %>
 
-  <div  class = "search"><%= f.label "Course Number (5 character limit)" %>
-  <%= f.text_field :course_num, :default => @deck.course_num, :onkeyup => "CheckMaxlength(this);", :maxlength => 5  %></div>
-
-  <div  class = "search"><%= f.label "Course Name (70 character limit)" %>
-  <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path, :default => @deck.course_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 70 %></div>
-
-   <div  class = "search">
-    <%= f.label "Instructor (Last name, first name)" %>
-    <%= f.text_field :prof_name, :default => @deck.prof_name %>
-
-  </div>
-
-  <p style= "font-size:10px;">Note: If either school, subject, and/or course name not found, a new entry will be created </p>
-
- <%= f.submit "Save Changes", class: "btn btn-medium btn-success" %>
-
- <% end %>
 </body>

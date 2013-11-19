@@ -1,7 +1,11 @@
 <head>
 </head>
 <body>
+  <%if @resultcount == 1 %>
+  <h1><%= @resultcount %> Result</h1>
+  <%else%>
   <h1><%= @resultcount %> Results</h1>
+  <%end%>
   <div class="search">
   <%= simple_form_for @thing, :url => {:action => 'sort'} do |f| %>
     <%= f.label "Sort Results", params[:value]  %>

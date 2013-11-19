@@ -63,7 +63,7 @@
       <% @array = @cards.to_a %>
       <% card = @array.at(@count) %>
       <td>
-        <table class = "questionCard">
+        <table class = "questionCard<%= @deck.background%>">
           <tr>
             <td>
               <p class = "cardBody"> 
@@ -76,7 +76,7 @@
       <td class ="spacecol">
       </td>
       <td>
-        <table id = "showAnswer" class = "answerCard" style= "display: none" onclick = "hideAns()">
+        <table id = "showAnswer" class = "answerCard<%= @deck.background%>" style= "display: none" onclick = "hideAns()">
           <tr>
             <td>
              
@@ -87,7 +87,7 @@
             </td>
           </tr>
         </table>
-        <table class = "answerCard" id = "hideAnswer" onclick = "showAns()">
+        <table class = "answerCard<%= @deck.background%>" id = "hideAnswer" onclick = "showAns()">
           <tr>
             <td>
               <p class = "cardTitle"> 
@@ -168,7 +168,7 @@
       </td>
     <% else %>
       <td>
-        <table class = "questionCard">
+        <table class = "questionCard<%= @deck.background%>">
           <tr>
             <td>
               <p class = "cardTitle"> 
@@ -181,7 +181,7 @@
       <td class ="spacecol">
       </td>
       <td>
-        <table class = "answerCard">
+        <table class = "answerCard<%= @deck.background%>">
           <tr>
             <td>
               <p class = "cardTitle"> 
