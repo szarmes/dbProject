@@ -113,7 +113,7 @@
             <td style = "text-align:center">
               <% @rand = rand(@array.size) %>
               <% while @count == @rand %>
-                <% @rand = rand(@array.size) %>
+                <% @rand = rand(@array.size) + 1 %>
               <% end %>
               <%= link_to image_tag('shuffle.png', :title=>"Random Card"), deck_path(card.deck_id, :count => @rand), class: "btn btn-small btn-info", :id => "rand_link" %>
             </td>
