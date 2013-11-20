@@ -22,6 +22,7 @@ class CreateSchema < ActiveRecord::Migration
     t.datetime :last_sign_in_at
     t.string   :current_sign_in_ip
     t.string   :last_sign_in_ip
+    t.string   :school_name
   end
 
  
@@ -37,8 +38,12 @@ class CreateSchema < ActiveRecord::Migration
         t.integer     :subject_id, default:0,  null: false
         t.string   :remember_token
         t.datetime :created_on
+        t.integer  :school_id
+        t.string   :school_name
+        t.string   :prof_name
+        t.integer  :background, default: 1
 
-       
+           
     end
 
     create_table :cards do |t|
@@ -62,6 +67,8 @@ class CreateSchema < ActiveRecord::Migration
         t.string  :username,    null: false
         t.integer  :percent,    null: false
         t.datetime :created_on, null: false
+        t.string   :school_name
+        t.string   :prof_name
   end
     create_table :recent_decks do |t|
         t.integer   :user_id,  null: false
@@ -81,6 +88,8 @@ class CreateSchema < ActiveRecord::Migration
         t.integer   :course_id,  null: false
         t.string   :course_num,  null: false
         t.string    :name
+        t.integer :school_id
+        t.string  :school_name
 
     end
 
@@ -90,6 +99,16 @@ class CreateSchema < ActiveRecord::Migration
         t.integer   :card_id,  null: false
         t.integer :fav_id,  null: false
     end
+    create_table :schools do |t|
+        t.integer :school_id, null: false
+        t.string  :name,      null: false
+    end
+
+    create_table :flagged_decks do |t|
+        t.integer :deck_id, null: false
+        t.string  :user_id,       null: false
+        t.string  :card_id,       null: false
+  end
 
 
  end

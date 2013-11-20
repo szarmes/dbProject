@@ -11,7 +11,10 @@ class SearchController < ApplicationController
     @result = Result.new
     @thing = Deck.new
     @resultcount = @results.size
-    @userID = current_user.user_id
+    if user_signed_in?
+      @userID = current_user.user_id
+    else @userID = 0
+    end
   end
 
   def index
@@ -25,7 +28,10 @@ class SearchController < ApplicationController
     @thing = Result.new
     @subSearch = Deck.new
     @results = Result.all.paginate(page: params[:page])
-    @userID = current_user.user_id
+    if user_signed_in?
+      @userID = current_user.user_id
+    else @userID = 0
+    end
   end
 
   def sort
@@ -98,7 +104,10 @@ class SearchController < ApplicationController
       @result.save
     end
     @results = Result.all.paginate(page: params[:page])
-    @userID = current_user.user_id
+    if user_signed_in?
+      @userID = current_user.user_id
+    else @userID = 0
+    end
     redirect_to '/index'
   end
 

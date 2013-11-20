@@ -14,9 +14,7 @@
     <%= f.submit "Sort", class: "btn btn-medium btn-success" %>
   <% end %>
   </div>
-  <div><% if user_signed_in? %>
-        <br/>
-        <br/>
+  <div>
   
   <% if @results.any? %>
       <div>
@@ -46,7 +44,7 @@
       </div>
       <%= will_paginate @results %>
   <% end %>
-<% end %></div>
+</div>
   <p>Search Again</p>
   <div class="search">
   <%= simple_form_for @subSearch, :url => { :action => "create" } do |f| %>
