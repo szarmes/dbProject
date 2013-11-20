@@ -35,7 +35,10 @@ class SearchController < ApplicationController
   end
 
   def sort
-    @userID = current_user.user_id
+   if user_signed_in?
+      @userID = current_user.user_id
+    else @userID = 0
+    end
     @subSearch = Deck.new
     @results = Result.all.paginate(page: params[:page])
     @result = Result.new
