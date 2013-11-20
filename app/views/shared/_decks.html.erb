@@ -57,17 +57,18 @@
                    <div class = 'likedText', style = "color:#0D55D1">
                       <%= @percent %>% liked <br>
                       <div id="container" style="width: 83px; height: 14px; ">
-                      <canvas id="myCanvas" width="85" height="30" style = "solid #FF0000"></canvas>          <script type = "text/javaScript">
+                      <canvas id="myCanvas<%=decks.deck_id%>" width="85" height="30" style = "solid #FF0000"></canvas>  
+
+                      <script type = "text/javaScript">
                           var pct = <%=@percent.to_json%>;
-                          var c=document.getElementById("myCanvas");
+                          var c=document.getElementById("myCanvas<%=decks.deck_id%>");
                           var ctx=c.getContext("2d");
                           ctx.fillStyle="red";
                           ctx.fillRect(0,0, 85, 30);
                           ctx.fillStyle="#0D55D1";
                           ctx.fillRect(0,0, 85*(pct/100), 30);
+                      </script>
 
-
-                        </script>
                       </div>
                     </div>
                     </div>
@@ -75,17 +76,18 @@
                     <div class = 'likedText', style = "color:#FF0000">
                       <%= @percent %>% liked <br>
                       <div id="container" style="width: 83px; height: 14px; ">
-                      <canvas id="myCanvas" width="85" height="30" style = "solid #FF0000"></canvas>          <script type = "text/javaScript">
+                      <canvas id="myCanvas<%=decks.deck_id%>" width="85" height="30" style = "solid #FF0000"></canvas>     
+
+                      <script type = "text/javaScript">
                           var pct = <%=@percent.to_json%>;
-                          var c=document.getElementById("myCanvas");
+                          var c=document.getElementById("myCanvas<%=decks.deck_id%>");
                           var ctx=c.getContext("2d");
                           ctx.fillStyle="red";
                           ctx.fillRect(0,0, 85, 30);
                           ctx.fillStyle="#0D55D1";
                           ctx.fillRect(0,0, 85*(pct/100), 30);
-
-
                         </script>
+
                       </div>
                     </div>                  <% end %>
                 <% end %>
