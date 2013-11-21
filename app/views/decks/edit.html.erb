@@ -23,37 +23,54 @@
       <td>
         <div>
         <p> Fields marked with * are required </p>
-        
         <div  class = "search">
-        <p>* Title (50 character limit) </p> 
-        
-
-        <%= f.text_field :deck_title, :default => @deck.deck_title, :onkeyup => "CheckMaxlength(this);", :maxlength => 50%></div>
-
-        <div  class = "search">
-
-          <p>* Subject (40 character limit)</p>
-          <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path, :default => @deck.subject_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 40  %>
+          <div class = "hover">
+            <p>* Title</p> 
+            <%= f.text_field :deck_title, :onkeyup => "CheckMaxlength(this);", :maxlength => 50, :default => @deck.deck_title%>
+            <div class = "tooltip" style = "top:65px;">
+              50 character limit
+            </div>
+          </div>
         </div>
-        
+
+        <div  class = "search">
+          <div class = "hover">
+          <p>* Subject</p>
+          <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path, :default => @deck.subject_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 40  %>
+          <div class = "tooltip" style = "top:65px;">
+              40 character limit
+            </div>
+          </div>
+        </div>
 
         <div  class = "search">
           <%= f.label "School Name" %>
           <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path, :default => @deck.school_name  %>
-
         </div>
         
+        <div  class = "search">
+          <div class = "hover">
+          <p>Course Number</p>
+          <%= f.text_field :course_num, :onkeyup => "CheckMaxlength(this);", :default => @deck.course_num, :maxlength => 5  %>
+          <div class = "tooltip" style = "top:65px;">
+              5 character limit
+            </div>
+          </div>
+        </div>
 
-        <div  class = "search"><%= f.label "Course Number (5 character limit) " %>
-        <%= f.text_field :course_num, :default => @deck.course_num, :onkeyup => "CheckMaxlength(this);", :maxlength => 5  %></div>
+        <div  class = "search">
+          <div class = "hover">
+            <p>Course Name</p>
+            <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path, :default => @deck.course_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 70 %>
+            <div class = "tooltip" style = "top:65px;">
+              70 character limit
+            </div>
+          </div>
+        </div>
 
-        <div  class = "search"><%= f.label "Course Name (70 character limit)" %>
-        <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path, :default => @deck.course_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 70 %></div>
-
-         <div  class = "search">
+        <div  class = "search">
           <%= f.label "Instructor (Last name, first name)" %>
           <%= f.text_field :prof_name, :default => @deck.prof_name %>
-
         </div>
        
         <p style= "font-size:10px;">Note: If either school, subject, and/or course name not found, a new entry will be created </p>

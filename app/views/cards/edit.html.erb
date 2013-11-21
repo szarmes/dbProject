@@ -20,13 +20,21 @@
 
   <p> Fields marked with * are required </p>
   
-  <div>
-  	<p>* Question (255 character limit)</p> 
-  <%= f.text_area :qtext, :default => @card.qtext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255  %></div>
+  <div class = "hover">
+  	<p>* Question</p> 
+  	<%= f.text_area :qtext, :default => @card.qtext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255  %>
+  	<div class = "tooltip" style = "top:65px;">
+        255 character limit
+    </div>
+  </div>
 
-  <div>
-  	<p>* Answer (255 character limit) </p> 
-  <%= f.text_area :atext, :default => @card.atext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255 %></div>
+  <div class = "hover">
+  	<p>* Answer</p> 
+  	<%= f.text_area :atext, :default => @card.atext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255 %>
+  	<div class = "tooltip" style = "top:65px;">
+        255 character limit
+    </div>
+  </div>
 
   <%= f.hidden_field :deck_id, :value => @card.deck_id %>
  

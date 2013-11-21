@@ -62,12 +62,11 @@
         </div>
 
         <div  class = "search">
-
           <div class = "hover">
-          <p>Course Name</p>
-          <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path, :onkeyup => "CheckMaxlength(this);", :maxlength => 70 %>
-          <div class = "tooltip" style = "top:65px;">
-            70 character limit
+            <p>Course Name</p>
+            <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path, :onkeyup => "CheckMaxlength(this);", :maxlength => 70 %>
+            <div class = "tooltip" style = "top:65px;">
+              70 character limit
             </div>
           </div>
         </div>
