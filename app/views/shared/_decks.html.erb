@@ -46,7 +46,7 @@
             </td>
           </tr>
             <tr>
-              <td style = "width:8em; padding-left:60px;:right;vertical-align:bottom">
+              <td style = "width:8em; padding-left:60px;:right;vertical-align:bottom; padding-bottom:10px">
                 <% if Deckrating.where(deck_id: decks.deck_id).empty? %>
                   <div class = 'likedText'> No ratings </div>
                 <% else %>
@@ -56,17 +56,30 @@
                   <% if @percent > 49 %>
                    <div class = 'likedText', style = "color:#0D55D1">
                       <%= @percent %>% liked <br>
-                      <div id="container" style="width: 83px; height: 14px; ">
-                      <canvas id="myCanvas<%=decks.deck_id%>" width="85" height="30" style = "solid #FF0000"></canvas>  
+                      <div id="container" style="width: 88px; height: 10px; ">
+                       <canvas id="myCanvas<%=decks.deck_id%>" width="90" height="20" style = "solid #FF0000"></canvas>  
 
                       <script type = "text/javaScript">
                           var pct = <%=@percent.to_json%>;
                           var c=document.getElementById("myCanvas<%=decks.deck_id%>");
                           var ctx=c.getContext("2d");
-                          ctx.fillStyle="red";
-                          ctx.fillRect(0,0, 85, 30);
-                          ctx.fillStyle="#0D55D1";
-                          ctx.fillRect(0,0, 85*(pct/100), 30);
+                                var grad = ctx.createLinearGradient(0,0,0, 20);
+                                grad.addColorStop(0, "pink");
+                                grad.addColorStop(0.5, "red");
+                                grad.addColorStop(1.0, "red");
+
+                          ctx.fillStyle=grad;
+                          ctx.fillRect(0,0, 90, 30);
+
+                                grad = ctx.createLinearGradient(0,0,0, 20);
+                                grad.addColorStop(0, "white");
+                                grad.addColorStop(0.5, "#0D55D1");
+                                grad.addColorStop(1.0, "#0D55D1");
+                          ctx.fillStyle=grad;
+                          ctx.fillRect(0,0, 90*(pct/100), 30);
+                          ctx.lineWidth="1";
+                          ctx.rect(-5,-5, 90*(pct/100)+5, 30+5);
+                          ctx.stroke();
                       </script>
 
                       </div>
@@ -75,18 +88,31 @@
                   <% else %>
                     <div class = 'likedText', style = "color:#FF0000">
                       <%= @percent %>% liked <br>
-                      <div id="container" style="width: 83px; height: 14px; ">
-                      <canvas id="myCanvas<%=decks.deck_id%>" width="85" height="30" style = "solid #FF0000"></canvas>     
+                      <div id="container" style="width: 88px; height: 10px; ">
+                      <canvas id="myCanvas<%=decks.deck_id%>" width="90" height="20" style = "solid #FF0000"></canvas>     
 
-                      <script type = "text/javaScript">
+                          <script type = "text/javaScript">
                           var pct = <%=@percent.to_json%>;
                           var c=document.getElementById("myCanvas<%=decks.deck_id%>");
                           var ctx=c.getContext("2d");
-                          ctx.fillStyle="red";
-                          ctx.fillRect(0,0, 85, 30);
-                          ctx.fillStyle="#0D55D1";
-                          ctx.fillRect(0,0, 85*(pct/100), 30);
-                        </script>
+                                var grad = ctx.createLinearGradient(0,0,0, 20);
+                                grad.addColorStop(0, "pink");
+                                grad.addColorStop(0.5, "red");
+                                grad.addColorStop(1.0, "red");
+
+                          ctx.fillStyle=grad;
+                          ctx.fillRect(0,0, 90, 30);
+
+                                grad = ctx.createLinearGradient(0,0,0, 20);
+                                grad.addColorStop(0, "white");
+                                grad.addColorStop(0.5, "#0D55D1");
+                                grad.addColorStop(1.0, "#0D55D1");
+                          ctx.fillStyle=grad;
+                          ctx.fillRect(0,0, 90*(pct/100), 30);
+                          ctx.lineWidth="1";
+                          ctx.rect(-5,-5, 90*(pct/100)+5, 30+5);
+                          ctx.stroke();
+                      </script>
 
                       </div>
                     </div>                  <% end %>
