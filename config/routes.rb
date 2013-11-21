@@ -26,11 +26,11 @@ get   'flag', to: 'decks#flag'
 #post  'search', to: 'results#search'
 #get   'search', to: 'results#search'
 
-  match '/thier_decks', to: 'decks#thier_decks', via: 'get'
+  match '/created_by', to: 'decks#thier_decks', via: 'get'
   match '/your_decks', to: 'decks#your_decks', via: 'get'
   match '/recent_decks', to: 'decks#recent', via: 'get'
   match '/saved_decks', to: 'decks#favorite', via: 'get'
-  match '/index', to: 'search#search', via: 'get'
+  match '/results', to: 'search#search', via: 'get'
   match '/sort', to: 'search#sort', via: 'post'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -67,7 +67,7 @@ class SearchController < ApplicationController
         Result.where(:deck_id => (r.deck_id), :username => (r.username), :percent => r.percent).where.not(:id => @id).delete_all
         @result.save
       end
-    redirect_to '/index'
+    redirect_to '/results'
   end
 
   
@@ -111,7 +111,7 @@ class SearchController < ApplicationController
       @userID = current_user.user_id
     else @userID = 0
     end
-    redirect_to '/index'
+    redirect_to '/results'
   end
 
 
