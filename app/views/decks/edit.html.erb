@@ -20,7 +20,7 @@
 
   <table>
     <tr>
-      <td>
+      <td style= "vertical-align:top;">
         <div>
         <p> Fields marked with * are required </p>
         <div  class = "search">
@@ -79,30 +79,45 @@
        </div>
 
       </td>
-      <td style = "padding-left:2em;">
-      <div >
+      <td style = "padding-left:2em; vertical-align:top;">
       <%= f.label "Background image" %>
-      <%= image_tag('/assets/card1-6eb99ac61b498dd5de8d6a2ac9e359cc.jpg')  %>
-      <%= f.radio_button :background, 1, :default => @deck.background  %>
-      
-      <%= image_tag('/assets/card2-44898f1306913eed194696f4ba5d825d.png')  %>
-      <%= f.radio_button :background, 2 %>
-      
-      <%= image_tag('/assets/card3-91370e66d7bf6782e80bbfc0bcb6b185.png')  %>
-      <%= f.radio_button :background, 3  %>
-      
-      <%= image_tag('/assets/card4-05a6a951b1d7dfa800801585a159e7d8.png')  %>
-      <%= f.radio_button :background, 4  %>
-      
-      <%= image_tag('/assets/card5-aa8c004f6d145eb03020ae296543917d.png')  %>
-      <%= f.radio_button :background, 5 %>
-
-  
-
-
-
-
-      </div>
+      <table>
+        <tr>
+          <td>
+            
+            <label for="deck_background_1">
+            <%= image_tag('/assets/card1-6eb99ac61b498dd5de8d6a2ac9e359cc.jpg')  %>
+            <%= f.radio_button :background, 1, :default => @deck.background  %>
+            </label>
+          </td>
+          <td>
+            <label for="deck_background_2">
+            <%= image_tag('/assets/card2-44898f1306913eed194696f4ba5d825d.png')  %>
+            <%= f.radio_button :background, 2 %>
+            </label>
+          </td>
+          <td>
+            <label for="deck_background_3">
+            <%= image_tag('/assets/card3-91370e66d7bf6782e80bbfc0bcb6b185.png')  %>
+            <%= f.radio_button :background, 3  %>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="deck_background_4">
+            <%= image_tag('/assets/card4-05a6a951b1d7dfa800801585a159e7d8.png')  %>
+            <%= f.radio_button :background, 4  %>
+            </label>
+          </td>
+          <td>
+            <label for="deck_background_5">
+            <%= image_tag('/assets/card5-aa8c004f6d145eb03020ae296543917d.png')  %>
+            <%= f.radio_button :background, 5 %>
+            </label>
+          </td>
+        </tr>
+      </table>
       </td>
     </tr>
   </table>
