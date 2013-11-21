@@ -54,9 +54,9 @@
                   <% @total = Deckrating.where(deck_id: decks.deck_id).count %>
                   <% @percent = (@liked * 100 / @total) %>
                   <% if @percent > 49 %>
-                   <div class = 'likedText', style = "color:#0D55D1">
+                   <div class = 'likedText', style = "color:#0D55D1;text-align:right">
                       <%= @percent %>% liked <br>
-                      <div id="container" style="width: 88px; height: 10px; ">
+                      <div id="container" style="width: 88px; height: 10px; position:relative;right:-2px">
                        <canvas id="myCanvas<%=decks.deck_id%>" width="90" height="20" style = "solid #FF0000"></canvas>  
 
                       <script type = "text/javaScript">
@@ -86,9 +86,9 @@
                     </div>
                     </div>
                   <% else %>
-                    <div class = 'likedText', style = "color:#FF0000">
+                    <div class = 'likedText', style = "color:#FF0000;text-align:right">
                       <%= @percent %>% liked <br>
-                      <div id="container" style="width: 88px; height: 10px; ">
+                       <div id="container" style="width: 88px; height: 10px; position:relative;right:-2px">
                       <canvas id="myCanvas<%=decks.deck_id%>" width="90" height="20" style = "solid #FF0000"></canvas>     
 
                           <script type = "text/javaScript">

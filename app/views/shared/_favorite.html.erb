@@ -1,6 +1,19 @@
 
 <% @deck=Deck.find_by(deck_id: favorite.deck_id) %>
 <head>
+    <style>
+  #container {
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #000;
+    overflow: hidden;
+    }
+
+  #container > div {
+    height: 200px;
+    background-color: red;
+}
+  </style>
 </head>
 <body>
   <% if !@deck.nil? %>
@@ -42,19 +55,77 @@
                 </td>
               </tr>
                <tr>
-                  <td style = "width:8em; padding-left:60px; vertical-align: bottom;">
+                   <td style = "width:8em; padding-left:60px;:right;vertical-align:bottom; padding-bottom:10px">
                     <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
                       <div class = 'likedText'> No ratings </div>
                     <% else %>
                       <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
                       <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
-                      <% @percent = (@liked * 100 / @total) %>
-                      <% if @percent > 49 %>
-                        <div class = 'likedText', style = "color:#0D55D1"><%= @percent %>% liked </div>
-                      <% else %>
-                        <div class = 'likedText', style = "color:red"><%= @percent %>% liked </div>
-                      <% end %>
-                    <% end %>
+                                           <% @percent = (@liked * 100 / @total) %>
+                  <% if @percent > 49 %>
+                   <div class = 'likedText', style = "color:#0D55D1;text-align:right">
+                      <%= @percent %>% liked <br>
+                      <div id="container" style="width: 88px; height: 10px; position:relative;right:-2px">
+                       <canvas id="myCanvas<%=favorite.deck_id%>" width="90" height="20" style = "solid #FF0000"></canvas>  
+
+                      <script type = "text/javaScript">
+                          var pct = <%=@percent.to_json%>;
+                          var c=document.getElementById("myCanvas<%=favorite.deck_id%>");
+                          var ctx=c.getContext("2d");
+                                var grad = ctx.createLinearGradient(0,0,0, 20);
+                                grad.addColorStop(0, "pink");
+                                grad.addColorStop(0.5, "red");
+                                grad.addColorStop(1.0, "red");
+
+                          ctx.fillStyle=grad;
+                          ctx.fillRect(0,0, 90, 30);
+
+                                grad = ctx.createLinearGradient(0,0,0, 20);
+                                grad.addColorStop(0, "white");
+                                grad.addColorStop(0.5, "#0D55D1");
+                                grad.addColorStop(1.0, "#0D55D1");
+                          ctx.fillStyle=grad;
+                          ctx.fillRect(0,0, 90*(pct/100), 30);
+                          ctx.lineWidth="1";
+                          ctx.rect(-5,-5, 90*(pct/100)+5, 30+5);
+                          ctx.stroke();
+                      </script>
+
+                      </div>
+                    </div>
+                    </div>
+                  <% else %>
+                    <div class = 'likedText', style = "color:#FF0000;text-align:right">
+                      <%= @percent %>% liked <br>
+                       <div id="container" style="width: 88px; height: 10px; position:relative;right:-2px">
+                      <canvas id="myCanvas<%=favorite.deck_id%>" width="90" height="20" style = "solid #FF0000"></canvas>     
+
+                          <script type = "text/javaScript">
+                          var pct = <%=@percent.to_json%>;
+                          var c=document.getElementById("myCanvas<%=favorite.deck_id%>");
+                          var ctx=c.getContext("2d");
+                                var grad = ctx.createLinearGradient(0,0,0, 20);
+                                grad.addColorStop(0, "pink");
+                                grad.addColorStop(0.5, "red");
+                                grad.addColorStop(1.0, "red");
+
+                          ctx.fillStyle=grad;
+                          ctx.fillRect(0,0, 90, 30);
+
+                                grad = ctx.createLinearGradient(0,0,0, 20);
+                                grad.addColorStop(0, "white");
+                                grad.addColorStop(0.5, "#0D55D1");
+                                grad.addColorStop(1.0, "#0D55D1");
+                          ctx.fillStyle=grad;
+                          ctx.fillRect(0,0, 90*(pct/100), 30);
+                          ctx.lineWidth="1";
+                          ctx.rect(-5,-5, 90*(pct/100)+5, 30+5);
+                          ctx.stroke();
+                      </script>
+
+                      </div>
+                    </div>                  <% end %>
+                <% end %>
                   </td>
                 </tr>
             </table> </a>
