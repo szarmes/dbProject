@@ -27,5 +27,24 @@ module First_Website
     
     config.assets.initialize_on_precompile = false
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+
+
+    config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => "heroku.com",
+      :user_name      => ENV['USERNAME'],
+      :password       => ENV['PASSWORD'],
+
+      :authentication       => :plain,
+      :enable_starttls_auto => true
+      } 
+
+  
+  
+    config.action_mailer.default_url_options = {
+        :host => "heroku.com"
+    }
+
   end
 end
