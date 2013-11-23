@@ -14,6 +14,10 @@ gem 'simple_form'
 #gem 'carrierwave'
 gem 'rails3-jquery-autocomplete', git: 'https://github.com/francisd/rails3-jquery-autocomplete'
 gem "jquery-rails", "~> 2.3.0"
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
+
 
 
 group :development, :test do

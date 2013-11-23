@@ -10,8 +10,12 @@ ul.hmenu li {
 }
 
 /* mixins, variables, etc. */
-
 $grayMediumLight: #eaeaea;
+$grayLight: #eaeaea;
+$gray: grey;
+$grayDarker: grey;
+$grayLighter: grey;
+$blue: blue;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -26,7 +30,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+
 }
 
 section {
