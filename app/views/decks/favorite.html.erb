@@ -2,8 +2,6 @@
 
 <% if user_signed_in? %>
   			<br/>
-  			<br/>
-	
 	<% if @favorites.any? %>
 		  <div>
 		  	<% @count = 0
@@ -18,18 +16,14 @@
 			  	<% end %>
 			  	<% @count += 1 %>
 			<% end %>
-		  	<table>
-		  		<tr>
-		  			<td style ="vertical-align: top; padding-right: 4em;">
-						<%= render partial: 'shared/favorite', collection: @favorites1 %>
-					</td>
-					<td style ="vertical-align: top;">
-						<%= render partial: 'shared/favorite', collection: @favorites2 %>
-					</td>
-				</tr>
-			</table>
-
-		  </div>
+		  	<div class = "row" style= "align: center">
+		  		<div class = "col-md-6" >
+					<%= render partial: 'shared/favorite', collection: @favorites1 %>
+				</div>
+				<div class = "col-md-6" >
+					<%= render partial: 'shared/favorite', collection: @favorites2 %>
+				</div>
+		  	</div>
 		  <%= will_paginate @favorites %>
 	<% end %>
 <% end %>

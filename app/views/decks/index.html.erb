@@ -15,50 +15,66 @@
 <body>
 <h1> Create a Deck</h1>
 
-<%= simple_form_for @deck, :url => { :action => "create" } do |f| %>
+<%= simple_form_for @deck, :html => { :method => :put} do |f| %>
 
   <table>
     <tr>
-      <td style = "vertical-align:top;">
+      <td style= "vertical-align:top;">
         <div>
-        <p> Please fill in as much as you can to help other users find your deck easier </p>
         <p> Fields marked with * are required </p>
-        
         <div  class = "search">
-        <p>* Title (50 character limit) </p> 
-        
-
-        <%= f.text_field :deck_title, :onkeyup => "CheckMaxlength(this);", :maxlength => 50%></div>
+          <div class = "hover">
+            <p>* Title</p> 
+            <%= f.text_field :deck_title, :onkeyup => "CheckMaxlength(this);", :maxlength => 50, :default => @deck.deck_title%>
+            <div class = "tooltip" style = "top:65px;">
+              50 character limit
+            </div>
+          </div>
+        </div>
 
         <div  class = "search">
+          <div class = "hover">
+          <p>* Subject</p>
+          <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path, :default => @deck.subject_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 40  %>
+          <div class = "tooltip" style = "top:65px;">
+              40 character limit
+            </div>
+          </div>
+        </div>
 
-          <p>* Subject (40 character limit)</p>
-          <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path, :onkeyup => "CheckMaxlength(this);", :maxlength => 40  %>
+        <div  class = "search">
+          <p> School Name </p>
+          <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path, :default => @user.school_name  %>
         </div>
         
+        <div  class = "search">
+          <div class = "hover">
+          <p>Course Number</p>
+          <%= f.text_field :course_num, :onkeyup => "CheckMaxlength(this);", :default => @deck.course_num, :maxlength => 5  %>
+          <div class = "tooltip" style = "top:65px;">
+              5 character limit
+            </div>
+          </div>
+        </div>
 
         <div  class = "search">
-          <%= f.label "School Name" %>
-          <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path, :value => @school_name  %>
-
+          <div class = "hover">
+            <p>Course Name</p>
+            <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path, :default => @deck.course_name, :onkeyup => "CheckMaxlength(this);", :maxlength => 70 %>
+            <div class = "tooltip" style = "top:65px;">
+              70 character limit
+            </div>
+          </div>
         </div>
-        
 
-        <div  class = "search"><%= f.label "Course Number (5 character limit) " %>
-        <%= f.text_field :course_num, :onkeyup => "CheckMaxlength(this);", :maxlength => 5  %></div>
-
-        <div  class = "search"><%= f.label "Course Name (70 character limit)" %>
-        <%= f.autocomplete_field :course_name, autocomplete_course_name_search_path, :onkeyup => "CheckMaxlength(this);", :maxlength => 70 %></div>
-
-         <div  class = "search">
-          <%= f.label "Instructor (Last name, first name)" %>
-          <%= f.text_field :prof_name %>
-
+        <div  class = "search">
+          <p>Instructor (Last name, first name) </p>
+          <%= f.text_field :prof_name, :default => @deck.prof_name %>
         </div>
        
         <p style= "font-size:10px;">Note: If either school, subject, and/or course name not found, a new entry will be created </p>
 
-       <%= f.submit "Create Deck", class: "btn btn-medium btn-success" %>
+       <%= f.submit "Save Changes", class: "btn btn-medium btn-success" %>
        </div>
 
       </td>
@@ -70,7 +86,7 @@
             
             <label for="deck_background_1">
             <%= image_tag('/assets/card1-6eb99ac61b498dd5de8d6a2ac9e359cc.jpg')  %>
-            <%= f.radio_button :background, 1  %>
+            <%= f.radio_button :background, 1, :default => @deck.background  %>
             </label>
           </td>
           <td>
@@ -101,18 +117,11 @@
           </td>
         </tr>
       </table>
-        
-
-  
-
-
-
-
-
       </td>
     </tr>
   </table>
 
 <% end %>
+
 
 </body>

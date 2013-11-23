@@ -1,6 +1,6 @@
 <h1>Decks created by <%= @user.username %></h1>
 <% if @decks.any? %>
-	<div>
+		  <div>
 		  	<% @count = 0
 		  	%><%@deck1 = Deck.where(id: 0)
 		  	%><%@deck2 = Deck.where(id: 0)
@@ -19,23 +19,20 @@
 			  	<% end %>
 			  	<% @count += 1 %>
 			<% end %>
-		  	<table>
-		  		<tr>
-		  			<td style ="vertical-align: top;">
-						<%= render partial: 'shared/decks', collection: @deck1 %>
-					</td>
-					<td style ="vertical-align: top;">
-						<%= render partial: 'shared/decks', collection: @deck2 %>
-					</td>
-					<td style ="vertical-align: top;">
-						<%= render partial: 'shared/decks', collection: @deck3 %>
-					</td>
-					<td style ="vertical-align: top;">
-						<%= render partial: 'shared/decks', collection: @deck4 %>
-					</td>
-				</tr>
-			</table>
-
+		  	<div class = "row" style= "align: center">
+		  		<div class = "col-sm-3" >
+					<%= render partial: 'shared/decks', collection: @deck1 %>
+				</div>
+				<div class = "col-sm-3" >
+					<%= render partial: 'shared/decks', collection: @deck2 %>
+				</div>
+				<div class = "col-sm-3" >
+					<%= render partial: 'shared/decks', collection: @deck3 %>
+				</div>
+				<div class = "col-sm-3" >
+					<%= render partial: 'shared/decks', collection: @deck4 %>
+				</div>
+			</div>
 		  </div>
 		  <%= will_paginate @decks %>
 	<% end %>

@@ -30,18 +30,14 @@
           <% end %>
           <% @count += 1 %>
       <% end %>
-        <table>
-          <tr>
-            <td style ="vertical-align: top; padding-right: 4em;">
-            <%= render partial: 'shared/result', collection: @results1 %>
-          </td>
-          <td style ="vertical-align: top;">
-            <%= render partial: 'shared/result', collection: @results2 %>
-          </td>
-        </tr>
-      </table>
-
-      </div>
+        <div class = "row" style= "align: center">
+          <div class = "col-md-6" >
+          <%= render partial: 'shared/result', collection: @results1 %>
+        </div>
+        <div class = "col-md-6" >
+          <%= render partial: 'shared/result', collection: @results2 %>
+        </div>
+        </div>
       <%= will_paginate @results %>
   <% end %>
 </div>

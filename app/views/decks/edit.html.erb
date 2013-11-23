@@ -44,7 +44,7 @@
         </div>
 
         <div  class = "search">
-          <%= f.label "School Name" %>
+           <p> School Name </p>
           <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path, :default => @deck.school_name  %>
         </div>
         
@@ -69,7 +69,7 @@
         </div>
 
         <div  class = "search">
-          <%= f.label "Instructor (Last name, first name)" %>
+          <p> Instructor (Last name, first name) </p>
           <%= f.text_field :prof_name, :default => @deck.prof_name %>
         </div>
        
