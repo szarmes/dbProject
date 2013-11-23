@@ -95,13 +95,15 @@ class SearchController < ApplicationController
     @resultcount = @results.size
     @results.each do |r|
       if Deckrating.where(deck_id: r.deck_id).empty?
-        @percent = 0
+        @percent = -1
       else
         @liked = Deckrating.where(deck_id: r.deck_id, liked: true).count 
         @total = Deckrating.where(deck_id: r.deck_id).count 
         @percent = (@liked * 100 / @total) 
       end
-      @username = User.find_by(:user_id => r.user_id).username
+      if r.user_id != -1
+        @username = User.find_by(:user_id => r.user_id).username
+      end
       @result = Result.create(:deck_id => (r.deck_id), :username => (r.user_id), :percent => @percent, 
         :created_on => r.created_on, :school_name => (r.school_name), :prof_name => r.prof_name)
       @result.save

@@ -137,18 +137,21 @@
           <tr>
             <td>
             <table>
-              <tr>
+                <% if @deck.user_id != -1 %>
              <td class= "deckPartial" style = "width:150px;">
-              <p class = 'cardTitle2' style = "vertical-align:top; text-align:left;"> 
-                Created by
-              </p>
-                <p class = 'cardBody2' style = "vertical-align:top; text-align:left; margin-bottom: 0px">
-                <% if !@deck.nil? %>
-                  <% @username = User.find_by(user_id: @deck.user_id).username %>
-                  <%= link_to @username, {:controller => "decks", :action => "thier_decks", :username => @username } %>
-                <% end %>
-              </p>
+              
+                <p class = 'cardTitle2' style = "vertical-align:top; text-align:left;"> 
+                  Created by
+                </p>
+                  <p class = 'cardBody2' style = "vertical-align:top; text-align:left; margin-bottom: 0px">
+                  <% if !@deck.nil? %>
+                    <% @username = User.find_by(user_id: @deck.user_id).username %>
+                    <%= link_to @username, {:controller => "decks", :action => "thier_decks", :username => @username } %>
+                  <% end %>
+                </p>
+                
             </td>
+            <% end %>
 
             <td class= "deckPartial" style ="width:150px">
               <p class = 'cardTitle2' style = "vertical-align:top; text-align:left;"> 
