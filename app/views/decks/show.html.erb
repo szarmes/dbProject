@@ -12,6 +12,8 @@
           $("#hideAButton").hide();
           $("#showAButton").show();
         }
+
+
   </script>
 </head>
 <body style = "align: center">
@@ -56,7 +58,9 @@
       </td>
     </tr>
     <tr>
-      <td>
+      <td style = "vertical-align:top;">
+       <%= link_to image_tag('/assets/fbshare.jpg'), 
+       'http://www.facebook.com/sharer.php?u='+request.original_url, :target => :blank %>
     <% if !@cards.empty? && !@count.nil? %>
       <% @array = @cards.to_a %>
       <% card = @array.at(@count-1) %>
