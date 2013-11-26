@@ -1,5 +1,6 @@
 <head>
  <script type="text/javascript">
+
         function showAns(){
           $("#showAnswer").show();
           $("#hideAnswer").hide();
@@ -11,6 +12,29 @@
           $("#hideAnswer").show();
           $("#hideAButton").hide();
           $("#showAButton").show();
+        }
+        function goTo(cnum){
+          mycount = cnum;
+          if(mycount<0){
+            mycount = size + mycount;
+          }
+          else if(mycount>=size){
+            mycount = mycount - size;
+          }
+          var q = document.getElementById("qp");
+          var a = document.getElementById("ap");
+          q.textContent = questions[mycount];
+          a.textContent = answers[mycount];
+          hideAns();
+
+        }
+        function getRandom(){
+          var toreturn = Math.floor(Math.random()*(size));
+          if (toreturn!=mycount){
+            return toreturn;
+          }
+          else
+            return getRandom();
         }
 
 
@@ -64,19 +88,25 @@
     <% if !@cards.empty? && !@count.nil? %>
       <% @array = @cards.to_a %>
       <% @i = 0 %>
-      <% ref = @array.at(0) %>
+     
 
       <!-- Load questions and answers into array here -->
+      <% @qarray = Array.new(@array.size)%>
+      <% @aarray = Array.new(@array.size)%>
+      <% b = 0 %>
+      <% @array.count.times do
+         @qarray.push(@array.at(b).qtext.to_json)
+         @aarray.push(@array.at(b).atext.to_json)
+         b+=1
+      end%>
+
       <script type="text/javascript">
-      var size = <%@array.size.to_json%>;
+      var mycount = 0;
       var questions = new Array();
+      questions = <%=raw @qarray.compact%>;
       var answers = new Array();
-      for(var i = 0; i<size ; i++){
-        var card = <%@array.at(@i)%>;
-        questions[i] = <%ref.qtext%>;
-        answers[i] = <%ref.atext%>;
-        <% @i = @i+1 %>
-      }
+      answers = <%=raw @aarray.compact%>;
+      var size = questions.length;
       </script>
 
 
@@ -85,8 +115,11 @@
         <table class = "questionCard<%= @deck.background%>">
           <tr>
             <td>
-              <p class = "cardBody"> 
-                <%= card.qtext %>
+              <p class = "cardBody" id ="qp"> 
+                <script type="text/javascript" id="qscript">
+                var str = questions[mycount];
+                document.write(str);
+                </script>
               </p>
             </td>
           </tr>
@@ -99,8 +132,11 @@
           <tr>
             <td>
              
-                <p class = "cardBody"> 
-                  <%= card.atext %>
+                <p class = "cardBody" id="ap"> 
+                  <script type="text/javascript" id="ascript">
+                  var str = answers[mycount];
+                  document.write(str);
+                  </script>
                 </p>
               
             </td>
@@ -125,26 +161,37 @@
           <tr>
             <td style = "text-align:right; width:127px">
               <%= render 'shared/prev' %>
-              <% if @count>1 %>
-              <!-- if we are not on the first card -->
-                <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @count-1), class: "btn btn-small btn-info", :id => "prev_link"%>
-              <% else %>
-                <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @array.size), class: "btn btn-small btn-info", :id => "prev_link"%>
-              <% end %>
+              <div id="prevb" class="hover">
+              <button type="button" class="btn btn-small btn-info"
+              onclick="goTo(mycount-1)" id="prev_link">
+                <%=image_tag('left.png', :title=>"Previous Card")%>
+              </button>
+              <div class = "tooltip" style = "width:6.1em; top:25px; align:right;">
+              Previous Card
+            </div>
+              </div>         
             </td>
             <td style = "text-align:center">
-              <% @rand = rand(@array.size) %>
-              <% while @count == @rand %>
-                <% @rand = rand(@array.size) + 1 %>
-              <% end %>
-              <%= link_to image_tag('shuffle.png', :title=>"Random Card"), deck_path(card.deck_id, :count => @rand), class: "btn btn-small btn-info", :id => "rand_link" %>
+              <div id="ranb" class="hover">
+                <button type="button" class="btn btn-small btn-info"
+              onclick="goTo(getRandom())" id="rand_link">
+                  <%=image_tag('shuffle.png', :title=>"Random Card")%>
+                </button>
+                <div class = "tooltip" style = "width:6.1em; top:25px">
+              Random Card
+            </div>
+              </div>
             </td>
             <td style = "text-align:left">
-              <% if @count<(@array.size) %>
-                <%= link_to image_tag('next.png', :title=>"Next Card"), deck_path(card.deck_id, :count => @count+1), class: "btn btn-small btn-info", :id => "next_link" %>
-              <% else %>
-                <%= link_to image_tag('next.png', :title=>"Next Card"), deck_path(card.deck_id, :count => 1), class: "btn btn-small btn-info", :id => "next_link" %>
-              <% end %>
+              <div id="nextb" class="hover">
+                <button type="button" class="btn btn-small btn-info"
+              onclick="goTo(mycount+1)" id="next_link">
+                  <%=image_tag('next.png', :title=>"Next Card")%>
+                </button>
+                <div class = "tooltip" style = "width:6.1em; top:25px">
+              Next Card
+            </div>
+            </div>
             </td>
             <td>
             <div id="showAButton" class = "hover" >
