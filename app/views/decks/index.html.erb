@@ -15,7 +15,7 @@
 <body>
 <h1> Create a Deck</h1>
 
-<%= simple_form_for @deck, :html => { :method => :put} do |f| %>
+<%= simple_form_for @deck, :url => { :action => "create" } do |f| %>
 
   <table>
     <tr>
