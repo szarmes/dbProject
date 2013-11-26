@@ -4,8 +4,11 @@
 <%= simple_form_for @subSearch, :url => { :action => "create" } do |f| %>
   <div class="search">
     <%= f.label "Search by School" %>
-    <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path  %>
-
+   <% if !@user.nil? %>
+    <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path, :value => @user.school_name  %>
+     <% else %>
+    <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path  %>
+    <%end%>
   </div>
   
    <div class="search">

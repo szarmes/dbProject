@@ -13,6 +13,7 @@ class SearchController < ApplicationController
     @resultcount = @results.size
     if user_signed_in?
       @userID = current_user.user_id
+      @user = current_user
     else @userID = 0
     end
   end
@@ -30,6 +31,7 @@ class SearchController < ApplicationController
     @results = Result.all.paginate(page: params[:page])
     if user_signed_in?
       @userID = current_user.user_id
+      @user = current_user
     else @userID = 0
     end
   end
