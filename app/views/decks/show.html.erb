@@ -17,7 +17,7 @@
   </script>
 </head>
 <body style = "align: center">
-    <%= render partial: 'shared/title'%>   
+    <%= render partial: 'shared/title'%> 
   <table class= "presentDeck">
     <tr>
       <td class = "ratingscol">
@@ -63,6 +63,23 @@
        'http://www.facebook.com/sharer.php?u='+request.original_url, :target => :blank %>
     <% if !@cards.empty? && !@count.nil? %>
       <% @array = @cards.to_a %>
+      <% @i = 0 %>
+      <% ref = @array.at(0) %>
+
+      <!-- Load questions and answers into array here -->
+      <script type="text/javascript">
+      var size = <%@array.size.to_json%>;
+      var questions = new Array();
+      var answers = new Array();
+      for(var i = 0; i<size ; i++){
+        var card = <%@array.at(@i)%>;
+        questions[i] = <%ref.qtext%>;
+        answers[i] = <%ref.atext%>;
+        <% @i = @i+1 %>
+      }
+      </script>
+
+
       <% card = @array.at(@count-1) %>
       <td>
         <table class = "questionCard<%= @deck.background%>">
@@ -109,6 +126,7 @@
             <td style = "text-align:right; width:127px">
               <%= render 'shared/prev' %>
               <% if @count>1 %>
+              <!-- if we are not on the first card -->
                 <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @count-1), class: "btn btn-small btn-info", :id => "prev_link"%>
               <% else %>
                 <%= link_to image_tag('left.png', :title=>"Previous Card"), deck_path(card.deck_id, :count => @array.size), class: "btn btn-small btn-info", :id => "prev_link"%>
