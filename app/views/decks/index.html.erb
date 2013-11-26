@@ -44,7 +44,7 @@
 
         <div  class = "search">
           <p> School Name </p>
-          <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path, :default => @user.school_name  %>
+          <%= f.autocomplete_field :school_name, autocomplete_school_name_search_path, :value => @user.school_name  %>
         </div>
         
         <div  class = "search">
@@ -74,7 +74,7 @@
        
         <p style= "font-size:10px;">Note: If either school, subject, and/or course name not found, a new entry will be created </p>
 
-       <%= f.submit "Save Changes", class: "btn btn-medium btn-success" %>
+       <%= f.submit "Create Deck", class: "btn btn-medium btn-success" %>
        </div>
 
       </td>
