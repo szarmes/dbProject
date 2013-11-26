@@ -21,13 +21,13 @@
             keys2.shift();
           }
           if ( keys.toString() == code.toString() ) {
-            clickLink(document.getElementById("prev_link"));
+            document.getElementById("prev_link").click();
           }
           if ( keys1.toString() == code1.toString() ) {
-              clickLink(document.getElementById("next_link"));
+            document.getElementById("next_link").click();
           }
           if ( keys2.toString() == code2.toString() ) {
-              clickLink(document.getElementById("rand_link"));
+            document.getElementById("rand_link").click();
           }
         });
       });
