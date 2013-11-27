@@ -23,11 +23,12 @@
           }
           var q = document.getElementById("qp");
           var a = document.getElementById("ap");
-          q.textContent = questions[mycount];
-          a.textContent = answers[mycount];
+          q.textContent = questions[mycount].substring(1,questions[mycount].length-1);
+          a.textContent = answers[mycount].substring(1,answers[mycount].length-1);;
           hideAns();
 
         }
+
         function getRandom(){
           var toreturn = Math.floor(Math.random()*(size));
           if (toreturn!=mycount){
@@ -36,6 +37,23 @@
           else
             return getRandom();
         }
+
+        function shuffleArrays(q,a){
+          var rand;
+          var x,y;
+          for(var t = q.length-1; t>0; t--){
+            rand = Math.floor(Math.random()*(size));
+            x = q[t];
+            y = a[t];
+            q[t] = q[rand];
+            a[t] = a[rand];
+            q[rand] = x;
+            a[rand] = y;
+          }
+            goTo(mycount);
+          }
+
+
 
 
   </script>
@@ -118,7 +136,7 @@
               <p class = "cardBody" id ="qp"> 
                 <script type="text/javascript" id="qscript">
                 var str = questions[mycount];
-                document.write(str);
+                document.write(str.substring(1,str.length-1));
                 </script>
               </p>
             </td>
@@ -135,7 +153,7 @@
                 <p class = "cardBody" id="ap"> 
                   <script type="text/javascript" id="ascript">
                   var str = answers[mycount];
-                  document.write(str);
+                  document.write(str.substring(1,str.length));
                   </script>
                 </p>
               
@@ -174,7 +192,7 @@
             <td style = "text-align:center">
               <div id="ranb" class="hover">
                 <button type="button" class="btn btn-small btn-info"
-              onclick="goTo(getRandom())" id="rand_link">
+              onclick="shuffleArrays(questions,answers)" id="rand_link">
                   <%=image_tag('shuffle.png', :title=>"Random Card")%>
                 </button>
                 <div class = "tooltip" style = "width:6.1em; top:25px">
