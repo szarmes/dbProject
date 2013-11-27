@@ -1,11 +1,13 @@
   <p class = "deckInfo">
   <div style = "font-weight: bold; font-size: 1.9em"> 
-    <%= @deck.deck_title %>  
+    <%= @deck.deck_title %> 
+    <% if @deck.user_id != -1 %>
     <p style = "font-size:.5em;display:inline"> by 
 
       <% @owner = User.find_by(user_id: @deck.user_id)%>
       <% @username = @owner.username%>
       <%= link_to @username, {:controller => "decks", :action => "thier_decks", :username => @username }%></p> 
+    <%end%>
   </div>
      
         <%= @deck.subject_name %>
