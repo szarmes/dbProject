@@ -96,19 +96,24 @@ class SearchController < ApplicationController
     @results = Deck.search(@subjectString, @courseString, @nameString, @schoolString, @profString)
     @resultcount = @results.size
     @results.each do |r|
-      if Deckrating.where(deck_id: r.deck_id).empty?
-        @percent = -1
+      @cards = Card.where(deck_id: r.deck_id)
+      if @cards.empty?
+        @resultcount = @resultcount - 1
       else
-        @liked = Deckrating.where(deck_id: r.deck_id, liked: true).count 
-        @total = Deckrating.where(deck_id: r.deck_id).count 
-        @percent = (@liked * 100 / @total) 
+        if Deckrating.where(deck_id: r.deck_id).empty?
+          @percent = -1
+        else
+          @liked = Deckrating.where(deck_id: r.deck_id, liked: true).count 
+          @total = Deckrating.where(deck_id: r.deck_id).count 
+          @percent = (@liked * 100 / @total) 
+        end
+        if r.user_id != -1
+          @username = User.find_by(:user_id => r.user_id).username
+        end
+        @result = Result.create(:deck_id => (r.deck_id), :username => (r.user_id), :percent => @percent, 
+          :created_on => r.created_on, :school_name => (r.school_name), :prof_name => r.prof_name)
+        @result.save
       end
-      if r.user_id != -1
-        @username = User.find_by(:user_id => r.user_id).username
-      end
-      @result = Result.create(:deck_id => (r.deck_id), :username => (r.user_id), :percent => @percent, 
-        :created_on => r.created_on, :school_name => (r.school_name), :prof_name => r.prof_name)
-      @result.save
     end
     @results = Result.all.paginate(page: params[:page])
     if user_signed_in?
