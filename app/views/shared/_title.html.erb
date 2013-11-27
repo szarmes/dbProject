@@ -29,3 +29,7 @@
 
         - <%= @deck.created_on.strftime("%b-%d-%Y") %>
         </p>
+        <% @cards = Card.where(deck_id: @deck.deck_id) %>
+        <% if @cards.empty? %>
+        <p> Note: This deck does not have any cards yet </p>
+        <%end%>
