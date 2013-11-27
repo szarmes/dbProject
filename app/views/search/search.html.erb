@@ -47,9 +47,9 @@
    <div class="search">
     <%= f.label "Search by School" %>
     <% if !@user.nil? %>
-    <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path, :value => @user.school_name  %>
+    <%= f.autocomplete_field :subject_name, autocomplete_school_name_search_path, :value => @user.school_name  %>
      <% else %>
-    <%= f.autocomplete_field :subject_name, autocomplete_subject_name_search_path  %>
+    <%= f.autocomplete_field :subject_name, autocomplete_school_name_search_path  %>
     <%end%>
 
     </div>
