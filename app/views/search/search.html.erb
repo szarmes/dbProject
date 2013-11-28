@@ -7,12 +7,16 @@
   <h1><%= @resultcount %> Results</h1>
   <%end%>
   <div class="search">
+  <div class = "row">
   <%= simple_form_for @thing, :url => {:action => 'sort'} do |f| %>
-    <%= f.label "Sort Results", params[:value]  %>
-    <%= f.input :subject_name, :label => "", collection:['Rating', 'Author A-Z', 'Author Z-A',
-      'Date Created', 'School', 'Professor' ] %>
-    <%= f.submit "Sort", class: "btn btn-medium btn-success" %>
+      <div class = "col-sm-6">
+      <%= f.input :subject_name, :label => "", collection:['Rating', 'Author A-Z', 'Author Z-A',
+        'Date Created', 'School', 'Professor' ] %>
+      </div> <div class = "col-sm-6" style = "padding-top:23px;">
+       <%= f.submit "Sort", class: "btn btn-medium btn-success" %></div>
+    
   <% end %>
+  </div>
   </div>
   <div>
   
