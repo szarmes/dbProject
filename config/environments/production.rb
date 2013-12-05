@@ -84,6 +84,6 @@ First_Website::Application.configure do
 
   config.assets.precompile += ['static_pages.css']
 
-  config.action_mailer.default_url_options = { :host => 'smtp.sendgrid.net'}   #test fix
+  config.action_mailer.default_url_options = { :host => 'scflashcards.herokuapp.com'}   #test fix
 
 end
