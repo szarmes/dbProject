@@ -23,8 +23,8 @@
           }
           var q = document.getElementById("qp");
           var a = document.getElementById("ap");
-          q.textContent = questions[mycount].substring(1,questions[mycount].length-1);
-          a.textContent = answers[mycount].substring(1,answers[mycount].length-1);;
+          q.textContent = questions[mycount].substring(1,questions[mycount].length-1).replace(/(\\r\\n|\\n|\\r)/gm," ");;
+          a.textContent = answers[mycount].substring(1,answers[mycount].length-1).replace(/(\\r\\n|\\n|\\r)/gm," ");;;
           hideAns();
 
         }
@@ -136,6 +136,7 @@
               <p class = "cardBody" id ="qp"> 
                 <script type="text/javascript" id="qscript">
                 var str = questions[mycount];
+                str = str.replace(/(\\r\\n|\\n|\\r)/gm," ");
                 document.write(str.substring(1,str.length-1));
                 </script>
               </p>
@@ -153,6 +154,7 @@
                 <p class = "cardBody" id="ap"> 
                   <script type="text/javascript" id="ascript">
                   var str = answers[mycount];
+                  str = str.replace(/(\\r\\n|\\n|\\r)/gm," ");
                   document.write(str.substring(1,str.length-1));
                   </script>
                 </p>
