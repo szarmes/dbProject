@@ -17,6 +17,7 @@ gem "jquery-rails", "~> 2.3.0"
 gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
+gem "ckeditor"
 
 
 

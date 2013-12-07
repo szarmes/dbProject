@@ -146,7 +146,10 @@ p.cardBody{
   font-size: 1.25em;
   letter-spacing: 0px;
   margin-bottom: 0px;
-  padding:20px;
+  padding:5px;
+  padding-left:10px;
+  max-height: 275px;
+  overflow: hidden;
 }
 p.cardBody2{
   font-size: 1.1em;
@@ -196,6 +199,16 @@ p.ex4 {
 
 }
 
+p.footer{
+  
+  font-size: 0.9em;
+  line-height: 1.7em;
+  font: Helvatica, serif;
+  display: inline;
+  padding-left: 2em;
+  padding-right:2em;
+}
+
 div.likedText{
   font-size: 1.2em;
   line-height: 1.6em;
@@ -228,6 +241,27 @@ div.likedText{
 }
 div.search{
   width: 300px;
+}
+
+div.box{
+  
+    vertical-align: top;
+        font-family:                sans-serif;
+        width:                      340px;
+        max-height:                     180px;
+        overflow:                   hidden;
+}
+
+div.boxtext{
+  
+   vertical-align: top;
+   color:                      #333;
+        padding:                    5px;
+        width:                      340px;
+        overflow:                   hidden;
+        font-size:                  .95em;
+        line-height:                1;
+        word-wrap: break-word;
 }
 
 td.deckPartial{
@@ -495,4 +529,10 @@ li.mynav{
   padding-left:10px;
 
 }
+
+li {
+  
+  text-align:left;
+}
+
 

@@ -1,45 +1,20 @@
-<head>
-	<script language="javascript" type="text/javascript">
-		function CheckMaxlength(x)
-		{
-		      var max = parseInt(x.getAttribute('maxlength'));
-		      var cur = x.value.length;
-
-		      if ( x.getAttribute && cur > max )
-		      {
-		          x.value = x.value.substring(0, max);
-		      }
-		} 
-</script>
-</head>
 
 <% if @deck.user_id == @userID %>
 <h1> Edit this Card </h1>
 
-<%= simple_form_for @card, :html => { :method => :put} do |f| %>
+<%= simple_form_for @card, :url => { :action => "create" } do |f| %>
 
   <p> Fields marked with * are required </p>
-  
-  <div class = "hover">
-  	<p>* Question</p> 
-  	<%= f.text_area :qtext, :default => @card.qtext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255  %>
-  	<div class = "tooltip" style = "top:85px; width: 9em;">
-        255 character limit
+  <div class = "row">
+    <div class = "col-sm-6">
+      <%= f.input :qtext, :label => "Question", :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}, :default => @card.qtext}%>
+    </div>
+    <div class = "col-sm-6">
+      <%= f.input :atext, :label => "Answer", :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}, :default => @card.atext } %>
     </div>
   </div>
-
-  <div class = "hover">
-  	<p>* Answer</p> 
-  	<%= f.text_area :atext, :default => @card.atext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255 %>
-  	<div class = "tooltip" style = "top:85px; width: 9em;">
-        255 character limit
-    </div>
-  </div>
-
   <%= f.hidden_field :deck_id, :value => @card.deck_id %>
- 
-
- <%= f.submit "Save Changes", class: "btn btn-medium btn-success" %>
-
- <%end%>
+  <br/>
+  <%= f.submit "Save Changes", class: "btn btn-medium btn-success" %>
+<% end %>
  <% end %>

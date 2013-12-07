@@ -103,6 +103,14 @@
       <td style = "vertical-align:top;">
        <%= link_to image_tag('fbshare.jpg'), 
        'http://www.facebook.com/sharer.php?u='+request.original_url, :target => :blank %>
+     </td>
+   </tr>
+   <tr>
+     <td style = "vertical-align:top;">
+       <%= link_to image_tag('redditshare.png'), 
+       'http://www.reddit.com/submit?url='+request.original_url, :target => :blank %>
+     </td> 
+      
     <% if !@cards.empty? && !@count.nil? %>
       <% @array = @cards.to_a %>
       <% @i = 0 %>
@@ -133,13 +141,10 @@
         <table class = "questionCard<%= @deck.background%>">
           <tr>
             <td>
-              <p class = "cardBody" id ="qp"> 
-                <script type="text/javascript" id="qscript">
-                var str = questions[mycount];
-                str = str.replace(/(\\r\\n|\\n|\\r)/gm," ");
-                document.write(str.substring(1,str.length-1));
-                </script>
-              </p>
+              <div class = "box">
+                <div class = "boxtext">
+               <%=card.qtext.html_safe%></div></div>
+              
             </td>
           </tr>
         </table>
@@ -151,13 +156,9 @@
           <tr>
             <td>
              
-                <p class = "cardBody" id="ap"> 
-                  <script type="text/javascript" id="ascript">
-                  var str = answers[mycount];
-                  str = str.replace(/(\\r\\n|\\n|\\r)/gm," ");
-                  document.write(str.substring(1,str.length-1));
-                  </script>
-                </p>
+                <div class = "box">
+                <div class = "boxtext">
+               <%=card.atext.html_safe%></div></div>
               
             </td>
           </tr>

@@ -51,16 +51,19 @@ end
   def create
 	if user_signed_in?
       @card = Card.new(card_params)
-      if @card.save
-          flash[:success] = "Card created!"
-          redirect_to new_card_path(:deck =>@card.deck_id)
+      if @card.qtext.to_s.length < 4000 &&  @card.atext.to_s.length < 4000
+        if @card.save
+            flash[:success] = "Card created!"
+            redirect_to new_card_path(:deck =>@card.deck_id)
+        else
+            flash[:error] = "Please fill in all required fields."
+            redirect_to new_card_path(:deck =>@card.deck_id)
+        end
       else
-          flash[:error] = "Please fill in all required fields."
-          redirect_to new_card_path(:deck =>@card.deck_id)
+        flash[:error] = "Too much formatting"
+        redirect_to new_card_path(:deck =>@card.deck_id)
       end
-    
     end
-
   end
 
 

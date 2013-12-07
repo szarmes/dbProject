@@ -4,12 +4,33 @@
     
     <table>
       <tr>
-        <td style = "width:26em; vertical-align: top;"><p class = "cardBody"><%= cards.qtext %></p></td>
-        <td style = "width:26em; vertical-align: top;"><p class = "cardBody"><%= cards.atext %></p></td>
+        <td style = "width:26em; vertical-align: top;"><div class = "box">
+                <div class = "boxtext">
+               <%=cards.qtext.html_safe%></div></div>
+        </td>
+        <td style = "width:26em; vertical-align: top;">
+          <div class = "box">
+                <div class = "boxtext">
+               <%=cards.atext.html_safe%></div></div>
+        </td>
         <% if !cards.nil? %>
           <% if Deck.find_by(deck_id: cards.deck_id).user_id == @userID %>
-            <td><%= link_to "Edit this Card", edit_card_path(cards.card_id), class: "btn btn-small btn-info"%></td>
-            <td><%= link_to "Delete this Card", cards, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-small btn-danger" %></td>
+            <td>          
+              <div class= "hover">
+              <%= link_to image_tag('edit.png'), {:controller => "cards", :action => 'edit', :count => @count, :id => cards.card_id}, class: "btn btn-small btn-info"%>
+              <div class = "tooltip" style = "width:6.5em;">
+              Edit this Card
+             </div>
+            </div>
+            </td>
+            <td>
+              <div class= "hover">
+            <%= link_to image_tag('delete.png'), cards, method: :delete, data: { confirm: "Are you sure you want to delete this deck?" }, class: "btn btn-small btn-danger" %>
+            <div class = "tooltip">
+              Delete this Card
+            </div>
+          </div>
+            </td>
             <% end %>
           <% end %>
       </tr>

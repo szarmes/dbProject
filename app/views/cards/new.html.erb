@@ -1,40 +1,26 @@
-<%= render partial: 'shared/title'%>
-        <br/><br/><br/>
+<%= render partial: 'shared/title'%><br/>
 
 <%= simple_form_for @card, :url => { :action => "create" } do |f| %>
 
   <p> Fields marked with * are required </p>
-  
-  <div class = "hover">
-    <p>* Question</p> 
-    <%= f.text_area :qtext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255  %>
-    <div class = "tooltip" style = "top:85px; width: 9em;">
-        255 character limit
+  <div class = "row">
+    <div class = "col-sm-6">
+      <%= f.input :qtext, :label => "Question", :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}, :value => "" }%>
+    </div>
+    <div class = "col-sm-6">
+      <%= f.input :atext, :label => "Answer", :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}, :value => "" } %>
     </div>
   </div>
-
-  <div class = "hover">
-    <p>* Answer</p> 
-    <%= f.text_area :atext, :onkeyup => "CheckMaxlength(this);", :maxlength => 255 %>
-    <div class = "tooltip" style = "top:85px; width: 9em;">
-        255 character limit
-    </div>
-  </div>
-
   <%= f.hidden_field :deck_id, :value => @card.deck_id %>
- 
-
- <%= f.submit "Create Card", class: "btn btn-medium btn-success" %>
-
- <p class = "tableHeading"> Cards in this Deck </p>
- <table>
+  <br/>
+  <%= f.submit "Create Card", class: "btn btn-medium btn-success" %>
+<% end %>
+<p class = "tableHeading"> Cards in this Deck </p>
+<table>
   <tr>
     <td style = "width: 25em"> <p class = "cardTitle1">Question:</p> </td>
     <td style = "width: 25em"> <p class = "cardTitle1">Answer:</p> </td>
   </tr>
 </table>
+<div><%= render partial: 'shared/cards', collection: @cards %></div>
 
-
-  <div><%= render partial: 'shared/cards', collection: @cards %></div>
-
-<% end %>
