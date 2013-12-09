@@ -1,0 +1,378 @@
+<head>
+ <script type="text/javascript">
+
+        function showAns(){
+          $("#showAnswer").show();
+          $("#hideAnswer").hide();
+          $("#hideAButton").show();
+          $("#showAButton").hide();
+        }
+        function hideAns(){
+          $("#showAnswer").hide();
+          $("#hideAnswer").show();
+          $("#hideAButton").hide();
+          $("#showAButton").show();
+        }
+        function goTo(cnum){
+          mycount = cnum;
+          if(mycount<0){
+            mycount = size + mycount;
+          }
+          else if(mycount>=size){
+            mycount = mycount - size;
+          }
+          var q = document.getElementById("qp");
+          var a = document.getElementById("ap");
+          q.textContent = questions[mycount].substring(1,questions[mycount].length-1).replace(/(\\r\\n|\\n|\\r)/gm," ");;
+          a.textContent = answers[mycount].substring(1,answers[mycount].length-1).replace(/(\\r\\n|\\n|\\r)/gm," ");;;
+          hideAns();
+
+        }
+
+        function getRandom(){
+          var toreturn = Math.floor(Math.random()*(size));
+          if (toreturn!=mycount){
+            return toreturn;
+          }
+          else
+            return getRandom();
+        }
+
+        function shuffleArrays(q,a){
+          var rand;
+          var x,y;
+          for(var t = q.length-1; t>0; t--){
+            rand = Math.floor(Math.random()*(size));
+            x = q[t];
+            y = a[t];
+            q[t] = q[rand];
+            a[t] = a[rand];
+            q[rand] = x;
+            a[rand] = y;
+          }
+            goTo(mycount);
+          }
+
+
+
+
+  </script>
+</head>
+<body style = "align: center">
+    <%= render partial: 'shared/title'%> 
+  <table class= "presentDeck">
+    <tr>
+      <td class = "ratingscol">
+        <% if user_signed_in? %>
+          <% if Deckrating.where(deck_id: @deck.deck_id).empty? %>
+            <div class = 'likedText' style = "text-align:left;"> No ratings </div>
+          <% else %>
+            <% @liked = Deckrating.where(deck_id: @deck.deck_id, liked: true).count %>
+            <% @total = Deckrating.where(deck_id: @deck.deck_id).count %>
+            <% @percent = (@liked * 100 / @total) %>
+            <% if @percent > 49 %>
+              <div class = 'likedText', style = "color:#0D55D1;text-align:left;"><%= @percent %>% liked </div>
+            <% else %>
+              <div class = 'likedText', style = "color:red;text-align:left;"><%= @percent %>% liked </div>
+            <% end %>
+          <% end %>
+          <% if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).nil? %>
+            <p> 
+              <%= link_to image_tag('like.png', :title=>"Like"), {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-info"%> 
+              <%= link_to image_tag('dislike.png', :title=>"Dislike"), {:controller => "decks", :action => 'rate', :userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %>
+            </p>
+          <% else %>
+            <% if Deckrating.find_by(deck_id: @deck.deck_id, user_id: @userID).liked == true %>
+              <div class = 'likedText' style = "text-align:left;">
+                Deck liked
+              </div> 
+              <%= link_to image_tag('like.png', :title=>"Remove Rating"), {:controller => "decks", :action => 'unrate', :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
+              <%= link_to image_tag('dislike.png', :title=>"Dislike"), {:controller => "decks", :action => 'rate',:userID => @userID,:liked => false, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-danger" %> 
+            <% else %>
+              <div class = 'likedText' style = "text-align:left;">
+                Deck disliked
+              </div> 
+              <%= link_to image_tag('like.png', :title=>"Like"), {:controller => "decks", :action => 'rate', :userID => @userID,:liked => true, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-info" %>  
+              <%= link_to image_tag('dislike.png', :title=>"Remove Rating"), {:controller => "decks", :action => 'unrate', :userID => @userID, :deckID => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td style = "vertical-align:top;">
+       <%= link_to image_tag('fbshare.jpg'), 
+       'http://www.facebook.com/sharer.php?u='+request.original_url, :target => :blank %>
+     </td>
+   </tr>
+   <tr>
+     <td style = "vertical-align:top;">
+       <%= link_to image_tag('redditshare.png'), 
+       'http://www.reddit.com/submit?url='+request.original_url, :target => :blank %>
+     </td> 
+      
+    <% if !@cards.empty? && !@count.nil? %>
+      <% @array = @cards.to_a %>
+      <% @i = 0 %>
+     
+
+      <!-- Load questions and answers into array here -->
+      <% @qarray = Array.new(@array.size)%>
+      <% @aarray = Array.new(@array.size)%>
+      <% b = 0 %>
+      <% @array.count.times do
+         @qarray.push(@array.at(b).qtext.to_json)
+         @aarray.push(@array.at(b).atext.to_json)
+         b+=1
+      end%>
+
+      <script type="text/javascript">
+      var mycount = 0;
+      var questions = new Array();
+      questions = <%=raw @qarray.compact%>;
+      var answers = new Array();
+      answers = <%=raw @aarray.compact%>;
+      var size = questions.length;
+      </script>
+
+
+      <% card = @array.at(@count-1) %>
+      <td>
+        <table class = "questionCard<%= @deck.background%>">
+          <tr>
+            <td>
+              <div class = "box">
+                <div class = "boxtext">
+               <%=card.qtext.html_safe%></div></div>
+              
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td class ="spacecol">
+      </td>
+      <td>
+        <table id = "showAnswer" class = "answerCard<%= @deck.background%>" style= "display: none" onclick = "hideAns()">
+          <tr>
+            <td>
+             
+                <div class = "box">
+                <div class = "boxtext">
+               <%=card.atext.html_safe%></div></div>
+              
+            </td>
+          </tr>
+        </table>
+        <table class = "answerCard<%= @deck.background%>" id = "hideAnswer" onclick = "showAns()">
+          <tr>
+            <td>
+              <p class = "cardTitle"> 
+                Answer
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td style = "text-align:right; width:127px">
+              <%= render 'shared/prev' %>
+              <div id="prevb" class="hover">
+              <button type="button" class="btn btn-small btn-info"
+              onclick="goTo(mycount-1)" id="prev_link">
+                <%=image_tag('left.png', :title=>"Previous")%>
+              </button>
+              <div class = "tooltip" style = "width:6.1em; top:25px; align:right;">
+              Previous
+            </div>
+              </div>         
+            </td>
+            <td style = "text-align:center">
+              <div id="ranb" class="hover">
+                <button type="button" class="btn btn-small btn-info"
+              onclick="shuffleArrays(questions,answers)" id="rand_link">
+                  <%=image_tag('shuffle.png', :title=>"Shuffle")%>
+                </button>
+                <div class = "tooltip" style = "width:6.1em; top:25px">
+              Shuffle
+            </div>
+              </div>
+            </td>
+            <td style = "text-align:left">
+              <div id="nextb" class="hover">
+                <button type="button" class="btn btn-small btn-info"
+              onclick="goTo(mycount+1)" id="next_link">
+                  <%=image_tag('next.png', :title=>"Next Card")%>
+                </button>
+                <div class = "tooltip" style = "width:6.1em; top:25px">
+              Next
+            </div>
+            </div>
+            </td>
+            <td>
+            <div id="showAButton" class = "hover" >
+              <button type="button" onclick="showAns()", class= "btn btn-small btn-info">
+                <%=image_tag('view.png', :title=>"Show Answer")%>
+              </button>
+              <%= render 'shared/show' %>
+              <div class = "tooltip" style = "width:6.1em; top:25px">
+              Show Answer
+            </div>
+            </div>
+            <div id="hideAButton", style = "display: none" class = "hover" >
+              <button type="button" onclick="hideAns()", class= "btn btn-small btn-danger">
+                <%=image_tag('hide.png', :title=>"Hide Answer")%>
+              </button>
+              <div class = "tooltip" style = "width:6em; top:25px">
+              Hide Answer
+            </div>
+            </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td class ="spacecol">
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+      <td>
+      </td>
+    <% else %>
+      <td>
+        <table class = "questionCard<%= @deck.background%>">
+          <tr>
+            <td>
+              <p class = "cardTitle"> 
+                Question
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td class ="spacecol">
+      </td>
+      <td>
+        <table class = "answerCard<%= @deck.background%>">
+          <tr>
+            <td>
+              <p class = "cardTitle"> 
+                Answer
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <div class = "hover">
+        <%= link_to image_tag('play.png'), deck_path(@deck.deck_id, :count => 1), class: "btn btn-small btn-info" %>
+        <div class = "tooltip" style = "width:6.5em; top:25px">
+              Start Studying
+            </div>
+          </div>
+      </td>
+      <td>
+      </td>
+    <% end %>    
+    </tr> 
+  </table>
+  <br/>
+  <table>
+    <tr>
+       <td>
+        <% if user_signed_in? %>
+          <% if SavedDeck.find_by(:user_id => @userID, :deck_id => @deck.deck_id).nil? %>
+          <div class= "hover">
+            <%= link_to image_tag('save.png'), {:controller => "decks", :action => 'addfavorite',:userID => @userID,:favid => @deck.deck_id, :count => @count}, class: "btn btn-small btn-success"%>
+            <div class = "tooltip">
+              Save this Deck
+            </div>
+          </div>
+          <% else %>
+          <div class= "hover">
+            <%= link_to image_tag('unsave.png'), {:controller => "decks", :action => 'removefavorite', :userID => @userID,:favid => @deck.deck_id, :count => @count}, class: "btn btn-small btn-warning" %>
+            <div class = "tooltip">
+              Forget this Deck
+            </div>
+          </div>
+          <% end %>
+        <% else %>
+        <% end %>
+      </td>
+      <% if !card.nil? && Deck.find_by(deck_id: card.deck_id).user_id == @userID %>
+        <td>
+          <div class= "hover">
+            <%= link_to image_tag('edit.png'), {:controller => "cards", :action => 'edit', :count => @count, :id => card.card_id}, class: "btn btn-small btn-info"%>
+            <div class = "tooltip" style = "width:6.5em;">
+              Edit this Card
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class= "hover">
+            <%= link_to image_tag('delete.png'), card, method: :delete, data: { confirm: "Are you sure you want to delete this deck?" }, class: "btn btn-small btn-danger" %>
+            <div class = "tooltip">
+              Delete this Card
+            </div>
+          </div>
+        </td>
+      <% end %>
+      <td>
+        <div class = "howto">
+          Right Arrow - Next &nbsp&nbsp
+          Left Arrow  - Previous &nbsp&nbsp
+          A - Show/hide answer &nbsp&nbsp
+          S - Shuffle
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <% if card.nil?
+        @cardID = 0
+      else @cardID = card.card_id
+      end
+      %>
+
+      <% if user_signed_in? %>
+      <div class= "hover">
+       <%= link_to image_tag('flag.png'), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => @userID, :cardID => @cardID}, class: "btn btn-small btn-warning"%>
+       <div class = "tooltip" style = "width:10em; top:25px">
+              Flag as Inappropriate
+            </div>
+          </div>
+      <% else %>
+      <div class= "hover">
+       <%= link_to image_tag('flag.png', :title=>"Flag this deck/card for inappropriate content"), {:controller => "decks", :action => 'flag', :count => @count, :deckID => @deck.deck_id, :userID => 0, :cardID => @cardID}, class: "btn btn-small btn-warning"%>
+       <div class = "tooltip" style = "width:10em; top:25px">
+              Flag as Inappropriate
+            </div>
+          </div>
+      <% end %>
+      </td>
+    </tr>
+  </table>
+</body>
+
+
+

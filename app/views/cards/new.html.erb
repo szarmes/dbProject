@@ -1,3 +1,13 @@
+<script>
+
+CKEDITOR.replace( 'editor1',
+    {
+        customConfig : '/lib/cke_config.js'
+    });
+
+
+</script>
+
 <%= render partial: 'shared/title'%><br/>
 
 <%= simple_form_for @card, :url => { :action => "create" } do |f| %>

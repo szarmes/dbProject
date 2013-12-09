@@ -1,8 +1,19 @@
+<script>
+
+CKEDITOR.replace( 'editor1',
+    {
+        customConfig : '/lib/cke_config.js'
+    });
+
+
+</script>
+
+
 
 <% if @deck.user_id == @userID %>
 <h1> Edit this Card </h1>
 
-<%= simple_form_for @card, :url => { :action => "create" } do |f| %>
+<%= simple_form_for @card, :html => { :method => :put} do |f| %>
 
   <p> Fields marked with * are required </p>
   <div class = "row">
