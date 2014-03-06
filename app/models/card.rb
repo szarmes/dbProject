@@ -10,7 +10,7 @@ class Card < ActiveRecord::Base
 
 		has_one  :deck
 		validates :atext, :qtext, presence: true
-		validates_length_of :atext, :qtext, :maximum => 4000
+		validates_length_of :atext, :qtext, :maximum => 255
  
         
  	after_create :do_setID

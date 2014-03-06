@@ -48,9 +48,6 @@ GEM
       xpath (~> 2.0)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
-    ckeditor (4.0.6)
-      mime-types
-      orm_adapter
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -242,7 +239,6 @@ DEPENDENCIES
   bootstrap-will_paginate (= 0.0.9)
   capybara (= 2.1.0)
   childprocess (= 0.3.6)
-  ckeditor
   coffee-rails (= 4.0.0)
   devise
   factory_girl_rails (= 4.2.1)

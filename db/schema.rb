@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131008164900) do
+ActiveRecord::Schema.define(version: 20130922003911) do
 
   create_table "cards", force: true do |t|
-    t.integer "card_id", default: 0, null: false
-    t.integer "deck_id", default: 0, null: false
-    t.string  "qtext",               null: false
-    t.string  "atext",               null: false
+    t.integer "card_id", default: 0
+    t.integer "deck_id", default: 0
+    t.string  "qtext"
+    t.string  "atext"
   end
 
   create_table "courses", force: true do |t|
@@ -52,7 +52,13 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.integer  "school_id"
     t.string   "school_name"
     t.string   "prof_name"
-    t.integer  "background", default: 1
+    t.integer  "background",     default: 1
+  end
+
+  create_table "flagged_decks", force: true do |t|
+    t.integer "deck_id", null: false
+    t.string  "user_id", null: false
+    t.string  "card_id", null: false
   end
 
   create_table "recent_decks", force: true do |t|
@@ -110,15 +116,5 @@ ActiveRecord::Schema.define(version: 20131008164900) do
     t.string   "last_sign_in_ip"
     t.string   "school_name"
   end
-
-  create_table "flagged_decks", force: true do |t|
-    t.integer "deck_id", null: false
-    t.string  "user_id",       null: false
-    t.string  "card_id",       null: false
-  end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
