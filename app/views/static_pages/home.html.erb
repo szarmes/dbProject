@@ -50,10 +50,14 @@
 
 </div>
  <div class = "col-sm-7" >
+    <div style = "text-align: center">
+      <% if user_signed_in? %>
+        <%= link_to "Make your own flashcards here!", '/decks', class: "btn btn-lg btn-success" %>
+      <% end %>
 
-<h3> Connect with classmates around the world! </h3>
-<%= image_tag('homeimage.png') %>
-
+      <p style = "font-size: 24px;"> Connect with classmates around the world! </p>
+      <%= image_tag('homeimage.png') %>
+    </div>
 </div>
 
 
